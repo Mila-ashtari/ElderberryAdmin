@@ -1,13 +1,12 @@
-export const logIn=()=>{
+export const logIn=(userId)=>{
     return {
         type:'LOG_IN',
-        payload:true
+        payload:userId
     }
 }
 
 export const logOut=()=>{
     return {
         type:'LOG_OUT',
-        payload:true
     }
 }
