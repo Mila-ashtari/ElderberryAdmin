@@ -6,13 +6,11 @@ import theme from './theme'
 import Login from './components/Login'
 function App() {
   return (
-    <Fragment>
       <ThemeProvider theme={theme}> 
         <BrowserRouter>
         <Route path="/" exact component={Login} />
         </BrowserRouter>
       </ThemeProvider>
-    </Fragment>
   );
 }
 
