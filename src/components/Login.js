@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Button, TextField, Box } from "@material-ui/core";
+import { connect } from "react-redux";
+import { logIn } from "../actions";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   login: {
     width: "100vw",
     margin: "0 auto",
@@ -38,64 +40,64 @@ const useStyles = makeStyles((theme) => ({
     marginTop: "25px",
     backgroundColor: "#DF1B1B",
   },
-  signup: {
-    display: "flex",
-    padding: "20px",
-    borderTop: "1px solid rgba(128, 128, 128, 0.274)",
-    justifyContent: "center",
-    marginTop: "40px",
-    textAlign: "center",
-  },
-  p: {
-    margin: 0,
-    marginRight: "10px",
-  },
-  signupLink: {
-    color: "#f50057",
-  },
 }));
 
 function Login(props) {
   const classes = useStyles();
+  const { logIn } = props;
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    logIn()
+  };
   return (
     <section className={classes.login}>
-        <Box className={classes.formContainer}>
-          <form >
-            <h2 className={classes.h2}>Sign in</h2>
-            <label>Your email address:</label>
-            <TextField
-              className={classes.textField}
-              variant="outlined"
-              label="email"
-              fullWidth
-              required
-              type="email"
-              onChange={(e) => setEmail(e.target.value)}
-            />
-            <label>Password:</label>
-            <TextField
-              className={classes.textField}
-              variant="outlined"
-              label="password"
-              fullWidth
-              required
-              type="password"
-              onChange={(e) => setPassword(e.target.value)}
-            />
-            <Button
-              className={classes.button}
-              type="submit"
-              variant="contained"
-              color="secondary"
-            >
-              Login
-            </Button>
-          </form>
-        </Box>
+      <Box className={classes.formContainer}>
+        <form onSubmit={handleSubmit}>
+          <h2 className={classes.h2}>Sign in</h2>
+          <label>Your email address:</label>
+          <TextField
+            className={classes.textField}
+            variant="outlined"
+            label="email"
+            fullWidth
+            required
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          <label>Password:</label>
+          <TextField
+            className={classes.textField}
+            variant="outlined"
+            label="password"
+            fullWidth
+            required
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          <Button
+            className={classes.button}
+            type="submit"
+            variant="contained"
+            color="secondary"
+          >
+            Login
+          </Button>
+        </form>
+      </Box>
     </section>
   );
 }
 
-export default Login;
+const mapStateTopProps = (state) => {
+  console.log(state);
+  return {
+    auth: state.auth
+  }
+};
+
+export default connect(mapStateTopProps, { logIn })(Login);
