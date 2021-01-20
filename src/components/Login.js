@@ -44,13 +44,14 @@ const useStyles = makeStyles(() => ({
 
 function Login(props) {
   const classes = useStyles();
-  const { logIn } = props;
+  const { logIn, history } = props;
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    logIn()
+    logIn(email, password)
+    history.push('/dashboard')
   };
   return (
     <section className={classes.login}>

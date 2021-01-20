@@ -1,16 +1,16 @@
 import { combineReducers } from "redux";
 
 const INITIAL_STATE = {
-  isLogedIn: false,
-  userId: null,
+  authenticated: false,
+  errorMessage:'',
 };
 
 const authReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case "LOG_IN":
-      return { ...state, isLogedIn: true, userId: action.payload };
+      return { ...state, authenticated: true };
     case "LOG_OUT":
-      return { ...state, isLogedIn: false, userId: null };
+      return { ...state, authenticated: false };
     default:
       return state;
   }
