@@ -5,6 +5,7 @@ import { createStore } from "redux";
 
 import reducers from "./reducers";
 import App from "./components/App";
+import './normalize.css'
 
 const store = createStore(reducers);
 
