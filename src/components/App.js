@@ -5,13 +5,14 @@ import { ThemeProvider } from "@material-ui/core/styles";
 import theme from "../theme";
 import Login from "./Login";
 import Dashboard from "./Dashboard";
+import '../normalize.css'
 
 function App() {
   return (
     <ThemeProvider theme={theme}>
       <BrowserRouter>
         <Route path="/" exact component={Login} />
-        <Route path="/dashboard" exact component={Dashboard} />
+        <Route path="/dashboard" component={Dashboard} />
       </BrowserRouter>
     </ThemeProvider>
   );

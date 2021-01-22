@@ -4,13 +4,12 @@ import { Button, TextField, Box } from "@material-ui/core";
 import { connect } from "react-redux";
 import { logIn } from "../actions";
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles((theme) => ({
   login: {
-    width: "100vw",
     margin: "0 auto",
-    minHeight: "100vh",
+    height: "100vh",
     padding: "50px",
-    backgroundColor: "#44475ab9",
+    backgroundColor: theme.palette.primary.main,
   },
   formContainer: {
     border: " solid rgb(241, 238, 232) 1px",
@@ -38,7 +37,6 @@ const useStyles = makeStyles(() => ({
   },
   button: {
     marginTop: "25px",
-    backgroundColor: "#DF1B1B",
   },
 }));
 
@@ -84,7 +82,7 @@ function Login(props) {
             className={classes.button}
             type="submit"
             variant="contained"
-            color="secondary"
+            color="primary"
           >
             Login
           </Button>
