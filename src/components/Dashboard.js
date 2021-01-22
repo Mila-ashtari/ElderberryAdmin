@@ -10,11 +10,11 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
   },
   tabs: {
-    backgroundColor: theme.palette.primary.main,
     borderRight: "solid 1px black",
   },
   tab: {
-      color:'white'
+      color:'white',
+      backgroundColor: theme.palette.primary.main
   },
 }));
 
@@ -34,7 +34,7 @@ function Dashboard() {
 
   return (
     <Grid className={classes.dashboard} container spacing={3}>
-      <Grid item xs={4}>
+      <Grid item sm={4}>
         <Tabs
           className={classes.tabs}
           orientation="vertical"
@@ -50,11 +50,12 @@ function Dashboard() {
               label={tab.label}
               component={Link}
               to={`/dashboard/${tab.label}`}
+              classes={{root: classes.root}}
             />
           ))}
         </Tabs>
       </Grid>
-      <Grid item className={classes.tabsContainer} xs={8}>
+      <Grid item className={classes.tabsContainer} sm={8}>
         <Switch>
           {tabs.map((tab, index) => (
             <Route

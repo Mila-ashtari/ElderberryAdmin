@@ -1,7 +1,7 @@
 import { combineReducers } from "redux";
 
 const INITIAL_STATE = {
-  authenticated: false,
+  authenticated: true,
   errorMessage:'',
 };
 
