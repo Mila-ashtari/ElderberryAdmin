@@ -31,7 +31,7 @@ const {history}=props
   const tabs = [
     { label: "psw", component: "" },
     { label: "client", component: "" },
-    { label: "costumer", component: "" },
+    { label: "customer", component: "" },
   ];
 
   const handleChange = (event, newValue) => {
