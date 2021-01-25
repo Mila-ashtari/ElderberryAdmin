@@ -1,19 +1,17 @@
-import React, { Fragment, useState } from "react";
-import {
-  Tabs,
-  Tab,
-  Grid,
-} from "@material-ui/core";
+import React, { Fragment, useEffect, useState } from "react";
+import { Tabs, Tab, Grid } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { Switch, Route, Link } from "react-router-dom";
+import axios from "axios";
 
 import requiredAuth from "./requiredAuth";
 import DashboardHeader from "./DashboardHeader";
+import PSW from "./PSW";
 
 const useStyles = makeStyles((theme) => ({
-dashboardContainer:{
-    height:'100%'
-},
+  dashboardContainer: {
+    height: "100%",
+  },
   tabs: {
     borderRight: "solid 1px black",
   },
@@ -24,12 +22,12 @@ dashboardContainer:{
 }));
 
 function Dashboard(props) {
-const {history}=props
+  const { history } = props;
   const classes = useStyles();
   const [value, setValue] = useState(0);
 
   const tabs = [
-    { label: "psw", component: "" },
+    { label: "psw", component: PSW },
     { label: "client", component: "" },
     { label: "customer", component: "" },
   ];
@@ -38,9 +36,11 @@ const {history}=props
     setValue(newValue);
   };
 
+  useEffect(() => {});
+
   return (
     <Fragment>
-      <DashboardHeader history={history}/>
+      <DashboardHeader history={history} />
       <Grid className={classes.dashboardContainer} container spacing={3}>
         <Grid item sm={3}>
           <Tabs
@@ -70,7 +70,7 @@ const {history}=props
                 key={index}
                 path={`/dashboard/${tab.label}`}
                 exact
-                component={() => <p>{tab.label}</p>}
+                component={tab.component}
               />
             ))}
           </Switch>

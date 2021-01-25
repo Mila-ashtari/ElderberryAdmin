@@ -2,7 +2,7 @@ import { combineReducers } from "redux";
 
 const INITIAL_STATE = {
   authenticated: true,
-  errorMessage:'',
+  errorMessage: "",
 };
 
 const authReducer = (state = INITIAL_STATE, action) => {
@@ -16,6 +16,17 @@ const authReducer = (state = INITIAL_STATE, action) => {
   }
 };
 
+const PSW_INTIIAL_STATE=[]
+
+const PSWReduser = (state = PSW_INTIIAL_STATE, action) => {
+  if (action.type === "PSW_DATA") {
+    return "me";
+  }
+
+  return state;
+};
+
 export default combineReducers({
   auth: authReducer,
+  PSWData: PSWReduser,
 });
