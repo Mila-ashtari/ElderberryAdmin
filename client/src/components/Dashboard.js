@@ -2,7 +2,6 @@ import React, { Fragment, useEffect, useState } from "react";
 import { Tabs, Tab, Grid } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { Switch, Route, Link } from "react-router-dom";
-import axios from "axios";
 
 import requiredAuth from "./requiredAuth";
 import DashboardHeader from "./DashboardHeader";

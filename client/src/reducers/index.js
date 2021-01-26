@@ -16,14 +16,13 @@ const authReducer = (state = INITIAL_STATE, action) => {
   }
 };
 
-const PSW_INTIIAL_STATE=[]
-
-const PSWReduser = (state = PSW_INTIIAL_STATE, action) => {
-  if (action.type === "PSW_DATA") {
-    return "me";
+const PSWReduser = (state = [], action) => {
+  switch (action.type) {
+    case "PSW_DATA":
+      return action.payload;
+    default:
+      return state;
   }
-
-  return state;
 };
 
 export default combineReducers({
