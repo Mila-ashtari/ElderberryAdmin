@@ -1,18 +1,28 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
+import { Box, Tab, Grid } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core/styles";
 
-import { getPSW } from "../actions";
+import { getPsw } from "../actions";
+
+const useStyles = makeStyles((theme) => ({
+  pswContainer:{}
+}))
 
 function PSW(props) {
-  const { getPSW, PSWData } = props;
+  const classes = useStyles();
+  const { getPsw, pswArr } = props;
   useEffect(() => {
-    getPSW();
-  }, [getPSW]);
-  console.log(PSWData);
-  return <div>hey</div>;
+    getPsw();
+  }, [getPsw]);
+  console.log(pswArr);
+  const renderPSW=(psw)=>{
+    return 
+  }
+  return <Box className={classes.pswContainer}>{}</Box>;
 }
 
 const mapStateToProps = (state) => {
-  return { PSWData: state.PSWData };
+  return { pswArr: state.pswData };
 };
-export default connect(mapStateToProps, { getPSW })(PSW);
+export default connect(mapStateToProps, { getPsw })(PSW);

@@ -8,7 +8,7 @@ export const logOut = () => {
   return { type: "LOG_OUT" };
 };
 
-export const getPSW = () => async (dispatch) => {
+export const getPsw = () => async (dispatch) => {
   const response = await axios.get("http://localhost:3000/psw");
 
   dispatch({ type: "PSW_DATA", payload: response.data });

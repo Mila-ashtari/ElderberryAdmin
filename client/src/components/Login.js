@@ -93,7 +93,6 @@ function Login(props) {
 }
 
 const mapStateTopProps = (state) => {
-  console.log(state);
   return {
     auth: state.auth
   }
