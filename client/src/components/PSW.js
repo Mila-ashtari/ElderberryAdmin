@@ -1,13 +1,13 @@
-import React, { useEffect } from "react";
+import React, { Fragment, useEffect } from "react";
 import { connect } from "react-redux";
-import { Box, Tab, Grid } from "@material-ui/core";
+import { Box, ListItem, ListItemAvatar, ListItemText, Avatar, Divider } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 
 import { getPsw } from "../actions";
 
 const useStyles = makeStyles((theme) => ({
-  pswContainer:{}
-}))
+  pswContainer: {},
+}));
 
 function PSW(props) {
   const classes = useStyles();
@@ -15,11 +15,25 @@ function PSW(props) {
   useEffect(() => {
     getPsw();
   }, [getPsw]);
-  console.log(pswArr);
-  const renderPSW=(psw)=>{
-    return 
-  }
-  return <Box className={classes.pswContainer}>{}</Box>;
+  const renderPSW = (psw, index) => {
+    const { user } = psw.pswProfile;
+    return (
+      <Fragment key={index}>
+        <ListItem className={classes.listItem}>
+          <ListItemAvatar>
+            <Avatar />
+          </ListItemAvatar>
+          <ListItemText>{`${user.firstName} ${user.lastName}`}</ListItemText>
+        </ListItem>
+        <Divider />
+      </Fragment>
+    );
+  };
+  return (
+    <Box className={classes.pswContainer}>
+      {pswArr.map((psw, index) => renderPSW(psw, index))}
+    </Box>
+  );
 }
 
 const mapStateToProps = (state) => {

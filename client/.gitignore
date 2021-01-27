@@ -21,11 +21,8 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-<<<<<<< HEAD:client/.gitignore
 package-lock
 .eslintcache
 .gitignore
 package-lock.js
-=======
->>>>>>> main:.gitignore
 

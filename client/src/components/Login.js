@@ -63,6 +63,7 @@ function Login(props) {
             label="email"
             fullWidth
             required
+            autoComplete="true"
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}

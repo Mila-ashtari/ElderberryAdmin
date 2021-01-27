@@ -11,6 +11,9 @@ const useStyles = makeStyles((theme) => ({
   dashboardContainer: {
     height: "100%",
   },
+  tabsContainer:{
+    padding:"20px"
+  },
   tabs: {
     borderRight: "solid 1px black",
   },
@@ -35,12 +38,10 @@ function Dashboard(props) {
     setValue(newValue);
   };
 
-  useEffect(() => {});
-
   return (
     <Fragment>
       <DashboardHeader history={history} />
-      <Grid className={classes.dashboardContainer} container spacing={3}>
+      <Grid className={classes.dashboardContainer} container>
         <Grid item sm={3}>
           <Tabs
             className={classes.tabs}
