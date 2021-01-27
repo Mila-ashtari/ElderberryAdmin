@@ -5,7 +5,7 @@ import { Switch, Route, Link } from "react-router-dom";
 
 import requiredAuth from "./requiredAuth";
 import DashboardHeader from "./DashboardHeader";
-import PSW from "./PSW";
+import Psw from "./Psw";
 
 const useStyles = makeStyles((theme) => ({
   dashboardContainer: {
@@ -29,7 +29,7 @@ function Dashboard(props) {
   const [value, setValue] = useState(0);
 
   const tabs = [
-    { label: "psw", component: PSW },
+    { label: "psw", component: Psw },
     { label: "client", component: "" },
     { label: "customer", component: "" },
   ];

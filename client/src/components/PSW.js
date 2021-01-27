@@ -9,13 +9,13 @@ const useStyles = makeStyles((theme) => ({
   pswContainer: {},
 }));
 
-function PSW(props) {
+function Psw(props) {
   const classes = useStyles();
   const { getPsw, pswArr } = props;
   useEffect(() => {
     getPsw();
   }, [getPsw]);
-  const renderPSW = (psw, index) => {
+  const renderPsw = (psw, index) => {
     const { user } = psw.pswProfile;
     return (
       <Fragment key={index}>
@@ -31,7 +31,7 @@ function PSW(props) {
   };
   return (
     <Box className={classes.pswContainer}>
-      {pswArr.map((psw, index) => renderPSW(psw, index))}
+      {pswArr.map((psw, index) => renderPsw(psw, index))}
     </Box>
   );
 }
@@ -39,4 +39,4 @@ function PSW(props) {
 const mapStateToProps = (state) => {
   return { pswArr: state.pswData };
 };
-export default connect(mapStateToProps, { getPsw })(PSW);
+export default connect(mapStateToProps, { getPsw })(Psw);
