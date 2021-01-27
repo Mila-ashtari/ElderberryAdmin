@@ -48,7 +48,7 @@ function Login(props) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    logIn(email, password)
+    logIn("admin", "password")
     history.push('/dashboard')
   };
   return (

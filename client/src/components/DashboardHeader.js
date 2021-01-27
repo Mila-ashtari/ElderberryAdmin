@@ -11,6 +11,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import { connect } from "react-redux";
 
 import { logOut } from "../actions";
+import smith from '../images/christineSmith.png'
 
 const useStyles = makeStyles((theme) => ({
   toolBar: {
@@ -38,8 +39,8 @@ const { logOut, history } = props;
     <AppBar position="static">
       <Toolbar className={classes.toolBar}>
         <Box className={classes.userContainer}>
-          <Avatar alt="" src="" />
-          <Typography>user</Typography>
+          <Avatar alt="" src={smith} />
+          <Typography>Christine Smith</Typography>
         </Box>
         <Button color="inherit" onClick={handleClick}>Logout</Button>
       </Toolbar>

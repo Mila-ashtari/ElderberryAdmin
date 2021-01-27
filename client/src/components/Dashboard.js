@@ -48,7 +48,7 @@ function Dashboard(props) {
             orientation="vertical"
             value={value}
             onChange={handleChange}
-            aria-label="Vertical tabs example"
+            aria-label="Vertical tabs"
             indicatorColor="secondary"
           >
             {tabs.map((tab, index) => (
