@@ -1,11 +1,11 @@
-import React, { Fragment, useEffect, useState } from "react";
+import React, { Fragment, useState } from "react";
 import { Tabs, Tab, Grid } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { Switch, Route, Link } from "react-router-dom";
 
 import requiredAuth from "./requiredAuth";
 import DashboardHeader from "./DashboardHeader";
-import Psw from "./Psw";
+import PswContainer from "./PswContainer";
 
 const useStyles = makeStyles((theme) => ({
   dashboardContainer: {
@@ -29,7 +29,7 @@ function Dashboard(props) {
   const [value, setValue] = useState(0);
 
   const tabs = [
-    { label: "psw", component: Psw },
+    { label: "psw", component: PswContainer },
     { label: "client", component: "" },
     { label: "customer", component: "" },
   ];
