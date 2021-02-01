@@ -48,8 +48,9 @@ function Login(props) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    logIn(email, password)
-    history.push('/dashboard')
+    logIn("admin", "password", () => {
+      history.push("/dashboard");
+    });
   };
   return (
     <section className={classes.login}>
@@ -63,6 +64,7 @@ function Login(props) {
             label="email"
             fullWidth
             required
+            autoComplete="true"
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
@@ -93,10 +95,9 @@ function Login(props) {
 }
 
 const mapStateTopProps = (state) => {
-  console.log(state);
   return {
-    auth: state.auth
-  }
+    auth: state.auth,
+  };
 };
 
 export default connect(mapStateTopProps, { logIn })(Login);
