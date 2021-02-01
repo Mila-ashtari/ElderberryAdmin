@@ -5,19 +5,20 @@ import { Switch, Route, Link } from "react-router-dom";
 
 import requiredAuth from "./requiredAuth";
 import DashboardHeader from "./DashboardHeader";
-import PswContainer from "./PswContainer";
+import PswContainer from "./tabs/PswContainer";
 
 const useStyles = makeStyles((theme) => ({
   dashboardContainer: {
     height: "100%",
   },
-  tabsContainer:{
-    padding:"20px"
+  tabsContainer: {
+    padding: "20px",
   },
   tabs: {
     borderRight: "solid 1px black",
   },
   tab: {
+    maxWidth: "100%",
     color: "white",
     backgroundColor: theme.palette.primary.main,
   },
