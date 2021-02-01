@@ -10,8 +10,8 @@ export const logIn = (username, password, callback) => async (dispatch) => {
       password: password,
     },
   });
-  console.log(response.data);
   dispatch({ type: "LOG_IN", payload: response.data.token });
+  callback()
   localStorage.setItem("token", response.data.token);
 };
 

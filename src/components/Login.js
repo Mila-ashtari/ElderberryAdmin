@@ -48,8 +48,9 @@ function Login(props) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    logIn("admin", "password")
-    history.push('/dashboard')
+    logIn("admin", "password", () => {
+      history.push("/dashboard");
+    });
   };
   return (
     <section className={classes.login}>
@@ -95,8 +96,8 @@ function Login(props) {
 
 const mapStateTopProps = (state) => {
   return {
-    auth: state.auth
-  }
+    auth: state.auth,
+  };
 };
 
 export default connect(mapStateTopProps, { logIn })(Login);
