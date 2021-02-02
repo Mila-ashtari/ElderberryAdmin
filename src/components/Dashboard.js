@@ -59,7 +59,6 @@ function Dashboard(props) {
                 label={tab.label}
                 component={Link}
                 to={`/dashboard/${tab.label}`}
-                classes={{ root: classes.root }}
               />
             ))}
           </Tabs>
@@ -70,7 +69,6 @@ function Dashboard(props) {
               <Route
                 key={index}
                 path={`/dashboard/${tab.label}`}
-                exact
                 component={tab.component}
               />
             ))}
