@@ -24,7 +24,7 @@ function PswContainer(props) {
   }, [getPsw]);
   return (
     <Fragment>
-      <List className={classes.pswContainer}>
+      <List>
         {pswArr.map((psw, index) => {
           const { user } = psw.pswProfile;
           return (
