@@ -3,6 +3,11 @@ import {
   ListItem,
   Avatar,
   List,
+  ListItemText,
+  Dialog,
+  DialogContent,
+  DialogTitle,
+  Divider,
   Typography,
   Grid,
   Link,
@@ -20,9 +25,10 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Psw = ({ psw }) => {
+const Psw = ({ psw, key }) => {
   const classes = useStyles();
   const { user, documents, skills, profile } = psw.pswProfile;
+  const [open, setOpen] = useState(false);
 
   const renderProfile = (profile) => {
     const profileKeys = Object.keys(profile);
@@ -40,90 +46,107 @@ const Psw = ({ psw }) => {
   };
 
   return (
-    <Grid
-      container
-      direction="column"
-      spacing={2}
-      className={classes.pswContainer}
-    >
-      <Grid item>
-        <Accordion>
-          <AccordionSummary
-            expandIcon={<ExpandMoreIcon />}
-            aria-controls="panel2a-content"
-          >
-            <Typography variant="h2">Profile</Typography>
-          </AccordionSummary>
-          <AccordionDetails>{renderProfile(profile[0])}</AccordionDetails>
-        </Accordion>
-      </Grid>
-      <Grid item>
-        <Accordion>
-          <AccordionSummary
-            expandIcon={<ExpandMoreIcon />}
-            aria-controls="panel2a-content"
-            id="panel2a-header"
-          >
-            <Typography variant="h2">Documents</Typography>
-          </AccordionSummary>
-          <AccordionDetails>
-            <List>
-              <ListItem>
-                <Link
-                  href={documents[0].opswaCard}
-                  target="_blank"
-                  rel="noopener"
+    <Fragment>
+      <ListItem
+        button
+        className={classes.listItem}
+        onClick={() => setOpen(true)}
+        key={key}
+      >
+        <ListItemText>{`${user.firstName} ${user.lastName}`}</ListItemText>
+      </ListItem>
+
+      <Dialog
+        open={open}
+        onClose={() => {
+          setOpen(false);
+        }}
+      >
+        <DialogTitle>{`${user.firstName} ${user.lastName}`}</DialogTitle>
+        <DialogContent>
+          <Grid container direction="column" spacing={2}>
+            <Grid item>
+              <Accordion>
+                <AccordionSummary
+                  expandIcon={<ExpandMoreIcon />}
+                  aria-controls="panel2a-content"
                 >
-                  OPSWA Card
-                </Link>
-              </ListItem>
-              <ListItem>
-                <Link
-                  href={documents[0].proofOfWorkEligibility}
-                  target="_blank"
-                  rel="noopener"
+                  <Typography variant="h2">Profile</Typography>
+                </AccordionSummary>
+                <AccordionDetails>{renderProfile(profile[0])}</AccordionDetails>
+              </Accordion>
+            </Grid>
+            <Grid item>
+              <Accordion>
+                <AccordionSummary
+                  expandIcon={<ExpandMoreIcon />}
+                  aria-controls="panel2a-content"
+                  id="panel2a-header"
                 >
-                  Proof of work eligibility
-                </Link>
-              </ListItem>
-            </List>
-          </AccordionDetails>
-        </Accordion>
-      </Grid>
-      <Grid item>
-        <Accordion>
-          <AccordionSummary
-            expandIcon={<ExpandMoreIcon />}
-            aria-controls="panel2a-content"
-            id="panel2a-header"
-          >
-            <Typography variant="h2">Skills</Typography>
-          </AccordionSummary>
-          <AccordionDetails>
-            <List>
-              <ListItem>
-                <Link
-                  href={documents[0].opswaCard}
-                  target="_blank"
-                  rel="noopener"
+                  <Typography variant="h2">Documents</Typography>
+                </AccordionSummary>
+                <AccordionDetails>
+                  <List>
+                    <ListItem>
+                      <Link
+                        href={documents[0].opswaCard}
+                        target="_blank"
+                        rel="noopener"
+                      >
+                        OPSWA Card
+                      </Link>
+                    </ListItem>
+                    <ListItem>
+                      <Link
+                        href={documents[0].proofOfWorkEligibility}
+                        target="_blank"
+                        rel="noopener"
+                      >
+                        Proof of work eligibility
+                      </Link>
+                    </ListItem>
+                  </List>
+                </AccordionDetails>
+              </Accordion>
+            </Grid>
+            <Grid item>
+              <Accordion>
+                <AccordionSummary
+                  expandIcon={<ExpandMoreIcon />}
+                  aria-controls="panel2a-content"
+                  id="panel2a-header"
                 >
-                  OPSWA Card
-                </Link>
-              </ListItem>
-              <ListItem>
-                <Link
-                  href={documents[0].proofOfWorkEligibility}
-                  target="_blank"
-                  rel="noopener"
-                >
-                  Proof of work eligibility
-                </Link>
-              </ListItem>
-            </List>
-          </AccordionDetails>
-        </Accordion>
-      </Grid>
-    </Grid>
+                  <Typography variant="h2">Skills</Typography>
+                </AccordionSummary>
+                <AccordionDetails>
+                  <List>
+                    <ListItem>
+                      <Link
+                        href={documents[0].opswaCard}
+                        target="_blank"
+                        rel="noopener"
+                      >
+                        OPSWA Card
+                      </Link>
+                    </ListItem>
+                    <ListItem>
+                      <Link
+                        href={documents[0].proofOfWorkEligibility}
+                        target="_blank"
+                        rel="noopener"
+                      >
+                        Proof of work eligibility
+                      </Link>
+                    </ListItem>
+                  </List>
+                </AccordionDetails>
+              </Accordion>
+            </Grid>
+          </Grid>
+        </DialogContent>
+      </Dialog>
+      <Divider />
+    </Fragment>
   );
 };
 

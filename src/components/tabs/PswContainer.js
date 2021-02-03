@@ -1,49 +1,29 @@
-import React, { Fragment, useEffect } from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
-import {
-  List,
-  ListItem,
-  ListItemText,
-  ListItemAvatar,
-  Divider,
-} from "@material-ui/core";
+import { List } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 
 import { getPsw } from "../../actions";
-import { Route,  Switch, Link } from "react-router-dom";
+import Psw from "../pswContent/Psw";
 
 const useStyles = makeStyles((theme) => ({
-  pswContainer: {},
+  pswContainer: {
+    padding: "20px",
+  },
 }));
 
 function PswContainer(props) {
   const classes = useStyles();
-  const { getPsw, pswArr} = props;
+  const { getPsw, pswArr } = props;
   useEffect(() => {
     getPsw();
   }, [getPsw]);
   return (
-    <Fragment>
-      <List>
-        {pswArr.map((psw, index) => {
-          const { user } = psw.pswProfile;
-          return (
-            <Fragment>
-              <ListItem
-                button
-                className={classes.listItem}
-                key={index}
-                // component={Link}
-                // to={`/psw/${user.lastName}`}
-              >
-                <ListItemText>{`${user.firstName} ${user.lastName}`}</ListItemText>
-              </ListItem>
-              <Divider />
-            </Fragment>
-          );
-        })}
-      </List>
-    </Fragment>
+    <List className={classes.pswContainer}>
+      {pswArr.map((psw, index) => (
+        <Psw psw={psw} key={index} />
+      ))}
+    </List>
   );
 }
 
