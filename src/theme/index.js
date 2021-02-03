@@ -14,6 +14,9 @@ const theme = createMuiTheme({
       '"akagi-pro", serif',
       h2:{
         fontSize:"1.5rem"
+      },
+      h1:{
+        fontSize:"1rem"
       }
   },
 });
