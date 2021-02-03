@@ -15,7 +15,7 @@ function App() {
       <BrowserRouter>
         <Route path="/" exact component={Login} />
         <Route path="/dashboard" component={Dashboard} />
-        <PswRoutes/>
+        {/* <PswRoutes/> */}
       </BrowserRouter>
     </ThemeProvider>
   );

@@ -33,8 +33,8 @@ function PswContainer(props) {
                 button
                 className={classes.listItem}
                 key={index}
-                component={Link}
-                to={`/psw/${user.lastName}`}
+                // component={Link}
+                // to={`/psw/${user.lastName}`}
               >
                 <ListItemText>{`${user.firstName} ${user.lastName}`}</ListItemText>
               </ListItem>

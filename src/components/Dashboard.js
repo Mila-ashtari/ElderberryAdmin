@@ -1,6 +1,7 @@
 import React, { Fragment, useState } from "react";
-import { Tabs, Tab, Grid } from "@material-ui/core";
+import { Tabs, Tab, Grid, TextField, InputAdornment } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
+import SearchIcon from "@material-ui/icons/Search";
 import { Switch, Route, Link } from "react-router-dom";
 
 import requiredAuth from "./requiredAuth";
@@ -8,19 +9,20 @@ import DashboardHeader from "./DashboardHeader";
 import PswContainer from "./tabs/PswContainer";
 
 const useStyles = makeStyles((theme) => ({
-  dashboardContainer: {
-    height: "100%",
-  },
-  tabsContainer: {
-    padding: "20px",
-  },
-  tabs: {
-    borderRight: "solid 1px black",
+  gridContainer: {
+    // backgroundColor: theme.palette.primary.main,
+    borderBottom: "black solid 2px",
   },
   tab: {
     maxWidth: "100%",
-    color: "white",
+    // color: "white",
+    // backgroundColor: theme.palette.primary.main,
+  },
+  indicator: {
     backgroundColor: theme.palette.primary.main,
+  },
+  searchBar: {
+    alignSelf:'center',
   },
 }));
 
@@ -42,15 +44,13 @@ function Dashboard(props) {
   return (
     <Fragment>
       <DashboardHeader history={history} />
-      <Grid className={classes.dashboardContainer} container>
-        <Grid item sm={3}>
+      <Grid container className={classes.gridContainer}>
+        <Grid item xs={8}>
           <Tabs
             className={classes.tabs}
-            orientation="vertical"
             value={value}
             onChange={handleChange}
-            aria-label="Vertical tabs"
-            indicatorColor="secondary"
+            classes={{ indicator: classes.indicator }}
           >
             {tabs.map((tab, index) => (
               <Tab
@@ -63,18 +63,28 @@ function Dashboard(props) {
             ))}
           </Tabs>
         </Grid>
-        <Grid item className={classes.tabsContainer} sm={9}>
-          <Switch>
-            {tabs.map((tab, index) => (
-              <Route
-                key={index}
-                path={`/dashboard/${tab.label}`}
-                component={tab.component}
-              />
-            ))}
-          </Switch>
+        <Grid item xs={4} className={classes.searchBar}>
+          <TextField
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <SearchIcon />
+                </InputAdornment>
+              ),
+            }}
+          ></TextField>
         </Grid>
       </Grid>
+
+      <Switch>
+        {tabs.map((tab, index) => (
+          <Route
+            key={index}
+            path={`/dashboard/${tab.label}`}
+            component={tab.component}
+          />
+        ))}
+      </Switch>
     </Fragment>
   );
 }

@@ -11,13 +11,12 @@ import { makeStyles } from "@material-ui/core/styles";
 import { connect } from "react-redux";
 
 import { logOut } from "../actions";
-import smith from "../images/christineSmith.png";
 import logo from "../images/logo.png";
 
 const useStyles = makeStyles((theme) => ({
   toolBar: {
     color: "white",
-    padding: "15px",
+    padding: "10px 15px",
   },
   gridItem: {
     alignSelf: "center",
