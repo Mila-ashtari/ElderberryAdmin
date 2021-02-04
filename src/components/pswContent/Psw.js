@@ -1,14 +1,13 @@
 import React, { Fragment, useState } from "react";
 import {
   ListItem,
-  ListItemAvatar,
-  ListItemText,
   Avatar,
-  Divider,
+  List,
+  ListItemText,
   Dialog,
   DialogContent,
   DialogTitle,
-  List,
+  Divider,
   Typography,
   Grid,
   Link,
@@ -21,27 +20,26 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
-  pswContainer: {},
+  pswContainer: {
+    padding: "30px",
+  },
 }));
 
-const Psw = ({ psw }) => {
+const Psw = ({ psw, key }) => {
   const classes = useStyles();
-  const [open, setOpen] = useState(false);
   const { user, documents, skills, profile } = psw.pswProfile;
+  const [open, setOpen] = useState(false);
 
   const renderProfile = (profile) => {
     const profileKeys = Object.keys(profile);
     profileKeys.shift();
     return (
       <List>
-        {profileKeys.map((key) =>
-          key === "profileImage" ? (
-            <ListItem>
-              <Avatar src={profile[key]}></Avatar>
-            </ListItem>
-          ) : (
-            <listItem>{`${key} : ${profile[key]}`}</listItem>
-          )
+        {profileKeys.map(
+          (key) =>
+            key !== "profileImage" && (
+              <ListItem>{`${key} : ${profile[key]}`}</ListItem>
+            )
         )}
       </List>
     );
@@ -53,6 +51,7 @@ const Psw = ({ psw }) => {
         button
         className={classes.listItem}
         onClick={() => setOpen(true)}
+        key={key}
       >
         <ListItemText>{`${user.firstName} ${user.lastName}`}</ListItemText>
       </ListItem>

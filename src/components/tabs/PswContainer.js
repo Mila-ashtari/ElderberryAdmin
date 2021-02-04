@@ -1,13 +1,15 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
-import {List } from "@material-ui/core";
+import { List } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 
 import { getPsw } from "../../actions";
 import Psw from "../pswContent/Psw";
 
 const useStyles = makeStyles((theme) => ({
-  pswContainer: {},
+  pswContainer: {
+    padding: "20px",
+  },
 }));
 
 function PswContainer(props) {
@@ -18,7 +20,9 @@ function PswContainer(props) {
   }, [getPsw]);
   return (
     <List className={classes.pswContainer}>
-      {pswArr.map((psw, index) => <Psw psw={psw} key={index}/>)}
+      {pswArr.map((psw, index) => (
+        <Psw psw={psw} key={index} />
+      ))}
     </List>
   );
 }
