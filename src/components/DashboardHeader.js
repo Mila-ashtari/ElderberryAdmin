@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   AppBar,
   Toolbar,
@@ -6,7 +6,10 @@ import {
   Typography,
   Grid,
   CardMedia,
+  Menu,
+  MenuItem,
 } from "@material-ui/core";
+import MenuIcon from "@material-ui/icons/Menu";
 import { makeStyles } from "@material-ui/core/styles";
 import { connect } from "react-redux";
 
@@ -18,6 +21,9 @@ const useStyles = makeStyles((theme) => ({
     color: "white",
     padding: "10px 15px",
   },
+  gridContainer: {
+    justifyContent: "space-between",
+  },
   gridItem: {
     alignSelf: "center",
   },
@@ -28,19 +34,30 @@ const useStyles = makeStyles((theme) => ({
     alignSelf: "center",
     marginLeft: "15px",
   },
+  menuIcon: {
+    color: "white",
+  },
 }));
 
 function DashboardHeader(props) {
   const { logOut, history } = props;
+  const [anchorEl, setAnchorEl] = useState(null);
   const classes = useStyles();
-  const handleClick = () => {
+  const handleMenuOpen = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleMenuClose = () => {
+    setAnchorEl(null);
+  };
+  const handleLogout = () => {
+    setAnchorEl(null);
     logOut();
     history.push("/");
   };
   return (
     <AppBar position="static">
       <Toolbar className={classes.toolBar}>
-        <Grid container spacing={2}>
+        <Grid container spacing={2} className={classes.gridContainer}>
           <Grid container Item xs={8} className={classes.gridItem}>
             <CardMedia
               component="img"
@@ -54,12 +71,23 @@ function DashboardHeader(props) {
           </Grid>
 
           <Grid item xs={2} className={classes.gridItem}>
-            <Typography>Christine Smith</Typography>
-          </Grid>
-          <Grid item xs={2} className={classes.gridItem}>
-            <Button color="inherit" onClick={handleClick}>
-              Logout
+            <Button
+              aria-controls="menu"
+              aria-haspopup="true"
+              onClick={handleMenuOpen}
+            >
+              <MenuIcon className={classes.menuIcon} />
             </Button>
+            <Menu
+              id="menu"
+              anchorEl={anchorEl}
+              keepMounted
+              open={Boolean(anchorEl)}
+              onClose={handleMenuClose}
+            >
+              <MenuItem disabled>Christine Smith</MenuItem>
+              <MenuItem onClick={handleLogout}>Logout</MenuItem>
+            </Menu>
           </Grid>
         </Grid>
       </Toolbar>

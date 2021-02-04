@@ -11,8 +11,8 @@ export const logIn = (username, password, callback) => async (dispatch) => {
     },
   });
   dispatch({ type: "LOG_IN", payload: response.data.token });
-  callback()
   localStorage.setItem("token", response.data.token);
+  callback()
 };
 
 export const logOut = () => {
