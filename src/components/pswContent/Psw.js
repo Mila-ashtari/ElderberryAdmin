@@ -57,6 +57,7 @@ const Psw = ({ psw, key }) => {
       </ListItem>
 
       <Dialog
+        fullScreen
         open={open}
         onClose={() => {
           setOpen(false);
