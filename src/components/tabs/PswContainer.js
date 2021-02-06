@@ -19,7 +19,7 @@ function PswContainer(props) {
     getPsw();
   }, [getPsw]);
   return (
-    <List className={classes.pswContainer} alignItems="flex-start">
+    <List className={classes.pswContainer}>
       {pswArr.map((psw, index) => (
         <Psw psw={psw} key={index} />
       ))}

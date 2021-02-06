@@ -1,8 +1,6 @@
 import React, { Fragment, useState } from "react";
 import {
   ListItem,
-  Avatar,
-  List,
   ListItemText,
   Dialog,
   DialogContent,
@@ -10,39 +8,45 @@ import {
   Divider,
   Typography,
   Grid,
-  Link,
-  Accordion,
-  AccordionDetails,
-  AccordionSummary,
+  Tab,
+  Tabs,
+  Button,
+  Box,
 } from "@material-ui/core";
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import CloseIcon from "@material-ui/icons/Close";
 
 import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
+  gridContainer: {
+    justifyContent: "space-between",
+  },
   pswContainer: {
     padding: "30px",
   },
+  tabs: {
+    backgroundColor: "rgba(131, 125, 125, 0.671)",
+    justifyContent: "center",
+  },
+  indicator: {
+    backgroundColor: theme.palette.primary.main,
+  },
 }));
 
-const Psw = ({ psw, key }) => {
+const Psw = ({ psw }) => {
   const classes = useStyles();
   const { user, documents, skills, profile } = psw.pswProfile;
   const [open, setOpen] = useState(false);
+  const [value, setValue] = useState(0);
+  const tabsArr = [
+    { label: "Profile", component: () => <div>Profile</div> },
+    { label: "Documentation", component: () => <div>Documentation</div> },
+    { label: "Availibily", component: () => <div>Availibily</div> },
+    { label: "Bookings", component: () => <div>Bookings</div> },
+  ];
 
-  const renderProfile = (profile) => {
-    const profileKeys = Object.keys(profile);
-    profileKeys.shift();
-    return (
-      <List>
-        {profileKeys.map(
-          (key) =>
-            key !== "profileImage" && (
-              <ListItem>{`${key} : ${profile[key]}`}</ListItem>
-            )
-        )}
-      </List>
-    );
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
   };
 
   return (
@@ -51,7 +55,6 @@ const Psw = ({ psw, key }) => {
         button
         className={classes.listItem}
         onClick={() => setOpen(true)}
-        key={key}
       >
         <ListItemText>{`${user.firstName} ${user.lastName}`}</ListItemText>
       </ListItem>
@@ -59,91 +62,46 @@ const Psw = ({ psw, key }) => {
       <Dialog
         fullScreen
         open={open}
+        scroll="body"
         onClose={() => {
           setOpen(false);
         }}
       >
-        <DialogTitle>{`${user.firstName} ${user.lastName}`}</DialogTitle>
-        <DialogContent>
-          <Grid container direction="column" spacing={2}>
+        <DialogTitle disableTypography>
+          <Grid container spacing={3} className={classes.gridContainer}>
             <Grid item>
-              <Accordion>
-                <AccordionSummary
-                  expandIcon={<ExpandMoreIcon />}
-                  aria-controls="panel2a-content"
-                >
-                  <Typography variant="h2">Profile</Typography>
-                </AccordionSummary>
-                <AccordionDetails>{renderProfile(profile[0])}</AccordionDetails>
-              </Accordion>
+              <Typography variant="h2">{`${user.firstName} ${user.lastName}`}</Typography>
             </Grid>
             <Grid item>
-              <Accordion>
-                <AccordionSummary
-                  expandIcon={<ExpandMoreIcon />}
-                  aria-controls="panel2a-content"
-                  id="panel2a-header"
-                >
-                  <Typography variant="h2">Documents</Typography>
-                </AccordionSummary>
-                <AccordionDetails>
-                  <List>
-                    <ListItem>
-                      <Link
-                        href={documents[0].opswaCard}
-                        target="_blank"
-                        rel="noopener"
-                      >
-                        OPSWA Card
-                      </Link>
-                    </ListItem>
-                    <ListItem>
-                      <Link
-                        href={documents[0].proofOfWorkEligibility}
-                        target="_blank"
-                        rel="noopener"
-                      >
-                        Proof of work eligibility
-                      </Link>
-                    </ListItem>
-                  </List>
-                </AccordionDetails>
-              </Accordion>
+              <Typography variant="body1">{user.email}</Typography>
             </Grid>
             <Grid item>
-              <Accordion>
-                <AccordionSummary
-                  expandIcon={<ExpandMoreIcon />}
-                  aria-controls="panel2a-content"
-                  id="panel2a-header"
-                >
-                  <Typography variant="h2">Skills</Typography>
-                </AccordionSummary>
-                <AccordionDetails>
-                  <List>
-                    <ListItem>
-                      <Link
-                        href={documents[0].opswaCard}
-                        target="_blank"
-                        rel="noopener"
-                      >
-                        OPSWA Card
-                      </Link>
-                    </ListItem>
-                    <ListItem>
-                      <Link
-                        href={documents[0].proofOfWorkEligibility}
-                        target="_blank"
-                        rel="noopener"
-                      >
-                        Proof of work eligibility
-                      </Link>
-                    </ListItem>
-                  </List>
-                </AccordionDetails>
-              </Accordion>
+              <Button>
+                <CloseIcon
+                  onClick={() => {
+                    setOpen(false);
+                  }}
+                />
+              </Button>
             </Grid>
           </Grid>
+        </DialogTitle>
+        <DialogContent>
+          <Tabs
+            className={classes.tabs}
+            aria-label="tabs"
+            value={value}
+            variant="fullWidth"
+            onChange={handleChange}
+            classes={{ indicator: classes.indicator }}
+          >
+            {tabsArr.map((tab, index) => (
+              <Tab className={classes.tab} key={index} label={tab.label} />
+            ))}
+          </Tabs>
+          <Box>
+            {}
+          </Box>
         </DialogContent>
       </Dialog>
       <Divider />

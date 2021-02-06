@@ -58,7 +58,7 @@ function DashboardHeader(props) {
     <AppBar position="static">
       <Toolbar className={classes.toolBar}>
         <Grid container spacing={2} className={classes.gridContainer}>
-          <Grid container Item xs={8} className={classes.gridItem}>
+          <Grid container item xs={8} className={classes.gridItem}>
             <CardMedia
               component="img"
               alt="elderberry logo"

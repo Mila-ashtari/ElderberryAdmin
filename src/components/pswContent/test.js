@@ -1,3 +1,17 @@
+const renderProfile = (profile) => {
+  const profileKeys = Object.keys(profile);
+  profileKeys.shift();
+  return (
+    <List>
+      {profileKeys.map(
+        (key) =>
+          key !== "profileImage" && (
+            <ListItem>{`${key} : ${profile[key]}`}</ListItem>
+          )
+      )}
+    </List>
+  );
+};
 <Grid container direction="column" spacing={2}>
 <Grid item>
   <Accordion>

@@ -15,8 +15,6 @@ const useStyles = makeStyles((theme) => ({
   },
   tab: {
     maxWidth: "100%",
-    // color: "white",
-    // backgroundColor: theme.palette.primary.main,
   },
   indicator: {
     backgroundColor: theme.palette.primary.main,
