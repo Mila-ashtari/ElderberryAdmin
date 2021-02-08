@@ -70,7 +70,7 @@ function DashboardHeader(props) {
             </Typography>
           </Grid>
 
-          <Grid item xs={2} className={classes.gridItem}>
+          <Grid item xs={2} className={classes.gridItem} style={{textAlign:'center'}}>
             <Button
               aria-controls="menu"
               aria-haspopup="true"

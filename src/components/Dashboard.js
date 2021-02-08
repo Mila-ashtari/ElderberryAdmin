@@ -9,8 +9,7 @@ import DashboardHeader from "./DashboardHeader";
 import PswContainer from "./tabs/PswContainer";
 
 const useStyles = makeStyles((theme) => ({
-  gridContainer: {
-    // backgroundColor: theme.palette.primary.main,
+  tabs: {
     borderBottom: "black solid 2px",
   },
   tab: {
@@ -20,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.primary.main,
   },
   searchBar: {
-    alignSelf:'center',
+    alignSelf: "center",
   },
 }));
 
@@ -42,26 +41,32 @@ function Dashboard(props) {
   return (
     <Fragment>
       <DashboardHeader history={history} />
-      <Grid container className={classes.gridContainer}>
-        <Grid item xs={8}>
-          <Tabs
-            className={classes.tabs}
-            value={value}
-            onChange={handleChange}
-            classes={{ indicator: classes.indicator }}
-          >
-            {tabs.map((tab, index) => (
-              <Tab
-                className={classes.tab}
-                key={index}
-                label={tab.label}
-                component={Link}
-                to={`/dashboard/${tab.label}`}
-              />
-            ))}
-          </Tabs>
-        </Grid>
-        <Grid item xs={4} className={classes.searchBar}>
+
+      <Tabs
+        variant="fullWidth"
+        className={classes.tabs}
+        value={value}
+        onChange={handleChange}
+        classes={{ indicator: classes.indicator }}
+      >
+        {tabs.map((tab, index) => (
+          <Tab
+            className={classes.tab}
+            key={index}
+            label={tab.label}
+            component={Link}
+            to={`/dashboard/${tab.label}`}
+            style={{
+              backgroundColor: index === value && "rgba(131, 125, 125, 0.219)",
+              boxShadow:
+                (index === value + 1 && "-5px 0px 7px rgba(37, 36, 36, 0.945)") ||
+                (index === value - 1 && "5px 0px 7px rgba(80, 77, 77, 0.658)"),
+            }}
+          />
+        ))}
+      </Tabs>
+
+      {/* <Grid item xs={4} className={classes.searchBar}>
           <TextField
             InputProps={{
               startAdornment: (
@@ -71,8 +76,7 @@ function Dashboard(props) {
               ),
             }}
           ></TextField>
-        </Grid>
-      </Grid>
+        </Grid> */}
 
       <Switch>
         {tabs.map((tab, index) => (

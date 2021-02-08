@@ -16,8 +16,8 @@ import {
 import CloseIcon from "@material-ui/icons/Close";
 import { makeStyles } from "@material-ui/core/styles";
 
-import Profile from './Profile'
-import Documents from './Documents'
+import Profile from "./Profile";
+import Documents from "./Documents";
 
 const useStyles = makeStyles((theme) => ({
   gridContainer: {
@@ -33,16 +33,34 @@ const useStyles = makeStyles((theme) => ({
   indicator: {
     backgroundColor: theme.palette.primary.main,
   },
+  flexContainer: {
+    display: "flex",
+  },
+  id: {
+    width: "20%",
+    margin: "0px 20px",
+  },
+  firstName: {
+    width: "10%",
+    margin: "0px 20px",
+  },
+  lastName: {
+    width: "10%",
+    margin: "0px 20px",
+  },
 }));
 
-const Psw = ({ psw }) => {
+const Psw = ({ psw, key }) => {
   const classes = useStyles();
   const { user, documents, skills, profile } = psw.pswProfile;
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState(0);
   const tabsArr = [
-    { label: "Profile", component:<Profile profile={profile} skills={skills}/> },
-    { label: "Documentation", component: <Documents documents={documents}/> },
+    {
+      label: "Profile",
+      component: <Profile profile={profile} skills={skills} />,
+    },
+    { label: "Documentation", component: <Documents documents={documents} /> },
     { label: "Availibily", component: "" },
     { label: "Bookings", component: "" },
   ];
@@ -57,8 +75,14 @@ const Psw = ({ psw }) => {
         button
         className={classes.listItem}
         onClick={() => setOpen(true)}
+        style={{backgroundColor: key % 2 !==0 && '#e4e2e2'}}
+        
       >
-        <ListItemText>{`${user.firstName} ${user.lastName}`}</ListItemText>
+        <ListItemText className={classes.flexContainer} disableTypography>
+          <Typography className={classes.id}>ID</Typography>
+          <Typography className={classes.lastName}>{user.lastName}</Typography>
+          <Typography className={classes.firstName}>{user.firstName}</Typography>
+        </ListItemText>
       </ListItem>
 
       <Dialog
@@ -102,9 +126,9 @@ const Psw = ({ psw }) => {
             ))}
           </Tabs>
           <Box>
-            {tabsArr.map((tab, index)=>{
-              if(index==value){
-                return tab.component
+            {tabsArr.map((tab, index) => {
+              if (index == value) {
+                return tab.component;
               }
             })}
           </Box>
