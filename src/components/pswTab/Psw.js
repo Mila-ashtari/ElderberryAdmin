@@ -14,8 +14,10 @@ import {
   Box,
 } from "@material-ui/core";
 import CloseIcon from "@material-ui/icons/Close";
-
 import { makeStyles } from "@material-ui/core/styles";
+
+import Profile from './Profile'
+import Documents from './Documents'
 
 const useStyles = makeStyles((theme) => ({
   gridContainer: {
@@ -39,10 +41,10 @@ const Psw = ({ psw }) => {
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState(0);
   const tabsArr = [
-    { label: "Profile", component: () => <div>Profile</div> },
-    { label: "Documentation", component: () => <div>Documentation</div> },
-    { label: "Availibily", component: () => <div>Availibily</div> },
-    { label: "Bookings", component: () => <div>Bookings</div> },
+    { label: "Profile", component:<Profile profile={profile} skills={skills}/> },
+    { label: "Documentation", component: <Documents documents={documents}/> },
+    { label: "Availibily", component: "" },
+    { label: "Bookings", component: "" },
   ];
 
   const handleChange = (event, newValue) => {
@@ -73,7 +75,7 @@ const Psw = ({ psw }) => {
               <Typography variant="h2">{`${user.firstName} ${user.lastName}`}</Typography>
             </Grid>
             <Grid item>
-              <Typography variant="body1">{user.email}</Typography>
+              <Typography variant="body1">Email: {user.email}</Typography>
             </Grid>
             <Grid item>
               <Button>
@@ -100,7 +102,11 @@ const Psw = ({ psw }) => {
             ))}
           </Tabs>
           <Box>
-            {}
+            {tabsArr.map((tab, index)=>{
+              if(index==value){
+                return tab.component
+              }
+            })}
           </Box>
         </DialogContent>
       </Dialog>
