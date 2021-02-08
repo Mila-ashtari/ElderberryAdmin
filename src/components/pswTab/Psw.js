@@ -48,6 +48,9 @@ const useStyles = makeStyles((theme) => ({
     width: "10%",
     margin: "0px 20px",
   },
+  paper:{
+    
+  }
 }));
 
 const Psw = ({ psw, key }) => {
@@ -92,6 +95,7 @@ const Psw = ({ psw, key }) => {
         onClose={() => {
           setOpen(false);
         }}
+        classes={{paper:classes.paper}}
       >
         <DialogTitle disableTypography>
           <Grid container spacing={3} className={classes.gridContainer}>
@@ -125,7 +129,7 @@ const Psw = ({ psw, key }) => {
               <Tab className={classes.tab} key={index} label={tab.label} />
             ))}
           </Tabs>
-          <Box>
+          <Box style={{padding:'30px'}}>
             {tabsArr.map((tab, index) => {
               if (index == value) {
                 return tab.component;

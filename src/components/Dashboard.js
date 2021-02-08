@@ -1,7 +1,6 @@
 import React, { Fragment, useState } from "react";
-import { Tabs, Tab, Grid, TextField, InputAdornment } from "@material-ui/core";
+import { Tabs, Tab} from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import SearchIcon from "@material-ui/icons/Search";
 import { Switch, Route, Link } from "react-router-dom";
 
 import requiredAuth from "./requiredAuth";
@@ -59,7 +58,7 @@ function Dashboard(props) {
             style={{
               backgroundColor: index === value && "rgba(131, 125, 125, 0.219)",
               boxShadow:
-                (index === value + 1 && "-5px 0px 7px rgba(37, 36, 36, 0.945)") ||
+                (index === value + 1 && "-5px 0px 7px rgba(80, 77, 77, 0.932)") ||
                 (index === value - 1 && "5px 0px 7px rgba(80, 77, 77, 0.658)"),
             }}
           />

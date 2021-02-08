@@ -26,7 +26,7 @@ function Documents({ documents }) {
           <CardMedia
             component="img"
             src={`${documents[0].opswaCard}`}
-            title="Contemplative Reptile"
+            title="OPSWA Card"
           ></CardMedia>
           <CardContent>
             <Typography>OPSWA Card</Typography>
@@ -38,7 +38,7 @@ function Documents({ documents }) {
           <CardMedia
             component="img"
             src={`${documents[0].proofOfWorkEligibility}`}
-            title="Contemplative Reptile"
+            title="Proof of work eligibility"
           ></CardMedia>
           <CardContent>
             <Typography>Proof of work eligibility</Typography>
