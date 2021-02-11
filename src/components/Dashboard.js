@@ -58,8 +58,9 @@ function Dashboard(props) {
             style={{
               backgroundColor: index === value && "rgba(131, 125, 125, 0.219)",
               boxShadow:
-                (index === value + 1 && "-5px 0px 7px rgba(80, 77, 77, 0.932)") ||
-                (index === value - 1 && "5px 0px 7px rgba(80, 77, 77, 0.658)"),
+                (index === value + 1 && "-5px 0px 7px rgba(80, 77, 77, 0.932)"),
+                // (index === value - 1 && "5px 0px 7px rgba(80, 77, 77, 0.658)"),
+              borderLeft:index === value && '.5px solid black'
             }}
           />
         ))}

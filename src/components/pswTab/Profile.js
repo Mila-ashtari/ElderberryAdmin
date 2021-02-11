@@ -13,10 +13,10 @@ import { Fragment } from "react";
 
 const useStyles = makeStyles((theme) => ({
   flexContainer:{
-    display:'flex'
+    width:'50%'
   },
   profileImage: {
-    width:'200px',
+    width:'150px',
     alignSelf:'flex-start'
   },
 }));
@@ -31,9 +31,14 @@ function Profile({ profile, skills }) {
         title="profile image"
       ></CardMedia>
       <CardContent>
+        <Typography variant='h2'>Info</Typography>
         <Typography>{`Gender: ${profile[0].gender}`}</Typography>
         <Typography>{`Good with pets: ${profile[0].petPreference}`}</Typography>
         <Typography>{`About: ${profile[0].aboutYourSelf}`}</Typography>
+      </CardContent>
+      <CardContent>
+      <Typography variant='h2'>Skills</Typography>
+
       </CardContent>
     </Card>
   );
