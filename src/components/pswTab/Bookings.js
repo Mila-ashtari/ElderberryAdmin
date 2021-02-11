@@ -12,35 +12,44 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import ExpandLessIcon from "@material-ui/icons/ExpandLess";
 
 const useStyles = makeStyles((theme) => ({
-  root: {
-    width: "100%",
-    marginTop: theme.spacing.unit * 3,
-    overflowX: "auto",
-  },
-  table: {
-    minWidth: 700,
-  },
+  // root: {
+  //   width: "100%",
+  //   marginTop: theme.spacing.unit * 3,
+  //   overflowX: "auto",
+  // },
+  // table: {
+  //   minWidth: 700,
+  // },
 }));
-export const ExpandingRow = ({ row }) => {
+export const ExpandingRow = ({ row, index }) => {
+  const classes = useStyles();
   const [open, setOpen] = useState(false);
+  const rowKeys = Object.keys(row);
   return (
     <>
-      <TableRow key={row.id}>
-        <TableCell>{row.name}</TableCell>
-        <TableCell align="right">{row.calories}</TableCell>
-        <TableCell align="right">{row.fat}</TableCell>
-        <TableCell align="right">{row.carbs}</TableCell>
-        <TableCell align="right">{row.protein}</TableCell>
+      <TableRow
+        key={row.id}
+        style={{ backgroundColor: index % 2 !== 1 && "#e4e2e2" }}
+      >
+        {rowKeys.map((key) => (
+          <TableCell className={classes.tableCell}>{row[key]}</TableCell>
+        ))}
         <TableCell>
           <Button onClick={() => setOpen(!open)}>
             {open ? <ExpandLessIcon /> : <ExpandMoreIcon />}
           </Button>
         </TableCell>
       </TableRow>
-      <Collapse in={open} component="tr" style={{ display: "block" }}>
-        <td>
-          <div>Expanded data.</div>
-        </td>
+      <Collapse
+        in={open}
+        timeout="auto"
+        component="tr"
+        unmountOnExit
+      >
+        <TableRow>
+          <div>dggd</div>
+          <div>dffd</div>
+        </TableRow>
       </Collapse>
     </>
   );
@@ -49,16 +58,37 @@ export const ExpandingRow = ({ row }) => {
 function Bookings(props) {
   const classes = useStyles();
   let id = 0;
-  function createData(name, calories, fat, carbs, protein) {
+  function createData(
+    date,
+    startTime,
+    endTime,
+    hours,
+    client,
+    customer,
+    address
+  ) {
     id += 1;
-    return { id, name, calories, fat, carbs, protein };
+    return { date, startTime, endTime, hours, client, customer, address };
   }
   const rows = [
-    createData("Frozen yoghurt", 159, 6.0, 24, 4.0),
-    createData("Ice cream sandwich", 237, 9.0, 37, 4.3),
-    createData("Eclair", 262, 16.0, 24, 6.0),
-    createData("Cupcake", 305, 3.7, 67, 4.3),
-    createData("Gingerbread", 356, 16.0, 49, 3.9),
+    createData(
+      "Feb 19,2021",
+      "11:00am",
+      "03:00pm",
+      "4",
+      "Mila Ashtari",
+      "Farhad Ashtari",
+      "309 horsham st"
+    ),
+    createData(
+      "Feb 19,2021",
+      "11:00am",
+      "03:00pm",
+      "4",
+      "Mila Ashtari",
+      "Farhad Ashtari",
+      "309 horsham st"
+    ),
   ];
 
   return (
@@ -76,8 +106,8 @@ function Bookings(props) {
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
-            <ExpandingRow row={row} />
+          {rows.map((row, index) => (
+            <ExpandingRow row={row} index={index} />
           ))}
         </TableBody>
       </Table>
