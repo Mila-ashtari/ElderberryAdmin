@@ -48,7 +48,7 @@ function Login(props) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    logIn("admin", "password", () => {
+    logIn("username", "password", () => {
       history.push("/dashboard");
     });
   };

@@ -54,7 +54,7 @@ const useStyles = makeStyles((theme) => ({
 
 const Psw = ({ psw, key }) => {
   const classes = useStyles();
-  const { user, documents, skills, profile } = psw.pswProfile;
+  const { user, documents, skills, profile } = psw;
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState(0);
   const tabsArr = [
@@ -77,7 +77,7 @@ const Psw = ({ psw, key }) => {
         button
         className={classes.listItem}
         onClick={() => setOpen(true)}
-        style={{ backgroundColor: key % 2 !== 0 && "#e4e2e2" }}
+        // style={{ backgroundColor: key % 2 !== 0 && "#e4e2e2" }}
       >
         <ListItemText className={classes.flexContainer} disableTypography>
           <Typography className={classes.id}>ID</Typography>

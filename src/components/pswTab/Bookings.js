@@ -47,8 +47,10 @@ export const ExpandingRow = ({ row, index }) => {
         unmountOnExit
       >
         <TableRow>
-          <div>dggd</div>
-          <div>dffd</div>
+          <div>Tasks</div>
+          <div>Notes</div>
+          <div>CC</div>
+          <div>Payment</div>
         </TableRow>
       </Collapse>
     </>
