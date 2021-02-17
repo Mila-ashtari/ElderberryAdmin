@@ -54,7 +54,8 @@ const useStyles = makeStyles((theme) => ({
 
 const Psw = ({ psw, key }) => {
   const classes = useStyles();
-  const { user, documents, skills, profile } = psw;
+  console.log(psw)
+  const { user, documents, skills, profile } = psw
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState(0);
   const tabsArr = [

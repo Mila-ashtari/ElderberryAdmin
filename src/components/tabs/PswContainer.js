@@ -37,7 +37,7 @@ function PswContainer(props) {
   }, [getPsw]);
   return (
     <List className={classes.pswContainer}>
-      {/* <ListItem className={classes.listHeader} disabled>
+      <ListItem className={classes.listHeader} disabled>
         <Typography className={classes.id}>ID</Typography>
         <Typography className={classes.lastName} >Last Name</Typography>
         <Typography className={classes.firstName}>First Name</Typography>
@@ -45,10 +45,11 @@ function PswContainer(props) {
       <Divider/>
       {pswArr.map((psw, index) => (
         <Psw psw={psw} key={index} />
-      ))} */}
+      ))}
     </List>
   );
 }
+
 
 const mapStateToProps = (state) => {
   return { pswArr: state.pswData };

@@ -2,7 +2,7 @@ import axios from "axios";
 
 export const logIn = (username, password, callback) => async (dispatch) => {
   const response = await axios({
-    url: "https://elderberrytest.herokuapp.com/api/tests/login",
+    url: "https://elderberrytest.herokuapp.com/api/admin/login",
     method: "POST",
     dataType: "json",
     data: {
@@ -27,7 +27,7 @@ export const getPsw = () => async (dispatch) => {
     url: " https://elderberrytest.herokuapp.com/api/admin/all-psws",
     method: "GET",
     headers: { Authorization: `Bearer ${token}` },
-    data:{
+    params: {
       userFields: {
         lastName: true,
         firstName: true,
@@ -35,9 +35,8 @@ export const getPsw = () => async (dispatch) => {
         address: true,
         contactNumber: true,
       },
-      'populateProfile': false,
-    }
+      populateProfile: true,
+    },
   });
-  console.log(response.data);
   dispatch({ type: "PSW_DATA", payload: response.data.psws });
 };
