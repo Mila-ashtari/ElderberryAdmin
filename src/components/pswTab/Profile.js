@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   Typography,
   Card,
@@ -9,6 +9,7 @@ import {
 import { makeStyles } from "@material-ui/core/styles";
 
 import Info from './Info'
+import Skills from "./Skills";
 
 const useStyles = makeStyles((theme) => ({
   flexContainer: {
@@ -41,7 +42,7 @@ function Profile({ profile, skills }) {
         <Card>
           <CardContent>
             <Typography variant="h2">Skills</Typography>
-            <Typography variant="h3">Certification and Licenses</Typography>
+            <Skills skills={skills}/>
           </CardContent>
         </Card>
       </Grid>

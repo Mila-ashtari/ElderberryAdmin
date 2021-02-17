@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 function Info({ profile }) {
   const classes = useStyles();
-  const [expanded, setExpanded] = useState(true);
+  const [expanded, setExpanded] = useState(false);
   return (
     <>
       <Box>
