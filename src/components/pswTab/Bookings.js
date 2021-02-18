@@ -1,120 +1,138 @@
 import React, { useState } from "react";
+import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
+import Box from "@material-ui/core/Box";
 import Collapse from "@material-ui/core/Collapse";
+import IconButton from "@material-ui/core/IconButton";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
+import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
+import Typography from "@material-ui/core/Typography";
 import Paper from "@material-ui/core/Paper";
-import Button from "@material-ui/core/Button";
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
-import ExpandLessIcon from "@material-ui/icons/ExpandLess";
+import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
+import KeyboardArrowUpIcon from "@material-ui/icons/KeyboardArrowUp";
 
-const useStyles = makeStyles((theme) => ({
-  // root: {
-  //   width: "100%",
-  //   marginTop: theme.spacing.unit * 3,
-  //   overflowX: "auto",
-  // },
-  // table: {
-  //   minWidth: 700,
-  // },
-}));
-export const ExpandingRow = ({ row, index }) => {
-  const classes = useStyles();
+const useRowStyles = makeStyles({
+  root: {
+    "& > *": {
+      borderBottom: "unset",
+    },
+  },
+});
+
+function createData(
+  date,
+  startTime,
+  endTime,
+  hours,
+  client,
+  customer,
+  address
+) {
+  return { date, startTime, endTime, hours, client, customer, address };
+}
+
+const rows = [
+  createData(
+    "Feb 19,2021",
+    "11:00am",
+    "03:00pm",
+    "4",
+    "Mila Ashtari",
+    "Farhad Ashtari",
+    "309 horsham st"
+  ),
+  createData(
+    "Feb 19,2021",
+    "11:00am",
+    "03:00pm",
+    "4",
+    "Mila Ashtari",
+    "Farhad Ashtari",
+    "309 horsham st"
+  ),
+];
+export function Row(props) {
+  const { row } = props;
   const [open, setOpen] = useState(false);
-  const rowKeys = Object.keys(row);
+  const classes = useRowStyles();
+
   return (
     <>
-      <TableRow
-        key={row.id}
-        style={{ backgroundColor: index % 2 !== 1 && "#e4e2e2" }}
-      >
-        {rowKeys.map((key) => (
-          <TableCell className={classes.tableCell}>{row[key]}</TableCell>
-        ))}
+      <TableRow className={classes.root}>
+        <TableCell component="th" scope="row">
+          {row.date}
+        </TableCell>
+        <TableCell align="right">{row.startTime}</TableCell>
+        <TableCell align="right">{row.endTime}</TableCell>
+        <TableCell align="right">{row.hours}</TableCell>
+        <TableCell align="right">{row.client}</TableCell>
+        <TableCell align="right">{row.customer}</TableCell>
+        <TableCell align="right">{row.address}</TableCell>
         <TableCell>
-          <Button onClick={() => setOpen(!open)}>
-            {open ? <ExpandLessIcon /> : <ExpandMoreIcon />}
-          </Button>
+          <IconButton
+            aria-label="expand row"
+            size="small"
+            onClick={() => setOpen(!open)}
+          >
+            {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
+          </IconButton>
         </TableCell>
       </TableRow>
-      <Collapse
-        in={open}
-        timeout="auto"
-        component="tr"
-        unmountOnExit
-      >
-        <TableRow>
-          <div>Tasks</div>
-          <div>Notes</div>
-          <div>CC</div>
-          <div>Payment</div>
-        </TableRow>
-      </Collapse>
+      <TableRow>
+        <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
+          <Collapse in={open} timeout="auto" unmountOnExit>
+            <Box margin={1}>
+              <Table size="small" aria-label="purchases">
+                <TableBody>
+                 
+                    <TableRow>
+                      <TableCell >
+                        Tasks
+                      </TableCell>
+                      <TableCell>Notes</TableCell>
+                      <TableCell align="right">CC</TableCell>
+                      <TableCell align="right">
+                        Payment
+                      </TableCell>
+                    </TableRow>
+              
+                </TableBody>
+              </Table>
+            </Box>
+          </Collapse>
+        </TableCell>
+      </TableRow>
     </>
-  );
-};
-
-function Bookings(props) {
-  const classes = useStyles();
-  let id = 0;
-  function createData(
-    date,
-    startTime,
-    endTime,
-    hours,
-    client,
-    customer,
-    address
-  ) {
-    id += 1;
-    return { date, startTime, endTime, hours, client, customer, address };
-  }
-  const rows = [
-    createData(
-      "Feb 19,2021",
-      "11:00am",
-      "03:00pm",
-      "4",
-      "Mila Ashtari",
-      "Farhad Ashtari",
-      "309 horsham st"
-    ),
-    createData(
-      "Feb 19,2021",
-      "11:00am",
-      "03:00pm",
-      "4",
-      "Mila Ashtari",
-      "Farhad Ashtari",
-      "309 horsham st"
-    ),
-  ];
-
-  return (
-    <Paper className={classes.root}>
-      <Table className={classes.table}>
-        <TableHead>
-          <TableRow>
-            <TableCell>Date</TableCell>
-            <TableCell>Start time</TableCell>
-            <TableCell>End time</TableCell>
-            <TableCell>Hours</TableCell>
-            <TableCell>Client</TableCell>
-            <TableCell>Customer</TableCell>
-            <TableCell>Address</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {rows.map((row, index) => (
-            <ExpandingRow row={row} index={index} />
-          ))}
-        </TableBody>
-      </Table>
-    </Paper>
   );
 }
 
-export default Bookings;
+function CollapsibleTable() {
+  return (
+    <TableContainer component={Paper}>
+      <Table aria-label="collapsible table">
+        <TableHead>
+          <TableRow>
+            <TableCell>Date</TableCell>
+            <TableCell align="right">Start Time</TableCell>
+            <TableCell align="right">End Time</TableCell>
+            <TableCell align="right">Hours</TableCell>
+            <TableCell align="right">Client</TableCell>
+            <TableCell align="right">Customer</TableCell>
+            <TableCell align="right">Address</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {rows.map((row) => (
+            <Row key={row.name} row={row} />
+          ))}
+        </TableBody>
+      </Table>
+    </TableContainer>
+  );
+}
+
+export default CollapsibleTable;

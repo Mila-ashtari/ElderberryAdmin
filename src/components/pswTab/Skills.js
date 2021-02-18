@@ -2,7 +2,11 @@ import React from "react";
 import { Typography, List, ListItem, ListItemText } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 
-const useStyles = makeStyles((theme) => ({}));
+const useStyles = makeStyles((theme) => ({
+    list:{
+        // listStyle=''
+    }
+}));
 function Skills({ skills }) {
   const classes = useStyles();
   const {
@@ -16,7 +20,7 @@ function Skills({ skills }) {
   return (
     <>
       <Typography variant="h3">Certification and Licenses</Typography>
-      <List>
+      <List className={classes.list}>
         {certificationsAndLicenses.map((item) => {
           return (
             <ListItem>

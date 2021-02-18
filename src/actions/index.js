@@ -2,7 +2,7 @@ import axios from "axios";
 
 export const logIn = (username, password, callback) => async (dispatch) => {
   const response = await axios({
-    url: "https://elderberrytest.herokuapp.com/api/admin/login",
+    url: "https://elderberry-development-api.herokuapp.com/api/admin/login",
     method: "POST",
     dataType: "json",
     data: {
@@ -24,7 +24,7 @@ export const logOut = () => {
 export const getPsw = () => async (dispatch) => {
   const token = localStorage.getItem("token");
   const response = await axios({
-    url: " https://elderberrytest.herokuapp.com/api/admin/all-psws",
+    url: " https://elderberry-development-api.herokuapp.com/api/admin/all-psws",
     method: "GET",
     headers: { Authorization: `Bearer ${token}` },
     params: {
