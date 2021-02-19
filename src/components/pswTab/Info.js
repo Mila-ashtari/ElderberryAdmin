@@ -1,13 +1,11 @@
 import React, { useState } from "react";
 import {
   Typography,
-  Card,
-  CardMedia,
-  CardContent,
-  Grid,
   Collapse,
   Button,
   Box,
+  List,
+  ListItem,
 } from "@material-ui/core";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import ExpandLessIcon from "@material-ui/icons/ExpandLess";
@@ -28,35 +26,37 @@ function Info({ profile }) {
   const classes = useStyles();
   const [expanded, setExpanded] = useState(false);
   return (
-    <>
-      <Box>
+    <List>
+      <ListItem>
         <Typography variant="h3" className={classes.h3}>
-          {"Gender: "}
+          {"Gender:  "}
         </Typography>
         <Typography className={classes.paragragh}>{profile.gender}</Typography>
-      </Box>
-      <Box>
+      </ListItem>
+      <ListItem>
         <Typography variant="h3" className={classes.h3}>
-          {"Good with pets: "}
+          {"Good with pets:  "}
         </Typography>
         <Typography className={classes.paragragh}>
           {profile.petPreference}
         </Typography>
-      </Box>
-      <Collapse in={expanded} timeout="auto" collapsedHeight="70px">
-        <Typography variant="h3" className={classes.h3}>
-          {"About: "}
-        </Typography>
-        <Typography className={classes.paragragh}>
-          {profile.aboutYourSelf}
-        </Typography>
-      </Collapse>
-      <Box className={classes.buttonContainer}>
-        <Button onClick={() => setExpanded(!expanded)}>
-          {expanded ? <ExpandLessIcon /> : <ExpandMoreIcon />}
-        </Button>
-      </Box>
-    </>
+      </ListItem>
+      <ListItem>
+        <Collapse in={expanded} timeout="auto" collapsedHeight="70px">
+          <Typography variant="h3" className={classes.h3}>
+            {"About: "}
+          </Typography>
+          <Typography className={classes.paragragh}>
+            {profile.aboutYourSelf}
+          </Typography>
+        </Collapse>
+        <Box className={classes.buttonContainer}>
+          <Button onClick={() => setExpanded(!expanded)}>
+            {expanded ? <ExpandLessIcon /> : <ExpandMoreIcon />}
+          </Button>
+        </Box>
+      </ListItem>
+    </List>
   );
 }
 

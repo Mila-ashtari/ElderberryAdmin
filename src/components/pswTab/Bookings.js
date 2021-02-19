@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
 import Box from "@material-ui/core/Box";
 import Collapse from "@material-ui/core/Collapse";
@@ -85,24 +84,10 @@ export function Row(props) {
       <TableRow>
         <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
           <Collapse in={open} timeout="auto" unmountOnExit>
-            <Box margin={1}>
-              <Table size="small" aria-label="purchases">
-                <TableBody>
-                 
-                    <TableRow>
-                      <TableCell >
-                        Tasks
-                      </TableCell>
-                      <TableCell>Notes</TableCell>
-                      <TableCell align="right">CC</TableCell>
-                      <TableCell align="right">
-                        Payment
-                      </TableCell>
-                    </TableRow>
-              
-                </TableBody>
-              </Table>
-            </Box>
+            <div>Tasks</div>
+            <div>Notes</div>
+            <div>CC</div>
+            <div>payment</div>
           </Collapse>
         </TableCell>
       </TableRow>
