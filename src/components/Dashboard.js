@@ -5,7 +5,7 @@ import { Switch, Route, Link } from "react-router-dom";
 
 import requiredAuth from "./requiredAuth";
 import DashboardHeader from "./DashboardHeader";
-import PswContainer from "./tabs/PswContainer";
+import PswContainer from "./dashboardTabs/PswContainer";
 
 const useStyles = makeStyles((theme) => ({
   tabs: {
