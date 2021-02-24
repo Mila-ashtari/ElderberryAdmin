@@ -52,10 +52,10 @@ const useStyles = makeStyles((theme) => ({
   paper: {},
 }));
 
-const Psw = ({ psw, key }) => {
+const Psw = ({ psw }) => {
   const classes = useStyles();
-  console.log(psw)
-  const { user, documents, skills, profile } = psw
+  // console.log(psw);
+  const { user, documents, skills, profile, expiration, verified, id } = psw;
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState(0);
   const tabsArr = [
@@ -63,9 +63,9 @@ const Psw = ({ psw, key }) => {
       label: "Profile",
       component: <Profile profile={profile} skills={skills} />,
     },
-    { label: "Documentation", component: <Documents documents={documents} /> },
+    { label: "Documentation", component: <Documents {...{documents, expiration, verified, id, user}} /> },
     { label: "Availibily", component: "" },
-    { label: "Bookings", component: <Bookings/>},
+    { label: "Bookings", component: <Bookings /> },
   ];
 
   const handleChange = (event, newValue) => {

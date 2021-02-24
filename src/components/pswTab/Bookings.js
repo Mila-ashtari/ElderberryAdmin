@@ -112,7 +112,7 @@ function CollapsibleTable() {
         </TableHead>
         <TableBody>
           {rows.map((row) => (
-            <Row key={row.name} row={row} />
+            <Row key={row.date} row={row} />
           ))}
         </TableBody>
       </Table>

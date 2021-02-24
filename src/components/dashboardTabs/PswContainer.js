@@ -43,8 +43,8 @@ function PswContainer(props) {
         <Typography className={classes.firstName}>First Name</Typography>
       </ListItem>
       <Divider/>
-      {pswArr.map((psw, index) => (
-        <Psw psw={psw} key={index} />
+      {pswArr.map((psw) => (
+        <Psw psw={psw} key={psw.id} />
       ))}
     </List>
   );
