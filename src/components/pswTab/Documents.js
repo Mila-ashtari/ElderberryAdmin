@@ -57,7 +57,9 @@ function Edit(props) {
   );
 }
 
-export const ConnectedEdit = connect(null, { updatePswStatus })(Edit);
+const ConnectedEdit = connect(null, { updatePswStatus })(Edit)
+
+export  {ConnectedEdit}
 
 function Documents({ documents, expiration, verified, id, user }) {
   const classes = useStyles();

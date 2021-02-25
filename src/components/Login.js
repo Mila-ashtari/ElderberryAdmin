@@ -49,7 +49,7 @@ function Login(props) {
   const handleSubmit = (e) => {
     e.preventDefault();
     logIn("username", "password", () => {
-      history.push("/dashboard");
+      history.push("/dashboard/psw");
     });
   };
   return (
