@@ -29,7 +29,6 @@ const useStyles = makeStyles((theme) => ({
 
 function Edit(props) {
   const { updatePsw, verified, expiration, id, user } = props;
-  console.log({id, email:user.email, userID:user.id})
   const classes = useStyles();
   return (
     <Grid container item sm={12}>
@@ -57,9 +56,9 @@ function Edit(props) {
   );
 }
 
-const ConnectedEdit = connect(null, { updatePsw })(Edit)
+const ConnectedEdit = connect(null, { updatePsw })(Edit);
 
-export  {ConnectedEdit}
+export { ConnectedEdit };
 
 function Documents({ documents, expiration, verified, id, user }) {
   const classes = useStyles();
@@ -67,30 +66,22 @@ function Documents({ documents, expiration, verified, id, user }) {
   return (
     <Grid container className={classes.gridContainer} spacing={3}>
       <ConnectedEdit {...{ expiration, verified, id, user }} />
-      <Grid item sm={6}>
-        <Card className={classes.documentContainer}>
-          <CardMedia
-            component="img"
-            src={`${documents[0].opswaCard}`}
-            title="OPSWA Card"
-          ></CardMedia>
-          <CardContent>
-            <Typography>OPSWA Card</Typography>
-          </CardContent>
-        </Card>
-      </Grid>
-      <Grid item sm={6}>
-        <Card className={classes.documentContainer}>
-          <CardMedia
-            component="img"
-            src={`${documents[0].proofOfWorkEligibility}`}
-            title="Proof of work eligibility"
-          ></CardMedia>
-          <CardContent>
-            <Typography>Proof of work eligibility</Typography>
-          </CardContent>
-        </Card>
-      </Grid>
+      {documents.map((document) => {
+        return (
+          <Grid item sm={6}>
+            <Card className={classes.documentContainer}>
+              <CardMedia
+                component="img"
+                src={document.url}
+                title={document.name}
+              ></CardMedia>
+              <CardContent>
+                <Typography>{document.name}</Typography>
+              </CardContent>
+            </Card>
+          </Grid>
+        );
+      })}
     </Grid>
   );
 }
