@@ -18,7 +18,7 @@ const authReducer = (state = INITIAL_STATE, action) => {
 
 const pswReducer = (state = [], action) => {
   switch (action.type) {
-    case "PSW_DATA":
+    case "FETCH_PSWS":
       return action.payload;
     default:
       return state;

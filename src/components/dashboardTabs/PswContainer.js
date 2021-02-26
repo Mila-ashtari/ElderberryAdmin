@@ -35,6 +35,7 @@ function PswContainer(props) {
   useEffect(() => {
     getPsw();
   }, [getPsw]);
+  console.log(pswArr)
   return (
     <List className={classes.pswContainer}>
       <ListItem className={classes.listHeader} disabled>

@@ -40,10 +40,10 @@ export const getPsw = () => async (dispatch) => {
       populateProfile: true,
     },
   });
-  dispatch({ type: "PSW_DATA", payload: response.data.psws });
+  dispatch({ type: "FETCH_PSWS", payload: response.data.psws });
 };
 
-export const updatePswStatus = (id, email, userID) => async (dispatch) => {
+export const updatePsw = (id, email, userID) => async (dispatch) => {
   const token = localStorage.getItem("token");
   await axios({
     url: "https://elderberry-development-api.herokuapp.com/api/admin/psw",
@@ -57,20 +57,5 @@ export const updatePswStatus = (id, email, userID) => async (dispatch) => {
       expiration: "2011-10-05T14:48:00.000Z",
     },
   });
-  const response = await axios({
-    url: " https://elderberry-development-api.herokuapp.com/api/admin/all-psws",
-    method: "GET",
-    headers: { Authorization: `Bearer ${token}` },
-    params: {
-      userFields: {
-        lastName: true,
-        firstName: true,
-        email: true,
-        address: true,
-        contactNumber: true,
-      },
-      populateProfile: true,
-    },
-  });
-  dispatch({ type: "PSW_DATA", payload: response.data.psws });
+  
 };

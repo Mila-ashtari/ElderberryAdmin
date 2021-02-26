@@ -11,7 +11,7 @@ import {
 import { makeStyles } from "@material-ui/core/styles";
 import EditIcon from "@material-ui/icons/Edit";
 
-import { updatePswStatus } from "../../actions/index";
+import { updatePsw } from "../../actions/index";
 
 const useStyles = makeStyles((theme) => ({
   gridContainer: {
@@ -28,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function Edit(props) {
-  const { updatePswStatus, verified, expiration, id, user } = props;
+  const { updatePsw, verified, expiration, id, user } = props;
   console.log({id, email:user.email, userID:user.id})
   const classes = useStyles();
   return (
@@ -36,7 +36,7 @@ function Edit(props) {
       <Grid item container sm={12}>
         <Button
           className={classes.iconButton}
-          onClick={() => updatePswStatus(id, user.email, user.id)}
+          onClick={() => updatePsw(id, user.email, user.id)}
         >
           <EditIcon className={classes.icon} />
         </Button>
@@ -57,7 +57,7 @@ function Edit(props) {
   );
 }
 
-const ConnectedEdit = connect(null, { updatePswStatus })(Edit)
+const ConnectedEdit = connect(null, { updatePsw })(Edit)
 
 export  {ConnectedEdit}
 

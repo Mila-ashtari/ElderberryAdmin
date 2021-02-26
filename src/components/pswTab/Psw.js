@@ -54,7 +54,6 @@ const useStyles = makeStyles((theme) => ({
 
 const Psw = ({ psw }) => {
   const classes = useStyles();
-  // console.log(psw);
   const { user, documents, skills, profile, expiration, verified, id } = psw;
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState(0);
