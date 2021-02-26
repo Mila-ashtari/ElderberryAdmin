@@ -31,11 +31,11 @@ const useStyles = makeStyles((theme) => ({
 
 function PswContainer(props) {
   const classes = useStyles();
-  const { getPsw, pswArr } = props;
+  const { getPsw, pswObj } = props;
   useEffect(() => {
     getPsw();
   }, [getPsw]);
-  console.log(pswArr)
+  console.log(pswObj)
   return (
     <List className={classes.pswContainer}>
       <ListItem className={classes.listHeader} disabled>
@@ -44,15 +44,16 @@ function PswContainer(props) {
         <Typography className={classes.firstName}>First Name</Typography>
       </ListItem>
       <Divider/>
-      {pswArr.map((psw) => (
+      {/* {pswObj.map((psw) => (
         <Psw psw={psw} key={psw.id} />
-      ))}
+      ))} */}
     </List>
   );
 }
 
 
 const mapStateToProps = (state) => {
-  return { pswArr: state.pswData };
+  console.log(state.pswData)
+  return { pswObj: state.pswData };
 };
 export default connect(mapStateToProps, { getPsw })(PswContainer);
