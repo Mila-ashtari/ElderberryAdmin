@@ -28,14 +28,15 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function Edit(props) {
-  const { updatePsw, verified, expiration, id, user } = props;
+  const { updatePsw, psw} = props;
+  const {verified, expiration} = psw
   const classes = useStyles();
   return (
     <Grid container item sm={12}>
       <Grid item container sm={12}>
         <Button
           className={classes.iconButton}
-          onClick={() => updatePsw(id, user.email, user.id)}
+          onClick={() => updatePsw(psw)}
         >
           <EditIcon className={classes.icon} />
         </Button>
@@ -60,15 +61,15 @@ const ConnectedEdit = connect(null, { updatePsw })(Edit);
 
 export { ConnectedEdit };
 
-function Documents({ documents, expiration, verified, id, user }) {
+function Documents({ psw }) {
   const classes = useStyles();
-
+  const { documents } = psw;
   return (
     <Grid container className={classes.gridContainer} spacing={3}>
-      <ConnectedEdit {...{ expiration, verified, id, user }} />
+      <ConnectedEdit psw={psw} />
       {documents.map((document) => {
         return (
-          <Grid item sm={6}>
+          <Grid item sm={6} key={document.id}>
             <Card className={classes.documentContainer}>
               <CardMedia
                 component="img"

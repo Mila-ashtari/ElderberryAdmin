@@ -54,7 +54,7 @@ const useStyles = makeStyles((theme) => ({
 
 const Psw = ({ psw }) => {
   const classes = useStyles();
-  const { user, documents, skills, profile, expiration, verified, id } = psw;
+  const { user, skills, profile } = psw;
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState(0);
   const tabsArr = [
@@ -62,7 +62,7 @@ const Psw = ({ psw }) => {
       label: "Profile",
       component: <Profile profile={profile} skills={skills} />,
     },
-    { label: "Documentation", component: <Documents {...{documents, expiration, verified, id, user}} /> },
+    { label: "Documentation", component: <Documents psw={psw} /> },
     { label: "Availibily", component: "" },
     { label: "Bookings", component: <Bookings /> },
   ];
@@ -131,7 +131,7 @@ const Psw = ({ psw }) => {
           </Tabs>
           <Box style={{ padding: "30px" }}>
             {tabsArr.map((tab, index) => {
-              if (index == value) {
+              if (index === value) {
                 return tab.component;
               }
             })}

@@ -5,5 +5,5 @@ import pswReducer from './pswReducer'
 
 export default combineReducers({
   auth: authReducer,
-  pswData: pswReducer,
+  psws: pswReducer,
 });
