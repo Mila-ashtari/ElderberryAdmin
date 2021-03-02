@@ -43,21 +43,24 @@ export const getPsw = () => async (dispatch) => {
   dispatch({ type: "FETCH_PSWS", payload: response.data.psws });
 };
 
-export const updatePsw = (psw) => async (dispatch) => {
+export const updatePsw = (psw, verified, expiration) => async (dispatch) => {
   const token = localStorage.getItem("token");
-  const {user, id}=psw
+  const { user, id } = psw;
   const response = await axios({
     url: "https://elderberry-development-api.herokuapp.com/api/admin/psw",
     method: "POST",
     headers: { Authorization: `Bearer ${token}` },
     data: {
       id,
-      email:user.email,
-      userID:user.id,
+      email: user.email,
+      userID: user.id,
       verified: false,
-      expiration: "2011-10-05T14:48:00.000Z",
+      expiration: "2013-10-05T14:48:00.000Z",
     },
   });
-  console.log(response)
-  dispatch({ type: "UPDATE_PSW", payload: psw });
+  console.log(response);
+  dispatch({
+    type: "UPDATE_PSW",
+    payload: { psw, verified: false, expiration: "2013-10-05T14:48:00.000Z" },
+  });
 };

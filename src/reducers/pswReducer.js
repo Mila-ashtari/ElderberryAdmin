@@ -4,10 +4,17 @@ const pswReducer = (state = {}, action) => {
     case "FETCH_PSWS":
       return { ...state, ..._.mapKeys(action.payload, "id") };
     case "UPDATE_PSW":
-      return { ...state, [action.payload.id]: {...action.payload, verified:false} };
+      return {
+        ...state,
+        [action.payload.id]: {
+          ...action.payload.psw,
+          verified: action.payload.verified,
+          expiration: action.payload.expiration,
+        },
+      };
     default:
       return state;
   }
 };
 
-export default pswReducer
+export default pswReducer;

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { connect } from "react-redux";
 import {
   CardMedia,
@@ -12,6 +12,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import EditIcon from "@material-ui/icons/Edit";
 
 import { updatePsw } from "../../actions/index";
+import pswReducer from "../../reducers/pswReducer";
 
 const useStyles = makeStyles((theme) => ({
   gridContainer: {
@@ -29,14 +30,15 @@ const useStyles = makeStyles((theme) => ({
 
 function Edit(props) {
   const { updatePsw, psw} = props;
-  const {verified, expiration} = psw
+  const [verified, updateVerified]=useState(psw.verified)
+  const [expiration, updateExpiration]=useState(psw.expiration)
   const classes = useStyles();
   return (
     <Grid container item sm={12}>
       <Grid item container sm={12}>
         <Button
           className={classes.iconButton}
-          onClick={() => updatePsw(psw)}
+          onClick={() => updatePsw(psw, verified, expiration)}
         >
           <EditIcon className={classes.icon} />
         </Button>
