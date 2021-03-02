@@ -6,7 +6,7 @@ const pswReducer = (state = {}, action) => {
     case "UPDATE_PSW":
       return {
         ...state,
-        [action.payload.id]: {
+        [action.payload.psw.id]: {
           ...action.payload.psw,
           verified: action.payload.verified,
           expiration: action.payload.expiration,

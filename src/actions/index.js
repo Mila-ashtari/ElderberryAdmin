@@ -61,6 +61,6 @@ export const updatePsw = (psw, verified, expiration) => async (dispatch) => {
   console.log(response);
   dispatch({
     type: "UPDATE_PSW",
-    payload: { psw, verified: false, expiration: "2013-10-05T14:48:00.000Z" },
+    payload: { psw, verified: true, expiration: "2014-10-05T14:48:00.000Z" },
   });
 };
