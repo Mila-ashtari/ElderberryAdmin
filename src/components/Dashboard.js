@@ -1,11 +1,12 @@
 import React, { Fragment, useState } from "react";
-import { Tabs, Tab} from "@material-ui/core";
+import { Tabs, Tab } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { Switch, Route, Link } from "react-router-dom";
 
 import requiredAuth from "./requiredAuth";
 import DashboardHeader from "./DashboardHeader";
 import PswContainer from "./dashboardTabs/PswContainer";
+import CustomerContainer from "./dashboardTabs/CustomerContainer";
 
 const useStyles = makeStyles((theme) => ({
   tabs: {
@@ -30,7 +31,7 @@ function Dashboard(props) {
   const tabs = [
     { label: "psw", component: PswContainer },
     { label: "client", component: "" },
-    { label: "customer", component: "" },
+    { label: "customer", component: CustomerContainer },
   ];
 
   const handleChange = (event, newValue) => {
@@ -58,9 +59,8 @@ function Dashboard(props) {
             style={{
               backgroundColor: index === value && "rgba(131, 125, 125, 0.219)",
               boxShadow:
-                (index === value + 1 && "-5px 0px 7px rgba(80, 77, 77, 0.932)"),
-                // (index === value - 1 && "5px 0px 7px rgba(80, 77, 77, 0.658)"),
-              borderLeft:index === value && '.5px solid black'
+                index === value + 1 && "-5px 0px 7px rgba(80, 77, 77, 0.932)",
+              borderLeft: index === value && ".5px solid black",
             }}
           />
         ))}
