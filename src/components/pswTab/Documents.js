@@ -12,7 +12,6 @@ import { makeStyles } from "@material-ui/core/styles";
 import EditIcon from "@material-ui/icons/Edit";
 
 import { updatePsw } from "../../actions/index";
-import pswReducer from "../../reducers/pswReducer";
 
 const useStyles = makeStyles((theme) => ({
   gridContainer: {
@@ -29,9 +28,11 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function Edit(props) {
-  const { updatePsw, psw} = props;
-  const [verified, updateVerified]=useState(psw.verified)
-  const [expiration, updateExpiration]=useState(psw.expiration)
+  const { updatePsw, psw } = props;
+  console.log(psw.verified, psw.expiration )
+  const [verified, updateVerified] = useState(psw.verified);
+  const [expiration, updateExpiration] = useState(psw.expiration);
+  console.log(verified, expiration)
   const classes = useStyles();
   return (
     <Grid container item sm={12}>
@@ -43,7 +44,7 @@ function Edit(props) {
           <EditIcon className={classes.icon} />
         </Button>
         <Typography style={{ alignSelf: "center" }}>
-          {`Documents Verified: ${verified}`}
+          {`Documents Verified: ${psw.verified}`}
         </Typography>
       </Grid>
 
@@ -52,7 +53,7 @@ function Edit(props) {
           <EditIcon className={classes.icon} />
         </Button>
         <Typography style={{ alignSelf: "center" }}>
-          {`Documents Expiration Date: ${expiration}`}
+          {`Documents Expiration Date: ${psw.expiration}`}
         </Typography>
       </Grid>
     </Grid>
