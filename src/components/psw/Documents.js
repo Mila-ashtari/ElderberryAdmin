@@ -7,6 +7,8 @@ import {
   Typography,
   Grid,
   Button,
+  Dialog,
+  DialogContent,
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import EditIcon from "@material-ui/icons/Edit";
@@ -29,32 +31,43 @@ const useStyles = makeStyles((theme) => ({
 
 function Edit(props) {
   const { updatePsw, psw } = props;
+  const [open, setOpen] = useState(false);
   const [verified, setVerified] = useState(psw.verified);
   const [expiration, setExpiration] = useState(psw.expiration);
   const classes = useStyles();
   return (
-    <Grid container item sm={12}>
-      <Grid item container sm={12}>
-        <Button
-          className={classes.iconButton}
-          onClick={() => updatePsw(psw, verified, expiration)}
-        >
-          <EditIcon className={classes.icon} />
-        </Button>
-        <Typography style={{ alignSelf: "center" }}>
-          {`Documents Verified: ${psw.verified}`}
-        </Typography>
-      </Grid>
+    <>
+      <Grid container item sm={12}>
+        <Grid item container sm={12}>
+          <Button
+            className={classes.iconButton}
+            onClick={() => setOpen(true)}
+          >
+            <EditIcon className={classes.icon} />
+          </Button>
+          <Typography style={{ alignSelf: "center" }}>
+            {`Documents Verified: ${psw.verified}`}
+          </Typography>
+        </Grid>
 
-      <Grid item container sm={12}>
-        <Button className={classes.iconButton}>
-          <EditIcon className={classes.icon} />
-        </Button>
-        <Typography style={{ alignSelf: "center" }}>
-          {`Documents Expiration Date: ${psw.expiration}`}
-        </Typography>
+        <Grid item container sm={12}>
+          <Typography style={{ alignSelf: "center" }}>
+            {`Documents Expiration Date: ${psw.expiration}`}
+          </Typography>
+        </Grid>
       </Grid>
-    </Grid>
+      <Dialog
+        open={open}
+        scroll="body"
+        onClose={() => {
+          setOpen(false);
+        }}
+      >
+        <DialogContent>
+          
+        </DialogContent>
+      </Dialog>
+    </>
   );
 }
 
