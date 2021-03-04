@@ -29,10 +29,8 @@ const useStyles = makeStyles((theme) => ({
 
 function Edit(props) {
   const { updatePsw, psw } = props;
-  console.log(psw.verified, psw.expiration )
-  const [verified, updateVerified] = useState(psw.verified);
-  const [expiration, updateExpiration] = useState(psw.expiration);
-  console.log(verified, expiration)
+  const [verified, setVerified] = useState(psw.verified);
+  const [expiration, setExpiration] = useState(psw.expiration);
   const classes = useStyles();
   return (
     <Grid container item sm={12}>
