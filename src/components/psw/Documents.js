@@ -11,7 +11,7 @@ import {
 import { makeStyles } from "@material-ui/core/styles";
 import EditIcon from "@material-ui/icons/Edit";
 
-import { updatePsw } from "../../actions/index";
+import { updatePsw } from "../../actions/psw";
 
 const useStyles = makeStyles((theme) => ({
   gridContainer: {
