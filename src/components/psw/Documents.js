@@ -9,7 +9,14 @@ import {
   Button,
   Dialog,
   DialogContent,
+  TextField,
 } from "@material-ui/core";
+import DateFnsUtils from "@date-io/date-fns";
+import {
+  MuiPickersUtilsProvider,
+  KeyboardTimePicker,
+  KeyboardDatePicker,
+} from "@material-ui/pickers";
 import { makeStyles } from "@material-ui/core/styles";
 import EditIcon from "@material-ui/icons/Edit";
 
@@ -31,43 +38,39 @@ const useStyles = makeStyles((theme) => ({
 
 function Edit(props) {
   const { updatePsw, psw } = props;
-  const [open, setOpen] = useState(false);
   const [verified, setVerified] = useState(psw.verified);
-  const [expiration, setExpiration] = useState(psw.expiration);
+  const [expiration, setExpiration] = useState(new Date(psw.expiration));
   const classes = useStyles();
+
+  const handleDateChange = (date) => {
+    setExpiration(date);
+  };
   return (
-    <>
       <Grid container item sm={12}>
         <Grid item container sm={12}>
-          <Button
-            className={classes.iconButton}
-            onClick={() => setOpen(true)}
-          >
-            <EditIcon className={classes.icon} />
-          </Button>
-          <Typography style={{ alignSelf: "center" }}>
-            {`Documents Verified: ${psw.verified}`}
-          </Typography>
+        <TextField id="validationInput" label="yes" type="radio"/>
         </Grid>
 
-        <Grid item container sm={12}>
-          <Typography style={{ alignSelf: "center" }}>
-            {`Documents Expiration Date: ${psw.expiration}`}
-          </Typography>
+        <Grid item sm={12}>
+          <MuiPickersUtilsProvider utils={DateFnsUtils}>
+            <KeyboardDatePicker
+              disableToolbar
+              variant="dialog"
+              format="MM/dd/yyyy"
+              margin="normal"
+              id="date-picker"
+              // openTo="date"
+              views={["year", "month", "date"]}
+              label="Documents expiration date"
+              value={expiration}
+              onChange={handleDateChange}
+              KeyboardButtonProps={{
+                "aria-label": "change expiration date",
+              }}
+            />
+          </MuiPickersUtilsProvider>
         </Grid>
       </Grid>
-      <Dialog
-        open={open}
-        scroll="body"
-        onClose={() => {
-          setOpen(false);
-        }}
-      >
-        <DialogContent>
-          
-        </DialogContent>
-      </Dialog>
-    </>
   );
 }
 
