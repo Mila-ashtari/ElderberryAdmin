@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import {
   CardMedia,
@@ -14,11 +14,9 @@ import {
 import DateFnsUtils from "@date-io/date-fns";
 import {
   MuiPickersUtilsProvider,
-  KeyboardTimePicker,
   KeyboardDatePicker,
 } from "@material-ui/pickers";
 import { makeStyles } from "@material-ui/core/styles";
-import EditIcon from "@material-ui/icons/Edit";
 
 import { updatePsw } from "../../actions/psw";
 
@@ -34,28 +32,38 @@ const useStyles = makeStyles((theme) => ({
     minWidth: "30px",
     color: "#aba7a7",
   },
+  radioGroup: {
+    flexDirection: "row",
+    marginLeft: "10px",
+  },
+  formLabel: {
+    alignSelf: "center",
+  },
 }));
 
 function Edit(props) {
   const { updatePsw, psw } = props;
-  const [verified, setVerified] = useState(`${psw.verified}`);
+  const [verification, setVerification] = useState(`${psw.verified}`);
   const [expiration, setExpiration] = useState(new Date(psw.expiration));
   const classes = useStyles();
 
-  const handleDateChange = (date) => {
-    setExpiration(date);
-  };
+  useEffect(() => {
+    updatePsw(psw, verification, expiration);
+  }, [verification, expiration]);
   return (
     <Grid container item sm={12}>
       <Grid item container sm={12}>
-        <FormLabel component="legend">Documents verified?</FormLabel>
+        <FormLabel component="legend" className={classes.formLabel}>
+          Documents verified?
+        </FormLabel>
         <RadioGroup
           aria-label="document verified?"
           name="document verification"
-          value={verified}
+          value={verification}
           onChange={(event) => {
-            setVerified(event.target.value);
+            setVerification(event.target.value);
           }}
+          className={classes.radioGroup}
         >
           <FormControlLabel value="true" control={<Radio />} label="True" />
           <FormControlLabel value="false" control={<Radio />} label="False" />
@@ -74,7 +82,9 @@ function Edit(props) {
             views={["year", "month", "date"]}
             label="Documents expiration date"
             value={expiration}
-            onChange={handleDateChange}
+            onChange={(date) => {
+              setExpiration(date.toISOString());
+            }}
             KeyboardButtonProps={{
               "aria-label": "change expiration date",
             }}
