@@ -38,6 +38,7 @@ const useStyles = makeStyles((theme) => ({
   },
   formLabel: {
     alignSelf: "center",
+    fontSize: "1.1rem",
   },
 }));
 
@@ -80,7 +81,7 @@ function Edit(props) {
             id="date-picker"
             // openTo="date"
             views={["year", "month", "date"]}
-            label="Documents expiration date"
+            label="Documents expiration date:"
             value={expiration}
             onChange={(date) => {
               setExpiration(date.toISOString());
@@ -88,6 +89,7 @@ function Edit(props) {
             KeyboardButtonProps={{
               "aria-label": "change expiration date",
             }}
+            InputLabelProps={{style:{fontSize:"1.4rem"}}}
           />
         </MuiPickersUtilsProvider>
       </Grid>
