@@ -6,10 +6,10 @@ import {
   CardContent,
   Typography,
   Grid,
-  Button,
-  Dialog,
-  DialogContent,
-  TextField,
+  FormControlLabel,
+  FormLabel,
+  RadioGroup,
+  Radio,
 } from "@material-ui/core";
 import DateFnsUtils from "@date-io/date-fns";
 import {
@@ -38,7 +38,7 @@ const useStyles = makeStyles((theme) => ({
 
 function Edit(props) {
   const { updatePsw, psw } = props;
-  const [verified, setVerified] = useState(psw.verified);
+  const [verified, setVerified] = useState(`${psw.verified}`);
   const [expiration, setExpiration] = useState(new Date(psw.expiration));
   const classes = useStyles();
 
@@ -46,31 +46,42 @@ function Edit(props) {
     setExpiration(date);
   };
   return (
-      <Grid container item sm={12}>
-        <Grid item container sm={12}>
-        <TextField id="validationInput" label="yes" type="radio"/>
-        </Grid>
-
-        <Grid item sm={12}>
-          <MuiPickersUtilsProvider utils={DateFnsUtils}>
-            <KeyboardDatePicker
-              disableToolbar
-              variant="dialog"
-              format="MM/dd/yyyy"
-              margin="normal"
-              id="date-picker"
-              // openTo="date"
-              views={["year", "month", "date"]}
-              label="Documents expiration date"
-              value={expiration}
-              onChange={handleDateChange}
-              KeyboardButtonProps={{
-                "aria-label": "change expiration date",
-              }}
-            />
-          </MuiPickersUtilsProvider>
-        </Grid>
+    <Grid container item sm={12}>
+      <Grid item container sm={12}>
+        <FormLabel component="legend">Documents verified?</FormLabel>
+        <RadioGroup
+          aria-label="document verified?"
+          name="document verification"
+          value={verified}
+          onChange={(event) => {
+            setVerified(event.target.value);
+          }}
+        >
+          <FormControlLabel value="true" control={<Radio />} label="True" />
+          <FormControlLabel value="false" control={<Radio />} label="False" />
+        </RadioGroup>
       </Grid>
+
+      <Grid item sm={12}>
+        <MuiPickersUtilsProvider utils={DateFnsUtils}>
+          <KeyboardDatePicker
+            disableToolbar
+            variant="dialog"
+            format="MM/dd/yyyy"
+            margin="normal"
+            id="date-picker"
+            // openTo="date"
+            views={["year", "month", "date"]}
+            label="Documents expiration date"
+            value={expiration}
+            onChange={handleDateChange}
+            KeyboardButtonProps={{
+              "aria-label": "change expiration date",
+            }}
+          />
+        </MuiPickersUtilsProvider>
+      </Grid>
+    </Grid>
   );
 }
 
