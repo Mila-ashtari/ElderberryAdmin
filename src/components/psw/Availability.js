@@ -10,6 +10,8 @@ import {
   ViewSwitcher,
   DateNavigator,
   TodayButton,
+  AppointmentTooltip,
+  AppointmentForm,
 } from "@devexpress/dx-react-scheduler-material-ui";
 
 const Availability = () => {
@@ -32,12 +34,13 @@ const Availability = () => {
 
         <DayView startDayHour={9} endDayHour={18} />
         <WeekView startDayHour={10} endDayHour={19} />
-
         <Toolbar />
         <DateNavigator />
         <TodayButton />
-        <ViewSwitcher />
         <Appointments />
+        <AppointmentTooltip showCloseButton showOpenButton />
+        <AppointmentForm />
+        <ViewSwitcher />
       </Scheduler>
     </Paper>
   );
