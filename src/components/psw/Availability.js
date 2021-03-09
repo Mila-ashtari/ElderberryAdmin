@@ -5,28 +5,38 @@ import {
   Scheduler,
   DayView,
   WeekView,
-  Appointments
+  Appointments,
+  Toolbar,
+  ViewSwitcher,
+  DateNavigator,
+  TodayButton,
 } from "@devexpress/dx-react-scheduler-material-ui";
 
 const Availability = () => {
-  const currentDate = "2018-11-01";
   const schedulerData = [
     {
-      startDate: "2018-11-01T09:45",
-      endDate: "2018-11-01T11:00",
+      startDate: "2021-03-09T09:45",
+      endDate: "2021-03-09T11:00",
       title: "Meeting",
     },
     {
-      startDate: "2018-11-01T12:00",
-      endDate: "2018-11-01T13:30",
-      title: "Go to a gym",
+      startDate: "2021-03-11T09:45",
+      endDate: "2021-03-11T11:00",
+      title: "Going to Gym",
     },
   ];
   return (
     <Paper>
-      <Scheduler data={schedulerData}>
-        <ViewState currentDate={currentDate} />
-        <WeekView startDayHour={9} endDayHour={24} />
+      <Scheduler data={schedulerData} height={660}>
+        <ViewState defaultCurrentViewName="Week" />
+
+        <DayView startDayHour={9} endDayHour={18} />
+        <WeekView startDayHour={10} endDayHour={19} />
+
+        <Toolbar />
+        <DateNavigator />
+        <TodayButton />
+        <ViewSwitcher />
         <Appointments />
       </Scheduler>
     </Paper>
