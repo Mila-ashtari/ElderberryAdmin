@@ -19,6 +19,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Profile from "./Profile";
 import Documents from "./Documents";
 import Bookings from "./Bookings";
+import Availability from "./Availability"
 
 const useStyles = makeStyles((theme) => ({
   gridContainer: {
@@ -63,7 +64,7 @@ const Psw = ({ psw }) => {
       component: <Profile profile={profile} skills={skills} />,
     },
     { label: "Documentation", component: <Documents psw={psw} /> },
-    { label: "Availibily", component: "" },
+    { label: "Availibily", component: <Availability/> },
     { label: "Bookings", component: <Bookings /> },
   ];
 

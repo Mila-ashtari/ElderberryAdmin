@@ -66,8 +66,8 @@ function Edit(props) {
           }}
           className={classes.radioGroup}
         >
-          <FormControlLabel value="true" control={<Radio />} label="True" />
-          <FormControlLabel value="false" control={<Radio />} label="False" />
+          <FormControlLabel value="true" control={<Radio />} label="Yes" />
+          <FormControlLabel value="false" control={<Radio />} label="No" />
         </RadioGroup>
       </Grid>
 
