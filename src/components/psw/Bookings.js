@@ -98,7 +98,7 @@ export function Row(props) {
 function CollapsibleTable() {
   return (
     <TableContainer component={Paper}>
-      <Table aria-label="collapsible table">
+      <Table aria-label="bookings table">
         <TableHead>
           <TableRow>
             <TableCell>Date</TableCell>

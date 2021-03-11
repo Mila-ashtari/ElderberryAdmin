@@ -20,6 +20,7 @@ import Profile from "./Profile";
 import Documents from "./Documents";
 import Bookings from "./Bookings";
 import Availability from "./Availability"
+// import Schedule from "./Schedule"
 
 const useStyles = makeStyles((theme) => ({
   gridContainer: {
@@ -55,7 +56,7 @@ const useStyles = makeStyles((theme) => ({
 
 const Psw = ({ psw }) => {
   const classes = useStyles();
-  const { user, skills, profile } = psw;
+  const { user, skills, profile, schedule, currentBookings } = psw;
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState(0);
   const tabsArr = [
@@ -64,7 +65,8 @@ const Psw = ({ psw }) => {
       component: <Profile profile={profile} skills={skills} />,
     },
     { label: "Documentation", component: <Documents psw={psw} /> },
-    { label: "Availibily", component: <Availability/> },
+    // { label: "Schedule", component: <Schedule {...{schedule, currentBookings}}/> },
+    {label: "Availability", component: <Availability schedule={schedule} /> },
     { label: "Bookings", component: <Bookings /> },
   ];
 

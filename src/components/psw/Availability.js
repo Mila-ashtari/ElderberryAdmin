@@ -1,48 +1,119 @@
-import React, { useState } from "react";
-import Paper from "@material-ui/core/Paper";
-import { ViewState } from "@devexpress/dx-react-scheduler";
+import React from "react";
+import { makeStyles } from "@material-ui/core/styles";
 import {
-  Scheduler,
-  DayView,
-  WeekView,
-  Appointments,
-  Toolbar,
-  ViewSwitcher,
-  DateNavigator,
-  TodayButton,
-  AppointmentTooltip,
-  AppointmentForm,
-} from "@devexpress/dx-react-scheduler-material-ui";
+  Collapse,
+  IconButton,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Paper,
+  Typography,
+} from "@material-ui/core";
 
-const Availability = () => {
-  const schedulerData = [
-    {
-      startDate: "2021-03-09T09:45",
-      endDate: "2021-03-09T11:00",
-      title: "Meeting",
-    },
-    {
-      startDate: "2021-03-11T09:45",
-      endDate: "2021-03-11T11:00",
-      title: "Going to Gym",
-    },
-  ];
+const useStyles = makeStyles((theme) => ({
+    timeSlot:{
+        backgroundColor:"#e0e0e0",
+        marginBottom:"5px",
+        padding:"5px"
+    }
+}));
+const Availability = ({ schedule }) => {
+  const classes = useStyles();
+  const {
+    sunday,
+    monday,
+    saturday,
+    tuesday,
+    wednesday,
+    thrusday,
+    friday,
+  } = schedule.availability;
   return (
-    <Paper>
-      <Scheduler data={schedulerData} height={660}>
-        <ViewState defaultCurrentViewName="Week" />
-
-        <DayView startDayHour={9} endDayHour={18} />
-        <WeekView startDayHour={10} endDayHour={19} />
-        <Toolbar />
-        <DateNavigator />
-        <TodayButton />
-        <Appointments />
-        <AppointmentTooltip showCloseButton showOpenButton />
-        <AppointmentForm />
-        <ViewSwitcher />
-      </Scheduler>
-    </Paper>
+    <TableContainer component={Paper}>
+      <Table aria-label="bookings table">
+        <TableHead>
+          <TableRow>
+            <TableCell>Sunday</TableCell>
+            <TableCell>Monday</TableCell>
+            <TableCell>Tuesday</TableCell>
+            <TableCell>Wednesday</TableCell>
+            <TableCell>Thursday</TableCell>
+            <TableCell>Friday</TableCell>
+            <TableCell>Saturday</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          <TableRow>
+            <TableCell>
+              {sunday.map((item) => {
+                return (
+                  <Typography
+                    className={classes.timeSlot}
+                  >{`${item.startTime[0]}:${item.startTime[1]}-${item.endTime[0]}:${item.endTime[1]} `}</Typography>
+                );
+              })}
+            </TableCell>
+            <TableCell>
+              {monday.map((item) => {
+                return (
+                  <Typography
+                    className={classes.timeSlot}
+                  >{`${item.startTime[0]}:${item.startTime[1]}-${item.endTime[0]}:${item.endTime[1]} `}</Typography>
+                );
+              })}
+            </TableCell>
+            <TableCell>
+              {tuesday.map((item) => {
+                return (
+                  <Typography
+                    className={classes.timeSlot}
+                  >{`${item.startTime[0]}:${item.startTime[1]}-${item.endTime[0]}:${item.endTime[1]} `}</Typography>
+                );
+              })}
+            </TableCell>
+            <TableCell>
+              {wednesday.map((item) => {
+                return (
+                  <Typography
+                    className={classes.timeSlot}
+                  >{`${item.startTime[0]}:${item.startTime[1]}-${item.endTime[0]}:${item.endTime[1]} `}</Typography>
+                );
+              })}
+            </TableCell>
+            <TableCell>
+              {thrusday.map((item) => {
+                return (
+                  <Typography
+                    className={classes.timeSlot}
+                  >{`${item.startTime[0]}:${item.startTime[1]}-${item.endTime[0]}:${item.endTime[1]} `}</Typography>
+                );
+              })}
+            </TableCell>
+            <TableCell>
+              {friday.map((item) => {
+                return (
+                  <Typography
+                    className={classes.timeSlot}
+                  >{`${item.startTime[0]}:${item.startTime[1]}-${item.endTime[0]}:${item.endTime[1]} `}</Typography>
+                );
+              })}
+            </TableCell>
+            <TableCell>
+              {saturday.map((item) => {
+                return (
+                  <Typography
+                    className={classes.timeSlot}
+                  >{`${item.startTime[0]}:${item.startTime[1]}-${item.endTime[0]}:${item.endTime[1]} `}</Typography>
+                );
+              })}
+            </TableCell>
+          </TableRow>
+        </TableBody>
+      </Table>
+    </TableContainer>
   );
 };
 
