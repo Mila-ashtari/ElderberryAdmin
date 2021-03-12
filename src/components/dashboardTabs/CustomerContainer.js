@@ -34,7 +34,6 @@ function CustomerContainer(props) {
   useEffect(() => {
     getCustomer();
   }, [getCustomer]);
-  console.log(customers)
   return (
     <List className={classes.CustomerContainer}>
       <ListItem className={classes.listHeader} disabled>

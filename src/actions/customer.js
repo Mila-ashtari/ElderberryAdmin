@@ -14,7 +14,7 @@ export const getCustomer = () => async (dispatch) => {
           address: true,
           contactNumber: true,
         },
-        populateProfile: true,
+        loadClients: true,
       },
     });
     dispatch({ type: "FETCH_CUSTOMERS", payload: response.data.customers });

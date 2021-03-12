@@ -16,6 +16,8 @@ import {
 import CloseIcon from "@material-ui/icons/Close";
 import { makeStyles } from "@material-ui/core/styles";
 
+import Clients from './Clients'
+
 const useStyles = makeStyles((theme) => ({
   gridContainer: {
     justifyContent: "space-between",
@@ -53,13 +55,13 @@ const Customer = ({ customer }) => {
   const { user } = customer;
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState(0);
+  const {clients, history}=customer
   const tabsArr = [
     {
       label: "Profile",
       component: "",
     },
-    { label: "Documentation", component: "" },
-    { label: "Availibily", component: "" },
+    { label: "Clients", component: <Clients clients={clients}/> },
     { label: "Bookings", component: "" },
   ];
 
