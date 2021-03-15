@@ -19,3 +19,5 @@ export const getCustomer = () => async (dispatch) => {
     });
     dispatch({ type: "FETCH_CUSTOMERS", payload: response.data.customers });
   };
+
+  
