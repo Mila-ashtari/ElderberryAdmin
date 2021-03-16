@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { Divider, List, ListItem, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 
-import { getCustomer } from "../../actions/customer";
+import { getCustomers } from "../../actions/customer";
 import Customer from "../customer/Customer"
 
 const useStyles = makeStyles((theme) => ({
@@ -30,10 +30,10 @@ const useStyles = makeStyles((theme) => ({
 
 function CustomerContainer(props) {
   const classes = useStyles();
-  const { getCustomer, customers } = props;
+  const { getCustomers, customers } = props;
   useEffect(() => {
-    getCustomer();
-  }, [getCustomer]);
+    getCustomers();
+  }, [getCustomers]);
   return (
     <List className={classes.CustomerContainer}>
       <ListItem className={classes.listHeader} disabled>
@@ -53,4 +53,4 @@ function CustomerContainer(props) {
 const mapStateToProps = (state) => {
   return { customers: Object.values(state.customers)};
 };
-export default connect(mapStateToProps, { getCustomer })(CustomerContainer);
+export default connect(mapStateToProps, { getCustomers })(CustomerContainer);

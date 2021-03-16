@@ -68,7 +68,7 @@ export function RenderLanguages({languages}) {
   return (
     <>
       <Box className={classes.flexContainer}>
-        <Typography variant="h3" className={classes.tableTitle}>
+        <Typography variant="h3" className={classes.h3}>
           Languages
         </Typography>
         <Button onClick={() => setExpanded(!expanded)}>

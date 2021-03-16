@@ -1,4 +1,5 @@
 import React, { Fragment, useState } from "react";
+import { connect } from "react-redux";
 import {
   ListItem,
   ListItemText,
@@ -16,7 +17,8 @@ import {
 import CloseIcon from "@material-ui/icons/Close";
 import { makeStyles } from "@material-ui/core/styles";
 
-import Clients from './Clients'
+import Clients from "./Clients";
+import { getCustomer } from "../../actions/customer";
 
 const useStyles = makeStyles((theme) => ({
   gridContainer: {
@@ -50,18 +52,18 @@ const useStyles = makeStyles((theme) => ({
   paper: {},
 }));
 
-const Customer = ({ customer }) => {
+const Customer = (props) => {
   const classes = useStyles();
-  const { user } = customer;
+  const { user, clients, history, id } = props.customer;
+  const { getCustomer } = props;
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState(0);
-  const {clients, history}=customer
   const tabsArr = [
     {
       label: "Profile",
       component: "",
     },
-    { label: "Clients", component: <Clients clients={clients}/> },
+    { label: "Clients", component: <Clients clients={clients} /> },
     { label: "Bookings", component: "" },
   ];
 
@@ -69,12 +71,16 @@ const Customer = ({ customer }) => {
     setValue(newValue);
   };
 
+  const handleClick = () => {
+    getCustomer(user.firstName, user.lastName);
+  };
+
   return (
     <Fragment>
       <ListItem
         button
         className={classes.listItem}
-        onClick={() => setOpen(true)}
+        onClick={handleClick}
         // style={{ backgroundColor: key % 2 !== 0 && "#e4e2e2" }}
       >
         <ListItemText className={classes.flexContainer} disableTypography>
@@ -141,4 +147,4 @@ const Customer = ({ customer }) => {
   );
 };
 
-export default Customer;
+export default connect(null, { getCustomer })(Customer);
