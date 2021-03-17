@@ -72,7 +72,7 @@ const Customer = (props) => {
   };
 
   const handleClick = () => {
-    getCustomer(user.firstName, user.lastName);
+    setOpen(true)
   };
 
   return (

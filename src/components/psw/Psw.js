@@ -1,4 +1,5 @@
 import React, { Fragment, useState } from "react";
+import { connect } from "react-redux";
 import {
   ListItem,
   ListItemText,
@@ -19,7 +20,8 @@ import { makeStyles } from "@material-ui/core/styles";
 import Profile from "./Profile";
 import Documents from "./Documents";
 import Bookings from "./Bookings";
-import Availability from "./Availability"
+import Availability from "./Availability";
+import { getPsw } from "../../actions/psw";
 // import Schedule from "./Schedule"
 
 const useStyles = makeStyles((theme) => ({
@@ -54,9 +56,10 @@ const useStyles = makeStyles((theme) => ({
   paper: {},
 }));
 
-const Psw = ({ psw }) => {
+const Psw = (props) => {
   const classes = useStyles();
-  const { user, skills, profile, schedule, currentBookings } = psw;
+  const { psw, getPsw } = props;
+  const { user, skills, profile, schedule, currentBookings, id } = props.psw;
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState(0);
   const tabsArr = [
@@ -66,7 +69,7 @@ const Psw = ({ psw }) => {
     },
     { label: "Documentation", component: <Documents psw={psw} /> },
     // { label: "Schedule", component: <Schedule {...{schedule, currentBookings}}/> },
-    {label: "Availability", component: <Availability schedule={schedule} /> },
+    { label: "Availability", component: <Availability schedule={schedule} /> },
     { label: "Bookings", component: <Bookings /> },
   ];
 
@@ -74,12 +77,17 @@ const Psw = ({ psw }) => {
     setValue(newValue);
   };
 
+  const handleClick = () => {
+    getPsw(user, id);
+    setOpen(true)
+  };
+
   return (
     <Fragment>
       <ListItem
         button
         className={classes.listItem}
-        onClick={() => setOpen(true)}
+        onClick={handleClick}
         // style={{ backgroundColor: key % 2 !== 0 && "#e4e2e2" }}
       >
         <ListItemText className={classes.flexContainer} disableTypography>
@@ -146,4 +154,4 @@ const Psw = ({ psw }) => {
   );
 };
 
-export default Psw;
+export default connect(null, { getPsw })(Psw);

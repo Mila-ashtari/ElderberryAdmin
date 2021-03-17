@@ -1,5 +1,5 @@
 import axios from "axios";
-export const getPsw = () => async (dispatch) => {
+export const getPsws = () => async (dispatch) => {
   const token = localStorage.getItem("token");
   const response = await axios({
     url: " https://elderberry-development-api.herokuapp.com/api/admin/all-psws",
@@ -42,4 +42,28 @@ export const updatePsw = (psw, verification, expiration) => async (
     type: "UPDATE_PSW",
     payload: { id, verified, expiration },
   });
+};
+
+export const getPsw = (user, id) => async (dispatch) => {
+  const token = localStorage.getItem("token");
+  const response = await axios({
+    url: " https://elderberry-development-api.herokuapp.com/api/admin/psw",
+    method: "GET",
+    headers: { Authorization: `Bearer ${token}` },
+    params: {
+      pswID: id ,
+      email: user.email ,
+      userID: user.id ,
+      userFields: {
+        lastName: true,
+        firstName: true,
+        email: true,
+        address: true,
+        contactNumber: true,
+      },
+      populateProfile: true,
+    },
+  });
+  console.log(response.data)
+  // dispatch({ type: "FETCH_PSW", payload: response.data.psws });
 };
