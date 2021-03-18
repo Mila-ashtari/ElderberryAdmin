@@ -64,7 +64,7 @@ function PswContainer(props) {
               className={classes.listItem}
               key={id}
               component={Link}
-              to={`/dashboard/psw/${user.lastName}`}
+              to={`/psw/${id}`}
             >
               <ListItemText className={classes.flexContainer} disableTypography>
                 <Typography className={classes.id}>ID</Typography>

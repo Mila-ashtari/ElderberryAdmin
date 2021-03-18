@@ -21,7 +21,6 @@ import Profile from "./Profile";
 import Documents from "./Documents";
 import Bookings from "./Bookings";
 import Availability from "./Availability";
-import { getPsw } from "../../actions/psw";
 // import Schedule from "./Schedule"
 
 const useStyles = makeStyles((theme) => ({
@@ -56,11 +55,9 @@ const useStyles = makeStyles((theme) => ({
   paper: {},
 }));
 
-const Psw = (props) => {
-  console.log("psw")
+const Psw = ({psw}) => {
   const classes = useStyles();
-  const { psw, getPsw } = props;
-  const { user, skills, profile, schedule, currentBookings, id } = props.psw;
+  const { user, skills, profile, schedule, currentBookings, id } = psw;
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState(0);
   const tabsArr = [
@@ -79,13 +76,12 @@ const Psw = (props) => {
   };
 
   const handleClick = () => {
-    getPsw(user, id);
-    setOpen(true)
+    setOpen(true);
   };
 
   return (
     <Fragment>
-      <Dialog
+      {/* <Dialog
         fullScreen
         open={open}
         scroll="body"
@@ -134,10 +130,15 @@ const Psw = (props) => {
             })}
           </Box>
         </DialogContent>
-      </Dialog>
-      <Divider />
+      </Dialog> */}
+      {/* <Divider /> */}
+      <div>hello</div>
     </Fragment>
   );
 };
 
-export default connect(null, { getPsw })(Psw);
+const mapStateToProps = (state, ownProps) => {
+  return {psw:state.psws[ownProps.match.params.id]};
+};
+
+export default connect(mapStateToProps)(Psw);
