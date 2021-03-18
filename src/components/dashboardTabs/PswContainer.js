@@ -1,10 +1,17 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
-import { Divider, List, ListItem, Typography, ListItemText } from "@material-ui/core";
+import {
+  Divider,
+  List,
+  ListItem,
+  Typography,
+  ListItemText,
+} from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 
 import { getPsws } from "../../actions/psw";
 import Psw from "../psw/Psw";
+import { Route, Switch, Link } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   pswContainer: {
@@ -37,7 +44,6 @@ function PswContainer(props) {
   useEffect(() => {
     getPsws();
   }, [getPsws]);
-  // console.log(psws)
   return (
     <List className={classes.pswContainer}>
       <ListItem className={classes.listHeader} disabled>
@@ -50,13 +56,15 @@ function PswContainer(props) {
         <Psw psw={psw} key={psw.id} />
       ))} */}
       {psws.map((psw) => {
-        const { user } = psw;
-
+        const { user, id } = psw;
         return (
           <>
             <ListItem
               button
               className={classes.listItem}
+              key={id}
+              component={Link}
+              to={`/dashboard/psw/${user.lastName}`}
             >
               <ListItemText className={classes.flexContainer} disableTypography>
                 <Typography className={classes.id}>ID</Typography>
@@ -68,6 +76,7 @@ function PswContainer(props) {
                 </Typography>
               </ListItemText>
             </ListItem>
+            <Divider />
           </>
         );
       })}

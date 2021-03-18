@@ -57,6 +57,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Psw = (props) => {
+  console.log("psw")
   const classes = useStyles();
   const { psw, getPsw } = props;
   const { user, skills, profile, schedule, currentBookings, id } = props.psw;
@@ -84,21 +85,6 @@ const Psw = (props) => {
 
   return (
     <Fragment>
-      <ListItem
-        button
-        className={classes.listItem}
-        onClick={handleClick}
-        // style={{ backgroundColor: key % 2 !== 0 && "#e4e2e2" }}
-      >
-        <ListItemText className={classes.flexContainer} disableTypography>
-          <Typography className={classes.id}>ID</Typography>
-          <Typography className={classes.lastName}>{user.lastName}</Typography>
-          <Typography className={classes.firstName}>
-            {user.firstName}
-          </Typography>
-        </ListItemText>
-      </ListItem>
-
       <Dialog
         fullScreen
         open={open}
