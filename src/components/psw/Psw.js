@@ -81,16 +81,6 @@ const Psw = ({psw}) => {
 
   return (
     <Fragment>
-      {/* <Dialog
-        fullScreen
-        open={open}
-        scroll="body"
-        onClose={() => {
-          setOpen(false);
-        }}
-        classes={{ paper: classes.paper }}
-      >
-        <DialogTitle disableTypography>
           <Grid container spacing={3} className={classes.gridContainer}>
             <Grid item>
               <Typography variant="h2">{`${user.firstName} ${user.lastName}`}</Typography>
@@ -98,18 +88,7 @@ const Psw = ({psw}) => {
             <Grid item>
               <Typography variant="body1">Email: {user.email}</Typography>
             </Grid>
-            <Grid item>
-              <Button>
-                <CloseIcon
-                  onClick={() => {
-                    setOpen(false);
-                  }}
-                />
-              </Button>
-            </Grid>
           </Grid>
-        </DialogTitle>
-        <DialogContent>
           <Tabs
             className={classes.tabs}
             aria-label="tabs"
@@ -129,10 +108,6 @@ const Psw = ({psw}) => {
               }
             })}
           </Box>
-        </DialogContent>
-      </Dialog> */}
-      {/* <Divider /> */}
-      <div>hello</div>
     </Fragment>
   );
 };
