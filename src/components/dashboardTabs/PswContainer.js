@@ -65,7 +65,6 @@ function PswContainer(props) {
               key={id}
               component={Link}
               to={`/psw/${id}`}
-              target="_blank"
             >
               <ListItemText className={classes.flexContainer} disableTypography>
                 <Typography className={classes.id}>ID</Typography>
