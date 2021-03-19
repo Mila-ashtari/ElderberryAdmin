@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import { connect } from "react-redux";
 import {
   ListItem,
@@ -17,6 +17,7 @@ import {
 import CloseIcon from "@material-ui/icons/Close";
 import { makeStyles } from "@material-ui/core/styles";
 
+import {getPsw} from "../../actions/psw";
 import Profile from "./Profile";
 import Documents from "./Documents";
 import Bookings from "./Bookings";
@@ -25,8 +26,7 @@ import Availability from "./Availability";
 
 const useStyles = makeStyles((theme) => ({
   gridContainer: {
-    padding:"20px"
-
+    padding: "20px",
   },
   pswContainer: {
     padding: "30px",
@@ -56,8 +56,9 @@ const useStyles = makeStyles((theme) => ({
   paper: {},
 }));
 
-const Psw = ({ psw }) => {
+const Psw = (props) => {
   const classes = useStyles();
+  const {psw, getPsw } = props;
   const { user, skills, profile, schedule, currentBookings, id } = psw;
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState(0);
@@ -71,6 +72,8 @@ const Psw = ({ psw }) => {
     { label: "Availability", component: <Availability schedule={schedule} /> },
     { label: "Bookings", component: <Bookings /> },
   ];
+
+  useEffect(()=>{getPsw(props.match.params.id)},[getPsw])
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -118,4 +121,4 @@ const mapStateToProps = (state, ownProps) => {
   return { psw: state.psws[ownProps.match.params.id] };
 };
 
-export default connect(mapStateToProps)(Psw);
+export default connect(mapStateToProps, { getPsw })(Psw);

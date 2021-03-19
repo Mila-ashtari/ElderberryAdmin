@@ -12,6 +12,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import { getPsws } from "../../actions/psw";
 import Psw from "../psw/Psw";
 import { Route, Switch, Link } from "react-router-dom";
+import { Fragment } from "react";
 
 const useStyles = makeStyles((theme) => ({
   pswContainer: {
@@ -52,17 +53,13 @@ function PswContainer(props) {
         <Typography className={classes.firstName}>First Name</Typography>
       </ListItem>
       <Divider />
-      {/* {psws.map((psw) => (
-        <Psw psw={psw} key={psw.id} />
-      ))} */}
       {psws.map((psw) => {
         const { user, id } = psw;
         return (
-          <>
+          <Fragment key={id}>
             <ListItem
               button
               className={classes.listItem}
-              key={id}
               component={Link}
               to={`/psw/${id}`}
             >
@@ -77,7 +74,7 @@ function PswContainer(props) {
               </ListItemText>
             </ListItem>
             <Divider />
-          </>
+          </Fragment>
         );
       })}
     </List>
