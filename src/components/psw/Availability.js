@@ -28,7 +28,7 @@ const Availability = ({ schedule }) => {
     saturday,
     tuesday,
     wednesday,
-    thrusday,
+    thursday,
     friday,
   } = schedule.availability;
   return (
@@ -84,7 +84,7 @@ const Availability = ({ schedule }) => {
               })}
             </TableCell>
             <TableCell>
-              {thrusday.map((item) => {
+              {thursday.map((item) => {
                 return (
                   <Typography
                     className={classes.timeSlot}

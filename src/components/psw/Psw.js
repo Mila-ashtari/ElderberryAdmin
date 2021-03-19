@@ -25,7 +25,8 @@ import Availability from "./Availability";
 
 const useStyles = makeStyles((theme) => ({
   gridContainer: {
-    justifyContent: "space-between",
+    padding:"20px"
+
   },
   pswContainer: {
     padding: "30px",
@@ -55,7 +56,7 @@ const useStyles = makeStyles((theme) => ({
   paper: {},
 }));
 
-const Psw = ({psw}) => {
+const Psw = ({ psw }) => {
   const classes = useStyles();
   const { user, skills, profile, schedule, currentBookings, id } = psw;
   const [open, setOpen] = useState(false);
@@ -80,40 +81,41 @@ const Psw = ({psw}) => {
   };
 
   return (
-    <Fragment>
-          <Grid container spacing={3} className={classes.gridContainer}>
-            <Grid item>
-              <Typography variant="h2">{`${user.firstName} ${user.lastName}`}</Typography>
-            </Grid>
-            <Grid item>
-              <Typography variant="body1">Email: {user.email}</Typography>
-            </Grid>
-          </Grid>
-          <Tabs
-            className={classes.tabs}
-            aria-label="tabs"
-            value={value}
-            variant="fullWidth"
-            onChange={handleChange}
-            classes={{ indicator: classes.indicator }}
-          >
-            {tabsArr.map((tab, index) => (
-              <Tab className={classes.tab} key={index} label={tab.label} />
-            ))}
-          </Tabs>
-          <Box style={{ padding: "30px" }}>
-            {tabsArr.map((tab, index) => {
-              if (index === value) {
-                return tab.component;
-              }
-            })}
-          </Box>
-    </Fragment>
+    <>
+      <Grid container spacing={4} className={classes.gridContainer}>
+        <Grid item>
+          <Typography variant="h2">{`${user.firstName} ${user.lastName}`}</Typography>
+        </Grid>
+        <Grid item>
+          <Typography variant="body1">Email: {user.email}</Typography>
+        </Grid>
+      </Grid>
+
+      <Tabs
+        className={classes.tabs}
+        aria-label="tabs"
+        value={value}
+        variant="fullWidth"
+        onChange={handleChange}
+        classes={{ indicator: classes.indicator }}
+      >
+        {tabsArr.map((tab, index) => (
+          <Tab className={classes.tab} key={index} label={tab.label} />
+        ))}
+      </Tabs>
+      <Box style={{ padding: "30px" }}>
+        {tabsArr.map((tab, index) => {
+          if (index === value) {
+            return tab.component;
+          }
+        })}
+      </Box>
+    </>
   );
 };
 
 const mapStateToProps = (state, ownProps) => {
-  return {psw:state.psws[ownProps.match.params.id]};
+  return { psw: state.psws[ownProps.match.params.id] };
 };
 
 export default connect(mapStateToProps)(Psw);
