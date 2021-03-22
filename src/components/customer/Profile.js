@@ -8,39 +8,33 @@ import {
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 
-import Info from './Info'
-
 const useStyles = makeStyles((theme) => ({
-  flexContainer: {
-    display: "flex",
-  },
-  profileImage: {
-    width: "150px",
-    alignSelf: "flex-start",
+  p: {
+    display: "block",
+    marginBottom: "none",
   },
 }));
-function Profile({ profile, skills }) {
+function Profile({ user }) {
   const classes = useStyles();
+  const {
+    address: { addressLineOne, postalCode, province, city },
+  } = user;
   return (
     <Grid container spacing={2}>
       <Grid item xs={12}>
-        <Card className={classes.flexContainer}>
-          <CardMedia
-            className={classes.profileImage}
-            component="img"
-            src={profile.profileImage}
-            title="profile image"
-          ></CardMedia>
-          <CardContent>
-            <Typography variant="h2">Info</Typography>
-            <Info profile={profile}/>
-          </CardContent>
-        </Card>
-      </Grid>
-      <Grid item xs={12}>
         <Card>
           <CardContent>
-            <Typography variant="h2">Skills</Typography>
+            <Typography variant="h2" className={classes.h2}>
+              Address
+            </Typography>
+            <Typography
+              variant="paragraph"
+              className={classes.p}
+            >{`${addressLineOne}, ${postalCode},`}</Typography>
+            <Typography
+              variant="paragraph"
+              className={classes.p}
+            >{` ${province}, ${city}`}</Typography>
           </CardContent>
         </Card>
       </Grid>

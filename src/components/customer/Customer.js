@@ -18,7 +18,7 @@ import CloseIcon from "@material-ui/icons/Close";
 import { makeStyles } from "@material-ui/core/styles";
 
 import { getCustomer } from "../../actions/customer";
-// import Profile from "./Profile";
+import Profile from "./Profile";
 import Clients from "./Clients";
 
 // import Schedule from "./Schedule"
@@ -67,7 +67,7 @@ const Customer = (props) => {
   const tabsArr = [
     {
       label: "Profile",
-      component: "",
+      component: <Profile user={user}/>,
     },
     { label: "Clients", component: <Clients clients={clients} /> },
     { label: "Bookings", component: "" },
