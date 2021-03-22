@@ -62,7 +62,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export function RenderLanguages({languages}) {
+export function RenderLanguages({ languages }) {
   const [expanded, setExpanded] = useState(false);
   const classes = useStyles();
   return (
@@ -143,61 +143,6 @@ function Clients({ clients }) {
                 </Typography>
               </ListItemText>
             </ListItem>
-            <Dialog
-              open={open}
-              scroll="body"
-              onClose={() => {
-                setOpen(false);
-              }}
-            >
-              <DialogContent>
-                <CardMedia
-                  className={classes.profileImage}
-                  component="img"
-                  src={client.picture}
-                  title="profile image"
-                ></CardMedia>
-                <CardContent>
-                  <List>
-                    <ListItem>
-                      <Typography variant="h3" className={classes.h3}>
-                        Address:
-                      </Typography>
-                      <Typography className={classes.paragragh}>
-                        {`${address.addressLineOne}, ${address.city}, ${address.province}, ${address.postalCode}`}
-                      </Typography>
-                    </ListItem>
-                    <ListItem>
-                      <Typography variant="h3" className={classes.h3}>
-                        Weight:
-                      </Typography>
-                      <Typography className={classes.paragragh}>
-                        {client.weight}
-                      </Typography>
-                    </ListItem>
-                    <ListItem>
-                      <Typography variant="h3" className={classes.h3}>
-                        Height:
-                      </Typography>
-                      <Typography className={classes.paragragh}>
-                        {client.height}
-                      </Typography>
-                    </ListItem>
-                    <ListItem>
-                      <Typography variant="h3" className={classes.h3}>
-                        Mobility:
-                      </Typography>
-                      <Typography className={classes.paragragh}>
-                        {client.mobility}
-                      </Typography>
-                    </ListItem>
-                    <ListItem className={classes.colapseListItem}>
-                        <RenderLanguages languages={languages}/>
-                    </ListItem>
-                  </List>
-                </CardContent>
-              </DialogContent>
-            </Dialog>
           </>
         );
       })}

@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import { connect } from "react-redux";
 import {
   ListItem,
@@ -17,14 +17,17 @@ import {
 import CloseIcon from "@material-ui/icons/Close";
 import { makeStyles } from "@material-ui/core/styles";
 
-import Clients from "./Clients";
 import { getCustomer } from "../../actions/customer";
+// import Profile from "./Profile";
+import Clients from "./Clients";
+
+// import Schedule from "./Schedule"
 
 const useStyles = makeStyles((theme) => ({
   gridContainer: {
-    justifyContent: "space-between",
+    padding: "20px",
   },
-  CustomerContainer: {
+  customerContainer: {
     padding: "30px",
   },
   tabs: {
@@ -54,10 +57,13 @@ const useStyles = makeStyles((theme) => ({
 
 const Customer = (props) => {
   const classes = useStyles();
-  const { user, clients, history, id } = props.customer;
-  const { getCustomer } = props;
+  const {
+    customer: { user, clients, history },
+    getCustomer,
+  } = props;
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState(0);
+  console.log("rendered");
   const tabsArr = [
     {
       label: "Profile",
@@ -67,84 +73,54 @@ const Customer = (props) => {
     { label: "Bookings", component: "" },
   ];
 
+  useEffect(() => {
+    getCustomer(props.match.params.id);
+  }, []);
+
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
 
   const handleClick = () => {
-    setOpen(true)
+    setOpen(true);
   };
 
   return (
-    <Fragment>
-      <ListItem
-        button
-        className={classes.listItem}
-        onClick={handleClick}
-        // style={{ backgroundColor: key % 2 !== 0 && "#e4e2e2" }}
-      >
-        <ListItemText className={classes.flexContainer} disableTypography>
-          <Typography className={classes.id}>ID</Typography>
-          <Typography className={classes.lastName}>{user.lastName}</Typography>
-          <Typography className={classes.firstName}>
-            {user.firstName}
-          </Typography>
-        </ListItemText>
-      </ListItem>
+    <>
+      <Grid container spacing={4} className={classes.gridContainer}>
+        <Grid item>
+          <Typography variant="h2">{`${user.firstName} ${user.lastName}`}</Typography>
+        </Grid>
+        <Grid item>
+          <Typography variant="body1">Email: {user.email}</Typography>
+        </Grid>
+      </Grid>
 
-      <Dialog
-        fullScreen
-        open={open}
-        scroll="body"
-        onClose={() => {
-          setOpen(false);
-        }}
-        classes={{ paper: classes.paper }}
+      <Tabs
+        className={classes.tabs}
+        aria-label="tabs"
+        value={value}
+        variant="fullWidth"
+        onChange={handleChange}
+        classes={{ indicator: classes.indicator }}
       >
-        <DialogTitle disableTypography>
-          <Grid container spacing={3} className={classes.gridContainer}>
-            <Grid item>
-              <Typography variant="h2">{`${user.firstName} ${user.lastName}`}</Typography>
-            </Grid>
-            <Grid item>
-              <Typography variant="body1">Email: {user.email}</Typography>
-            </Grid>
-            <Grid item>
-              <Button>
-                <CloseIcon
-                  onClick={() => {
-                    setOpen(false);
-                  }}
-                />
-              </Button>
-            </Grid>
-          </Grid>
-        </DialogTitle>
-        <DialogContent>
-          <Tabs
-            className={classes.tabs}
-            aria-label="tabs"
-            value={value}
-            variant="fullWidth"
-            onChange={handleChange}
-            classes={{ indicator: classes.indicator }}
-          >
-            {tabsArr.map((tab, index) => (
-              <Tab className={classes.tab} key={index} label={tab.label} />
-            ))}
-          </Tabs>
-          <Box style={{ padding: "30px" }}>
-            {tabsArr.map((tab, index) => {
-              if (index === value) {
-                return tab.component;
-              }
-            })}
-          </Box>
-        </DialogContent>
-      </Dialog>
-      <Divider />
-    </Fragment>
+        {tabsArr.map((tab, index) => (
+          <Tab className={classes.tab} key={index} label={tab.label} />
+        ))}
+      </Tabs>
+      <Box style={{ padding: "30px" }}>
+        {tabsArr.map((tab, index) => {
+          if (index === value) {
+            return tab.component;
+          }
+        })}
+      </Box>
+    </>
   );
 };
 
-export default connect(null, { getCustomer })(Customer);
+const mapStateToProps = (state, ownProps) => {
+  return { customer: state.customers[ownProps.match.params.id] };
+};
+
+export default connect(mapStateToProps, { getCustomer })(Customer);
