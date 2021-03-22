@@ -62,6 +62,7 @@ const Psw = (props) => {
   const { user, skills, profile, schedule, currentBookings, id } = psw;
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState(0);
+  console.log("rendered")
   const tabsArr = [
     {
       label: "Profile",
@@ -73,11 +74,11 @@ const Psw = (props) => {
     { label: "Bookings", component: <Bookings /> },
   ];
 
-  useEffect(()=>{getPsw(props.match.params.id)},[getPsw])
+  useEffect(()=>{getPsw(props.match.params.id)},[])
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
-  };
+  }
 
   const handleClick = () => {
     setOpen(true);
