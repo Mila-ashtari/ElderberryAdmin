@@ -7,7 +7,7 @@ import Login from "./Login";
 import Psw from "./psw/Psw";
 import Customer from "./customer/Customer";
 import Client from "./client/Client";
-import Dashboard from "./Dashboard";
+import Dashboard from "./dashboard/Dashboard";
 import "../normalize.css";
 
 function App() {

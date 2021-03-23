@@ -13,8 +13,8 @@ import MenuIcon from "@material-ui/icons/Menu";
 import { makeStyles } from "@material-ui/core/styles";
 import { connect } from "react-redux";
 
-import { logOut } from "../actions";
-import logo from "../images/logo.png";
+import { logOut } from "../../actions/index";
+import logo from "../../images/logo.png";
 
 const useStyles = makeStyles((theme) => ({
   toolBar: {

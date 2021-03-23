@@ -39,7 +39,6 @@ export const getCustomer = (id) => async (dispatch) => {
       loadClients: true,
     },
   });
-  console.log(response)
   dispatch({ type: "FETCH_CUSTOMER", payload: response.data.customer });
 };
 

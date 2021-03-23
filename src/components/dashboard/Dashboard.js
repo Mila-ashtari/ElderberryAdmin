@@ -3,10 +3,10 @@ import { Tabs, Tab } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { Switch, Route, Link } from "react-router-dom";
 
-import requiredAuth from "./requiredAuth";
+import requiredAuth from "../requiredAuth";
 import DashboardHeader from "./DashboardHeader";
-import PswContainer from "./dashboardTabs/PswContainer";
-import CustomerContainer from "./dashboardTabs/CustomerContainer";
+import PswContainer from "./PswList";
+import CustomerContainer from "./CustomerList";
 
 const useStyles = makeStyles((theme) => ({
   tabs: {
