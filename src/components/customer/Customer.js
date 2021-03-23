@@ -58,16 +58,16 @@ const useStyles = makeStyles((theme) => ({
 const Customer = (props) => {
   const classes = useStyles();
   const {
-    customer: { user, clients, history },
+    customer,
     getCustomer,
   } = props;
-  const [open, setOpen] = useState(false);
+  const { user, clients, history }= customer
   const [value, setValue] = useState(0);
-  console.log("rendered");
+  console.log(props.customer);
   const tabsArr = [
     {
       label: "Profile",
-      component: <Profile user={user}/>,
+      component: <Profile user={user} />,
     },
     { label: "Clients", component: <Clients clients={clients} /> },
     { label: "Bookings", component: "" },
@@ -79,10 +79,6 @@ const Customer = (props) => {
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
-  };
-
-  const handleClick = () => {
-    setOpen(true);
   };
 
   return (

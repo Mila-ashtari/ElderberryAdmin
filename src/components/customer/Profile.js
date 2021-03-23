@@ -9,15 +9,16 @@ import {
 import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
-  p: {
-    display: "block",
+  paragraph: {
     marginBottom: "none",
+    display: "block",
   },
 }));
 function Profile({ user }) {
   const classes = useStyles();
   const {
     address: { addressLineOne, postalCode, province, city },
+    contactNumber,
   } = user;
   return (
     <Grid container spacing={2}>
@@ -25,16 +26,16 @@ function Profile({ user }) {
         <Card>
           <CardContent>
             <Typography variant="h2" className={classes.h2}>
-              Address
+              Address:
             </Typography>
-            <Typography
-              variant="paragraph"
-              className={classes.p}
-            >{`${addressLineOne}, ${postalCode},`}</Typography>
-            <Typography
-              variant="paragraph"
-              className={classes.p}
-            >{` ${province}, ${city}`}</Typography>
+            <Typography variant="body1">{`${addressLineOne}, ${postalCode},`}</Typography>
+            <Typography variant="body1">{` ${province}, ${city}`}</Typography>
+          </CardContent>
+          <CardContent>
+            <Typography variant="h2" className={classes.h2}>
+              Contact Phone Number:
+            </Typography>
+            <Typography variant="body1">{`${contactNumber}`}</Typography>
           </CardContent>
         </Card>
       </Grid>

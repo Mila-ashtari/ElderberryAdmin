@@ -17,7 +17,7 @@ import {
 import CloseIcon from "@material-ui/icons/Close";
 import { makeStyles } from "@material-ui/core/styles";
 
-import {getPsw} from "../../actions/psw";
+import { getPsw } from "../../actions/psw";
 import Profile from "./Profile";
 import Documents from "./Documents";
 import Bookings from "./Bookings";
@@ -58,11 +58,11 @@ const useStyles = makeStyles((theme) => ({
 
 const Psw = (props) => {
   const classes = useStyles();
-  const {psw, getPsw } = props;
+  const { psw, getPsw } = props;
   const { user, skills, profile, schedule, currentBookings, id } = psw;
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState(0);
-  console.log("rendered")
+  console.log("rendered");
   const tabsArr = [
     {
       label: "Profile",
@@ -74,11 +74,13 @@ const Psw = (props) => {
     { label: "Bookings", component: <Bookings /> },
   ];
 
-  useEffect(()=>{getPsw(props.match.params.id)},[])
+  useEffect(() => {
+    getPsw(props.match.params.id);
+  }, []);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
-  }
+  };
 
   const handleClick = () => {
     setOpen(true);
