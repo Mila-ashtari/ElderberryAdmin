@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, Fragment } from "react";
 import {
   Typography,
   Grid,
@@ -7,6 +7,9 @@ import {
   Box,
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
+
+import requiredAuth from "../requiredAuth";
+import history from "../../history"
 
 const useStyles = makeStyles((theme) => ({
   gridContainer: {
@@ -71,7 +74,7 @@ function User({user, tabs}) {
       <Box style={{ padding: "30px" }}>
         {tabs.map((tab, index) => {
           if (index === value) {
-            return tab.component;
+            return <Fragment key={index}>{tab.component}</Fragment>;
           }
         })}
       </Box>
@@ -79,4 +82,4 @@ function User({user, tabs}) {
   );
 }
 
-export default User
+export default requiredAuth(User)
