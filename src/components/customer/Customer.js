@@ -10,8 +10,7 @@ import User from "../user/User";
 
 const Customer = (props) => {
   const { getCustomer } = props;
-  const { user, clients, history } =
-    props.customer !== undefined && props.customer;
+  const { user, clients, history } = props.customer !== undefined && props.customer;
   console.log(props.customer);
   const tabs = props.customer !== undefined && [
     {
