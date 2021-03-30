@@ -23,7 +23,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import ExpandLessIcon from "@material-ui/icons/ExpandLess";
 const useStyles = makeStyles((theme) => ({
-  CustomerContainer: {
+  CustomerList: {
     padding: "20px",
   },
   listHeader: {
@@ -116,7 +116,7 @@ function Clients({ clients }) {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
   return (
-    <List className={classes.CustomerContainer}>
+    <List className={classes.CustomerList}>
       <ListItem className={classes.listHeader} disabled>
         <Typography className={classes.id}>ID</Typography>
         <Typography className={classes.lastName}>Last Name</Typography>

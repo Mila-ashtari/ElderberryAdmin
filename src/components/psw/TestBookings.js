@@ -22,28 +22,20 @@ const useRowStyles = makeStyles({
   },
 });
 
-function createData(bookingId, creationDate) {
-  return { bookingId, creationDate };
+function createData(date ,bookingId, transactionId) {
+  return { date ,bookingId, transactionId };
 }
 
 const rows = [
   createData(
     "Feb 19,2021",
-    "11:00am",
-    "03:00pm",
-    "4",
-    "Mila Ashtari",
-    "Farhad Ashtari",
-    "309 horsham st"
+    "3453434435",
+    "345345345",
   ),
   createData(
     "Feb 19,2021",
-    "11:00am",
-    "03:00pm",
-    "4",
-    "Mila Ashtari",
-    "Farhad Ashtari",
-    "309 horsham st"
+    "654564545645",
+    "456456456",
   ),
 ];
 export function Row(props) {
@@ -57,8 +49,8 @@ export function Row(props) {
         <TableCell component="th" scope="row">
           {row.date}
         </TableCell>
-        <TableCell align="right">{row.startTime}</TableCell>
-        <TableCell align="right">{row.endTime}</TableCell>
+        <TableCell align="right">{row.bookingId}</TableCell>
+        <TableCell align="right">{row.transactionId}</TableCell>
         <TableCell>
           <IconButton
             aria-label="expand row"
@@ -90,12 +82,8 @@ function TestBookings() {
         <TableHead>
           <TableRow>
             <TableCell>Date</TableCell>
-            <TableCell align="right">Start Time</TableCell>
-            <TableCell align="right">End Time</TableCell>
-            <TableCell align="right">Hours</TableCell>
-            <TableCell align="right">Client</TableCell>
-            <TableCell align="right">Customer</TableCell>
-            <TableCell align="right">Address</TableCell>
+            <TableCell align="right">Booking ID</TableCell>
+            <TableCell align="right">Transaction ID</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
