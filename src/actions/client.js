@@ -10,3 +10,16 @@ export const getClients = () => async (dispatch) => {
   });
   dispatch({ type: "FETCH_CLIENTS", payload: response.data.clients });
 };
+
+export const getClient = (id) => async (dispatch) => {
+  const token = localStorage.getItem("token");
+  const response = await axios({
+    url: " https://elderberry-development-api.herokuapp.com/api/admin/client",
+    method: "GET",
+    headers: { Authorization: `Bearer ${token}` },
+    params: {
+      clientID: id,
+    },
+  });
+  dispatch({ type: "FETCH_CLIENT", payload: response.data.client });
+};
