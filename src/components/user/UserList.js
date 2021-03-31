@@ -46,7 +46,8 @@ function UserList({ users, type }) {
       </ListItem>
       <Divider />
       {users.map((item) => {
-        const { user, id } = item;
+        const { firstName, lastName } = item.user ? item.user : item;
+        const { id } = item;
         return (
           <Fragment key={id}>
             <ListItem
@@ -60,10 +61,10 @@ function UserList({ users, type }) {
               <ListItemText className={classes.flexContainer} disableTypography>
                 <Typography className={classes.id}>ID</Typography>
                 <Typography className={classes.lastName}>
-                  {user.lastName}
+                  {lastName}
                 </Typography>
                 <Typography className={classes.firstName}>
-                  {user.firstName}
+                  {firstName}
                 </Typography>
               </ListItemText>
             </ListItem>
@@ -75,4 +76,4 @@ function UserList({ users, type }) {
   );
 }
 
-export default UserList
+export default UserList;

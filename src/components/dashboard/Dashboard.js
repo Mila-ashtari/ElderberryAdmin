@@ -7,6 +7,7 @@ import requiredAuth from "../requiredAuth";
 import DashboardHeader from "./DashboardHeader";
 import PswList from "./PswList";
 import CustomerList from "./CustomerList";
+import ClientList from "./ClientList"
 
 const useStyles = makeStyles((theme) => ({
   tabs: {
@@ -30,7 +31,7 @@ function Dashboard(props) {
 
   const tabs = [
     { label: "psw", component: PswList },
-    { label: "client", component: "" },
+    { label: "client", component: ClientList },
     { label: "customer", component: CustomerList },
   ];
 

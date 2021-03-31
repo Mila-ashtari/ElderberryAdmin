@@ -9,7 +9,9 @@ function ClientList(props) {
   useEffect(() => {
     getClients();
   }, [getClients]);
-  return <UserList users={clients} type="client" />;
+  return (
+    <UserList users={clients} type="client" />
+  );
 }
 
 const mapStateToProps = (state) => {
