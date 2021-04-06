@@ -54,7 +54,7 @@ import UserList from "../user/UserList";
 function Clients({ clients }) {
   console.log(clients);
  
-  return <UserList users={clients} />;
+  return <UserList users={clients} type="client" />;
 }
 
 export default Clients;
