@@ -18,7 +18,7 @@ export const getCustomers = () => async (dispatch) => {
       loadClients: true,
     },
   });
-  dispatch({ type: "FETCH_CUSTOMERS", payload: response.data.customers });
+  dispatch({ type: "FETCH_CUSTOMERS", payload: response.data });
 };
 
 export const getCustomer = (id) => async (dispatch) => {
@@ -39,6 +39,6 @@ export const getCustomer = (id) => async (dispatch) => {
       loadClients: true,
     },
   });
-  dispatch({ type: "FETCH_CUSTOMER", payload: response.data.customer });
+  dispatch({ type: "FETCH_CUSTOMER", payload: response.data});
 };
 
