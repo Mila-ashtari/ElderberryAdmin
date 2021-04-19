@@ -8,7 +8,7 @@ export const getClients = () => async (dispatch) => {
     method: "GET",
     headers: { Authorization: `Bearer ${token}` },
   });
-  dispatch({ type: "FETCH_CLIENTS", payload: response.data});
+  dispatch({ type: "FETCH_CLIENTS", payload: response.data });
 };
 
 export const getClient = (id) => async (dispatch) => {
@@ -19,6 +19,7 @@ export const getClient = (id) => async (dispatch) => {
     headers: { Authorization: `Bearer ${token}` },
     params: {
       clientID: id,
+      loadClient: true,
     },
   });
   dispatch({ type: "FETCH_CLIENT", payload: response.data });
