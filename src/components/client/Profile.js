@@ -32,7 +32,7 @@ const useStyles = makeStyles((theme) => ({
   buttonContainer: {
     textAlign: "right",
   },
-  h3: {
+  h2: {
     display: "inline",
   },
   paragragh: {
@@ -50,17 +50,45 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function RenderAdresses() {
-  return;
-}
 
-function Tasks({ tasks }) {
+function RenderTasks({ tasks }) {
   const [expanded, setExpanded] = useState(false);
   const classes = useStyles();
   return (
     <ListItem className={classes.listItem}>
       <Box className={classes.tableContainer}>
-        <Typography variant="h3" className={classes.tableTitle}>
+        <Typography variant="h2" className={classes.tableTitle}>
+          Tasks
+        </Typography>
+        <Button onClick={() => setExpanded(!expanded)}>
+          {expanded ? <ExpandLessIcon /> : <ExpandMoreIcon />}
+        </Button>
+      </Box>
+      <Collapse in={expanded} timeout="auto">
+        <TableContainer component="paper">
+          <Table className={classes.table} aria-label="Languages">
+            <TableBody>
+              {tasks.map((task, index) => {
+                return (
+                  <TableRow key={index}>
+                    <TableCell>{task}</TableCell>
+                  </TableRow>
+                );
+              })}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      </Collapse>
+    </ListItem>
+  );
+}
+function RenderLanguages({ languages }) {
+  const [expanded, setExpanded] = useState(false);
+  const classes = useStyles();
+  return (
+    <ListItem className={classes.listItem}>
+      <Box className={classes.tableContainer}>
+        <Typography variant="h2" className={classes.tableTitle}>
           Languages
         </Typography>
         <Button onClick={() => setExpanded(!expanded)}>
@@ -102,59 +130,20 @@ function Tasks({ tasks }) {
     </ListItem>
   );
 }
-function RenderLanguages({ languages }) {
-    const [expanded, setExpanded] = useState(false);
-    const classes = useStyles();
-    return (
-      <ListItem className={classes.listItem}>
-        <Box className={classes.tableContainer}>
-          <Typography variant="h3" className={classes.tableTitle}>
-            Languages
-          </Typography>
-          <Button onClick={() => setExpanded(!expanded)}>
-            {expanded ? <ExpandLessIcon /> : <ExpandMoreIcon />}
-          </Button>
-        </Box>
-        <Collapse in={expanded} timeout="auto">
-          <TableContainer component="paper">
-            <Table className={classes.table} aria-label="Languages">
-              <TableHead>
-                <TableRow>
-                  <TableCell>Language</TableCell>
-                  <TableCell align="right">Speaking</TableCell>
-                  <TableCell align="right">Reading</TableCell>
-                  <TableCell align="right">Writing</TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {languages.map((item) => {
-                  return (
-                    <TableRow key={item.id}>
-                      <TableCell>{item.language}</TableCell>
-                      <TableCell align="right">
-                        {item.speakingProficiency}
-                      </TableCell>
-                      <TableCell align="right">
-                        {item.readingProficiency}
-                      </TableCell>
-                      <TableCell align="right">
-                        {item.writingProficiency}
-                      </TableCell>
-                    </TableRow>
-                  );
-                })}
-              </TableBody>
-            </Table>
-          </TableContainer>
-        </Collapse>
-      </ListItem>
-    );
-  }
 
 function Profile({ client }) {
   const classes = useStyles();
   const [expanded, setExpanded] = useState(false);
-  const { picture, address, weight, height, notes, languages } = client;
+  const {
+    picture,
+    address,
+    weight,
+    height,
+    notes,
+    languages,
+    tasks,
+    contactNumber,
+  } = client;
   return (
     <Grid container spacing={2}>
       <Grid item xs={12}>
@@ -168,20 +157,33 @@ function Profile({ client }) {
           <CardContent>
             <List>
               <ListItem>
-                <Typography variant="h3" className={classes.h3}>
+                <Typography variant="h2" className={classes.h2}>
+                  Address:
+                </Typography>
+                <Typography variant="body1">{`${address.addressLineOne}, ${address.postalCode},`}</Typography>
+                <Typography variant="body1">{` ${address.province}, ${address.city}`}</Typography>
+              </ListItem>
+              <ListItem>
+                <Typography variant="h2" className={classes.h2}>
+                  Contact Phone Number:
+                </Typography>
+                <Typography variant="body1">{`${contactNumber}`}</Typography>
+              </ListItem>
+              <ListItem>
+                <Typography variant="h2" className={classes.h2}>
                   {"Weight:  "}
                 </Typography>
                 <Typography className={classes.paragragh}>{weight}</Typography>
               </ListItem>
               <ListItem>
-                <Typography variant="h3" className={classes.h3}>
+                <Typography variant="h2" className={classes.h2}>
                   {"Height:  "}
                 </Typography>
                 <Typography className={classes.paragragh}>{height}</Typography>
               </ListItem>
               <ListItem>
                 <Collapse in={expanded} timeout="auto" collapsedHeight="70px">
-                  <Typography variant="h3" className={classes.h3}>
+                  <Typography variant="h2" className={classes.h2}>
                     {"Notes: "}
                   </Typography>
                   <Typography className={classes.paragragh}>{notes}</Typography>
@@ -193,6 +195,7 @@ function Profile({ client }) {
                 </Box>
               </ListItem>
               <RenderLanguages languages={languages} />
+              <RenderTasks tasks={tasks} />
             </List>
           </CardContent>
         </Card>

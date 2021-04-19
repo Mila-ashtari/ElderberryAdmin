@@ -12,7 +12,7 @@ const theme = createMuiTheme({
   typography: {
     fontFamily: '"akagi-pro", serif',
     h2: {
-      fontSize: "1.5rem",
+      fontSize: "1.3rem",
     },
     h3: {
       fontSize: "1.2rem",
