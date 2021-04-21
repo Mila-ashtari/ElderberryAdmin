@@ -14,7 +14,7 @@ import {
   AppointmentForm,
 } from "@devexpress/dx-react-scheduler-material-ui";
 
-const Schedule = ({schedule, currentBookings}) => {
+const ScheduleDevExpress = ({schedule, currentBookings}) => {
   const schedulerData = [
     {
       startDate: "2021-03-09T09:45",
@@ -47,4 +47,4 @@ const Schedule = ({schedule, currentBookings}) => {
   );
 };
 
-export default Schedule;
+export default ScheduleDevExpress;
