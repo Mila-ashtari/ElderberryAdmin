@@ -44,16 +44,15 @@ const useStyles = makeStyles((theme) => ({
 function UserList({ users, type }) {
   const classes = useStyles();
   const [searchId, setSearchId] = useState("");
-  const dynamicUserList = ()=>{
-    return users.filter((user)=>
-      user.id.includes(searchId) 
+  const dynamicUserList =  users.filter((user)=>
+     user.id.includes(searchId) 
     )
-  }
   
   return (
     <>
       <TextField
         className={classes.searchBar}
+        onChange={(e)=>{setSearchId(e.target.value)}}
         InputProps={{
           startAdornment: (
             <InputAdornment position="start">
@@ -69,7 +68,7 @@ function UserList({ users, type }) {
           <Typography className={classes.firstName}>First Name</Typography>
         </ListItem>
         <Divider />
-        {dynamicUserList().map((item) => {
+        {dynamicUserList.map((item) => {
           const { firstName, lastName } = item.user ? item.user : item;
           return (
             <Fragment key={item.id}>
