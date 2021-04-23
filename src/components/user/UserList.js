@@ -1,11 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Divider,
   List,
   ListItem,
   Typography,
   ListItemText,
+  TextField,
+  InputAdornment,
 } from "@material-ui/core";
+import SearchIcon from "@material-ui/icons/Search";
 import { makeStyles } from "@material-ui/core/styles";
 import { Link } from "react-router-dom";
 import { Fragment } from "react";
@@ -33,46 +36,70 @@ const useStyles = makeStyles((theme) => ({
     width: "10%",
     margin: "0px 20px",
   },
+  searchBar: {
+    textAlign: "right",
+  },
 }));
 
 function UserList({ users, type }) {
   const classes = useStyles();
+  const [searchId, setSearchId] = useState("");
+  const dynamicUserList = ()=>{
+    return users.filter((user)=>
+      user.id.includes(searchId) 
+    )
+  }
+  
   return (
-    <List className={classes.userContainer}>
-      <ListItem className={classes.listHeader} disabled>
-        <Typography className={classes.id}>ID</Typography>
-        <Typography className={classes.lastName}>Last Name</Typography>
-        <Typography className={classes.firstName}>First Name</Typography>
-      </ListItem>
-      <Divider />
-      {users.map((item) => {
-        const { firstName, lastName } = item.user ? item.user : item;
-        const { id } = item;
-        return (
-          <Fragment key={id}>
-            <ListItem
-              button
-              className={classes.listItem}
-              component={Link}
-              to={`/${type}/${id}`}
-              target="_blank"
-              rel="noopener"
-            >
-              <ListItemText className={classes.flexContainer} disableTypography>
-                <Typography className={classes.id}>ID</Typography>
-                <Typography className={classes.lastName}>
-                  {lastName}
-                </Typography>
-                <Typography className={classes.firstName}>
-                  {firstName}
-                </Typography>
-              </ListItemText>
-            </ListItem>
-            <Divider />
-          </Fragment>
-        );
-      })}
-    </List>
+    <>
+      <TextField
+        className={classes.searchBar}
+        InputProps={{
+          startAdornment: (
+            <InputAdornment position="start">
+              <SearchIcon />
+            </InputAdornment>
+          ),
+        }}
+      ></TextField>
+      <List className={classes.userContainer}>
+        <ListItem className={classes.listHeader} disabled>
+          <Typography className={classes.id}>ID</Typography>
+          <Typography className={classes.lastName}>Last Name</Typography>
+          <Typography className={classes.firstName}>First Name</Typography>
+        </ListItem>
+        <Divider />
+        {dynamicUserList().map((item) => {
+          const { firstName, lastName } = item.user ? item.user : item;
+          return (
+            <Fragment key={item.id}>
+              <ListItem
+                button
+                className={classes.listItem}
+                component={Link}
+                to={`/${type}/${item.id}`}
+                target="_blank"
+                rel="noopener"
+              >
+                <ListItemText
+                  className={classes.flexContainer}
+                  disableTypography
+                >
+                  <Typography className={classes.id}>ID</Typography>
+                  <Typography className={classes.lastName}>
+                    {lastName}
+                  </Typography>
+                  <Typography className={classes.firstName}>
+                    {firstName}
+                  </Typography>
+                </ListItemText>
+              </ListItem>
+              <Divider />
+            </Fragment>
+          );
+        })}
+      </List>
+    </>
   );
 }
 
