@@ -38,22 +38,31 @@ const useStyles = makeStyles((theme) => ({
   },
   searchBar: {
     textAlign: "right",
+    padding:"20px",
+    
   },
 }));
 
 function UserList({ users, type }) {
   const classes = useStyles();
-  const [searchId, setSearchId] = useState("");
-  const dynamicUserList =  users.filter((user)=>
-     user.id.includes(searchId) 
-    )
-  
+  const [searchTerm, setSearchTerm] = useState("");
+  const dynamicUserList = users.filter(
+    (user) =>
+      user.id.includes(searchTerm) ||
+      user.user.firstName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      user.user.lastName.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
   return (
     <>
       <TextField
         className={classes.searchBar}
-        onChange={(e)=>{setSearchId(e.target.value)}}
+        onChange={(e) => {
+          setSearchTerm(e.target.value);
+        }}
+        value={searchTerm}
         InputProps={{
+          style:{width:"150px"},
           startAdornment: (
             <InputAdornment position="start">
               <SearchIcon />
