@@ -5,11 +5,8 @@ import {
   ListItem,
   Typography,
   ListItemText,
-  InputAdornment,
-  FormControl,
-  InputLabel,
-  Input,
-  IconButton,
+  Grid,
+  TextField
 } from "@material-ui/core";
 import SearchIcon from "@material-ui/icons/Search";
 import { makeStyles } from "@material-ui/core/styles";
@@ -40,12 +37,10 @@ const useStyles = makeStyles((theme) => ({
     margin: "0px 20px",
   },
   searchBar: {
-    textAlign: "right",
     padding: "20px",
   },
-  InputLabel:{
-   
-    right:"0"
+  gridContainer:{
+    justifyContent:"flex-end"
   }
 }));
 
@@ -61,24 +56,16 @@ function UserList({ users, type }) {
 
   return (
     <>
-      <FormControl className={classes.searchBar}>
-        <InputLabel htmlFor="searchField" className={classes.InputLabel}>search</InputLabel>
-        <Input
-          id="searchField"
-          type="text"
-          value={searchTerm}
-          onChange={(e) => {
-            setSearchTerm(e.target.value);
-          }}
-          startAdornment={
-            <InputAdornment position="start">
-              <IconButton>
-                <SearchIcon />
-              </IconButton>
-            </InputAdornment>
-          }
-        />
-      </FormControl>
+       <div className={classes.searchBar}>
+        <Grid container spacing={1} alignItems="flex-end" className={classes.gridContainer}>
+          <Grid item>
+            <SearchIcon />
+          </Grid>
+          <Grid item>
+            <TextField id="search" label="search" value={searchTerm} onChange={(e)=>{setSearchTerm(e.target.value)}}/>
+          </Grid>
+        </Grid>
+      </div>
       <List className={classes.userContainer}>
         <ListItem className={classes.listHeader} disabled>
           <Typography className={classes.id}>ID</Typography>
