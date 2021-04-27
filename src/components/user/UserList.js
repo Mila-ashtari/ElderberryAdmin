@@ -5,8 +5,11 @@ import {
   ListItem,
   Typography,
   ListItemText,
-  TextField,
   InputAdornment,
+  FormControl,
+  InputLabel,
+  Input,
+  IconButton,
 } from "@material-ui/core";
 import SearchIcon from "@material-ui/icons/Search";
 import { makeStyles } from "@material-ui/core/styles";
@@ -38,9 +41,12 @@ const useStyles = makeStyles((theme) => ({
   },
   searchBar: {
     textAlign: "right",
-    padding:"20px",
-    
+    padding: "20px",
   },
+  InputLabel:{
+   
+    right:"0"
+  }
 }));
 
 function UserList({ users, type }) {
@@ -55,21 +61,24 @@ function UserList({ users, type }) {
 
   return (
     <>
-      <TextField
-        className={classes.searchBar}
-        onChange={(e) => {
-          setSearchTerm(e.target.value);
-        }}
-        value={searchTerm}
-        InputProps={{
-          style:{width:"150px"},
-          startAdornment: (
+      <FormControl className={classes.searchBar}>
+        <InputLabel htmlFor="searchField" className={classes.InputLabel}>search</InputLabel>
+        <Input
+          id="searchField"
+          type="text"
+          value={searchTerm}
+          onChange={(e) => {
+            setSearchTerm(e.target.value);
+          }}
+          startAdornment={
             <InputAdornment position="start">
-              <SearchIcon />
+              <IconButton>
+                <SearchIcon />
+              </IconButton>
             </InputAdornment>
-          ),
-        }}
-      ></TextField>
+          }
+        />
+      </FormControl>
       <List className={classes.userContainer}>
         <ListItem className={classes.listHeader} disabled>
           <Typography className={classes.id}>ID</Typography>
