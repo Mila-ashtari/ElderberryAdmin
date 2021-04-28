@@ -12,6 +12,7 @@ import {
   TodayButton,
   AppointmentTooltip,
   AppointmentForm,
+  MonthView
 } from "@devexpress/dx-react-scheduler-material-ui";
 
 const ScheduleDevExpress = ({schedule, currentBookings}) => {
@@ -35,6 +36,7 @@ const ScheduleDevExpress = ({schedule, currentBookings}) => {
 
         <DayView startDayHour={9} endDayHour={18} />
         <WeekView startDayHour={10} endDayHour={19} />
+        <MonthView/>
         <Toolbar />
         <DateNavigator />
         <TodayButton />
