@@ -16,7 +16,7 @@ export const getPsws = () => async (dispatch) => {
       populateProfile: true,
     },
   });
-  dispatch({ type: "FETCH_PSWS", payload: response.data.psws });
+  dispatch({ type: "FETCH_PSWS", payload: response.data });
 };
 
 export const updatePsw = (psw, verification, expiration) => async (
@@ -62,5 +62,5 @@ export const getPsw = (id) => async (dispatch) => {
       populateProfile: true,
     },
   });
-  dispatch({ type: "FETCH_PSW", payload: response.data.psw });
+  dispatch({ type: "FETCH_PSW", payload: response.data });
 };

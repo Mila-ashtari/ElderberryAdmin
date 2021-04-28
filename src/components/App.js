@@ -1,5 +1,5 @@
 import React from "react";
-import { Router, Route } from "react-router-dom";
+import { HashRouter, Route } from "react-router-dom";
 import { ThemeProvider } from "@material-ui/core/styles";
 
 import theme from "../theme";
@@ -14,13 +14,13 @@ import history from "../history";
 function App() {
   return (
     <ThemeProvider theme={theme}>
-      <Router history={history}>
+      <HashRouter history={history}>
         <Route path="/" exact component={Login} />
         <Route path="/dashboard" component={Dashboard} />
         <Route path="/psw/:id" component={Psw}></Route>
         <Route path="/customer/:id" component={Customer}></Route>
         <Route path="/client/:id" component={Client}></Route>
-      </Router>
+      </HashRouter>
     </ThemeProvider>
   );
 }

@@ -15,7 +15,7 @@ const useStyles = makeStyles((theme) => ({
   gridContainer: {
     padding: "20px",
   },
-  customerContainer: {
+  CustomerList: {
     padding: "30px",
   },
   tabs: {
