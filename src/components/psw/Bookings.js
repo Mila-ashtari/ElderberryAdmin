@@ -22,55 +22,27 @@ const useRowStyles = makeStyles({
   },
 });
 
-function createData(
-  date,
-  startTime,
-  endTime,
-  hours,
-  client,
-  customer,
-  address
-) {
-  return { date, startTime, endTime, hours, client, customer, address };
-}
+// function createData(date, bookingId, transactionId) {
+//   return { date, bookingId, transactionId };
+// }
 
-const rows = [
-  createData(
-    "Feb 19,2021",
-    "11:00am",
-    "03:00pm",
-    "4",
-    "Mila Ashtari",
-    "Farhad Ashtari",
-    "309 horsham st"
-  ),
-  createData(
-    "Feb 19,2021",
-    "11:00am",
-    "03:00pm",
-    "4",
-    "Mila Ashtari",
-    "Farhad Ashtari",
-    "309 horsham st"
-  ),
-];
-export function Row(props) {
-  const { row } = props;
+// const rows = [
+//   createData("Feb 19,2021", "3453434435", "345345345"),
+//   createData("Feb 19,2021", "654564545645", "456456456"),
+// ];
+function Row({ booking }) {
   const [open, setOpen] = useState(false);
   const classes = useRowStyles();
+  const date = new Date(booking.startTime);
 
   return (
     <>
       <TableRow className={classes.root}>
         <TableCell component="th" scope="row">
-          {row.date}
+          {date. toDateString()}
         </TableCell>
-        <TableCell align="right">{row.startTime}</TableCell>
-        <TableCell align="right">{row.endTime}</TableCell>
-        <TableCell align="right">{row.hours}</TableCell>
-        <TableCell align="right">{row.client}</TableCell>
-        <TableCell align="right">{row.customer}</TableCell>
-        <TableCell align="right">{row.address}</TableCell>
+        <TableCell align="right">{booking.id}</TableCell>
+        {/* <TableCell align="right">{booking.transactionRefrence}</TableCell> */}
         <TableCell>
           <IconButton
             aria-label="expand row"
@@ -95,24 +67,20 @@ export function Row(props) {
   );
 }
 
-function CollapsibleTable() {
+function Bookings({ bookings }) {
   return (
     <TableContainer component={Paper}>
       <Table aria-label="bookings table">
         <TableHead>
           <TableRow>
             <TableCell>Date</TableCell>
-            <TableCell align="right">Start Time</TableCell>
-            <TableCell align="right">End Time</TableCell>
-            <TableCell align="right">Hours</TableCell>
-            <TableCell align="right">Client</TableCell>
-            <TableCell align="right">Customer</TableCell>
-            <TableCell align="right">Address</TableCell>
+            <TableCell align="right">Booking ID</TableCell>
+            {/* <TableCell align="right">Transaction ID</TableCell> */}
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row, index) => (
-            <Row key={index} row={row} />
+          {bookings.map((booking) => (
+            <Row key={booking.id} booking={booking} />
           ))}
         </TableBody>
       </Table>
@@ -120,4 +88,4 @@ function CollapsibleTable() {
   );
 }
 
-export default CollapsibleTable;
+export default Bookings;

@@ -22,20 +22,36 @@ const useRowStyles = makeStyles({
   },
 });
 
-function createData(date ,bookingId, transactionId) {
-  return { date ,bookingId, transactionId };
+function createData(
+  date,
+  startTime,
+  endTime,
+  hours,
+  client,
+  customer,
+  address
+) {
+  return { date, startTime, endTime, hours, client, customer, address };
 }
 
 const rows = [
   createData(
     "Feb 19,2021",
-    "3453434435",
-    "345345345",
+    "11:00am",
+    "03:00pm",
+    "4",
+    "Mila Ashtari",
+    "Farhad Ashtari",
+    "309 horsham st"
   ),
   createData(
     "Feb 19,2021",
-    "654564545645",
-    "456456456",
+    "11:00am",
+    "03:00pm",
+    "4",
+    "Mila Ashtari",
+    "Farhad Ashtari",
+    "309 horsham st"
   ),
 ];
 export function Row(props) {
@@ -49,8 +65,12 @@ export function Row(props) {
         <TableCell component="th" scope="row">
           {row.date}
         </TableCell>
-        <TableCell align="right">{row.bookingId}</TableCell>
-        <TableCell align="right">{row.transactionId}</TableCell>
+        <TableCell align="right">{row.startTime}</TableCell>
+        <TableCell align="right">{row.endTime}</TableCell>
+        <TableCell align="right">{row.hours}</TableCell>
+        <TableCell align="right">{row.client}</TableCell>
+        <TableCell align="right">{row.customer}</TableCell>
+        <TableCell align="right">{row.address}</TableCell>
         <TableCell>
           <IconButton
             aria-label="expand row"
@@ -75,15 +95,19 @@ export function Row(props) {
   );
 }
 
-function TestBookings() {
+function CollapsibleTable() {
   return (
     <TableContainer component={Paper}>
       <Table aria-label="bookings table">
         <TableHead>
           <TableRow>
             <TableCell>Date</TableCell>
-            <TableCell align="right">Booking ID</TableCell>
-            <TableCell align="right">Transaction ID</TableCell>
+            <TableCell align="right">Start Time</TableCell>
+            <TableCell align="right">End Time</TableCell>
+            <TableCell align="right">Hours</TableCell>
+            <TableCell align="right">Client</TableCell>
+            <TableCell align="right">Customer</TableCell>
+            <TableCell align="right">Address</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -96,4 +120,4 @@ function TestBookings() {
   );
 }
 
-export default TestBookings;
+export default CollapsibleTable;
