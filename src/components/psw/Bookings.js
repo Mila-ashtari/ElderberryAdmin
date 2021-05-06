@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import {
   Collapse,
@@ -37,7 +38,7 @@ function Row({ booking }) {
 
   return (
     <>
-      <TableRow className={classes.root}>
+      <TableRow className={classes.root} component={Link} to={`/booking/${booking.id}`}>
         <TableCell component="th" scope="row">
           {date. toDateString()}
         </TableCell>
