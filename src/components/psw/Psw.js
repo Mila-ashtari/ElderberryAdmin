@@ -7,9 +7,9 @@ import Documents from "./Documents";
 // import Bookings from "./Bookings";
 import Availability from "./Availability";
 import User from "../user/User";
-import ScheduleMobi from "./ScheduleMobi"
-import ScheduleDevExpress from "./ScheduleDevExpress"
-import TestBookings from "./TestBookings";
+import TestBooking from "./TestBooking"
+// import Schedule from "./Schedule";
+
 
 const Psw = (props) => {
   const { psw, getPsw } = props;
@@ -21,12 +21,16 @@ const Psw = (props) => {
       component: <Profile profile={profile} skills={skills} />,
     },
     { label: "Documentation", component: <Documents psw={psw} /> },
-    { label: "Schedule DevExpress", component: <ScheduleDevExpress {...{schedule, currentBookings}}/> },
-    // { label: "Availability", component: <Availability schedule={schedule} /> },
-    // { label: "Bookings", component: <Bookings /> },
-    { label: "Schedule Mobi", component: <ScheduleMobi/> },
-    { label: "TestBookings", component: <TestBookings /> },
+    // {
+    //   label: "Schedule",
+    //   component: <Schedule {...{ schedule, currentBookings }} />,
+    // },
+    { label: "Availability", component: <Availability schedule={schedule} /> },
+    // { label: "Bookings", component: <Bookings bookings={currentBookings}/> },
+    { label: "TestBookings", component: <TestBooking bookings={currentBookings}/> }
   ];
+
+  console.log(currentBookings)
 
   useEffect(() => {
     getPsw(props.match.params.id);
