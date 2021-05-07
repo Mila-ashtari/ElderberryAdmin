@@ -1,91 +1,67 @@
-import React, { useState } from "react";
+import React, { useState, Fragment } from "react";
 import { Link } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import {
-  Collapse,
-  IconButton,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
-  Paper,
+  Divider,
+  List,
+  ListItem,
+  Typography,
+  ListItemText,
 } from "@material-ui/core";
-import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
-import KeyboardArrowUpIcon from "@material-ui/icons/KeyboardArrowUp";
 
-const useRowStyles = makeStyles({
-  root: {
-    "& > *": {
-      borderBottom: "unset",
-    },
+const useStyles = makeStyles({
+  bookingContainer: {
+    padding: "20px",
   },
+  listHeader: {
+    display: "flex",
+
+  },
+  flexContainer: {
+    display: "flex",
+  },
+  column: {
+    width: "20%",
+    margin: "0px 20px",
+  },
+  
 });
 
-// function createData(date, bookingId, transactionId) {
-//   return { date, bookingId, transactionId };
-// }
-
-// const rows = [
-//   createData("Feb 19,2021", "3453434435", "345345345"),
-//   createData("Feb 19,2021", "654564545645", "456456456"),
-// ];
-function Row({ booking }) {
-  const [open, setOpen] = useState(false);
-  const classes = useRowStyles();
-  const date = new Date(booking.startTime);
-
-  return (
-    <>
-      <TableRow className={classes.root} component={Link} to={`/booking/${booking.id}`}>
-        <TableCell component="th" scope="row">
-          {date. toDateString()}
-        </TableCell>
-        <TableCell align="right">{booking.id}</TableCell>
-        {/* <TableCell align="right">{booking.transactionRefrence}</TableCell> */}
-        <TableCell>
-          <IconButton
-            aria-label="expand row"
-            size="small"
-            onClick={() => setOpen(!open)}
-          >
-            {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
-          </IconButton>
-        </TableCell>
-      </TableRow>
-      <TableRow>
-        <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
-          <Collapse in={open} timeout="auto" unmountOnExit>
-            <div>Tasks</div>
-            <div>Notes</div>
-            <div>CC</div>
-            <div>payment</div>
-          </Collapse>
-        </TableCell>
-      </TableRow>
-    </>
-  );
-}
-
 function Bookings({ bookings }) {
+  const classes = useStyles();
   return (
-    <TableContainer component={Paper}>
-      <Table aria-label="bookings table">
-        <TableHead>
-          <TableRow>
-            <TableCell>Date</TableCell>
-            <TableCell align="right">Booking ID</TableCell>
-            {/* <TableCell align="right">Transaction ID</TableCell> */}
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {bookings.map((booking) => (
-            <Row key={booking.id} booking={booking} />
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
+    <List className={classes.bookingContainer}>
+    <ListItem className={classes.listHeader} disabled>
+      <Typography className={classes.column}>Date</Typography>
+      <Typography className={classes.column}>Client</Typography>
+    </ListItem>
+    <Divider />
+    {bookings.map((booking) => {
+      const date = new Date(booking.startTime);
+      return (
+        <Fragment key={booking.id}>
+          <ListItem
+            button
+            className={classes.listItem}
+            component={Link}
+            to={`/booking/${booking.id}`}
+            target="_blank"
+            rel="noopener"
+          >
+            <ListItemText
+              className={classes.flexContainer}
+              disableTypography
+            >
+              <Typography className={classes.column}>
+              {date.toDateString()}
+              </Typography>
+            </ListItemText>
+          </ListItem>
+          <Divider />
+        </Fragment>
+      );
+    })}
+  </List>
   );
 }
 
