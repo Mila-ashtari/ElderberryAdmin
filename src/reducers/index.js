@@ -11,5 +11,5 @@ export default combineReducers({
   psws: pswReducer,
   customers: customerReducer,
   clients: clientReducer,
-  booking: bookingReducer
+  bookings: bookingReducer
 });

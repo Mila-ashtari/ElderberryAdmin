@@ -21,7 +21,7 @@ const Schedule = ({ schedule, currentBookings }) => {
     {
       startDate: "2021-05-04T09:45",
       endDate: "2021-05-04T11:00",
-      title: "available",
+      title: "available", 
     },
     {
       startDate: "2021-05-11T09:45",
