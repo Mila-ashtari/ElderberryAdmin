@@ -4,6 +4,7 @@ import { getBooking } from "../../actions/booking";
 
 function Booking(props) {
   const { getBooking, booking } = props;
+  console.log(booking)
 
   useEffect(() => {
     getBooking(props.match.params.id);
