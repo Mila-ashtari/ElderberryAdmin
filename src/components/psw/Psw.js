@@ -4,10 +4,9 @@ import { connect } from "react-redux";
 import { getPsw } from "../../actions/psw";
 import Profile from "./Profile";
 import Documents from "./Documents";
-// import Bookings from "./Bookings";
 import Availability from "./Availability";
 import User from "../user/User";
-import TestBooking from "./TestBooking"
+import Bookings from "./Bookings"
 // import Schedule from "./Schedule";
 
 
@@ -27,7 +26,7 @@ const Psw = (props) => {
     // },
     { label: "Availability", component: <Availability schedule={schedule} /> },
     // { label: "Bookings", component: <Bookings bookings={currentBookings}/> },
-    { label: "TestBookings", component: <TestBooking bookings={currentBookings}/> }
+    { label: "Bookings", component: <Bookings bookings={currentBookings}/> }
   ];
 
   console.log(currentBookings)
