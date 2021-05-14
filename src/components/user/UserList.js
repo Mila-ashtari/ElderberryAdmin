@@ -6,7 +6,8 @@ import {
   Typography,
   ListItemText,
   Grid,
-  TextField
+  TextField,
+  Paper
 } from "@material-ui/core";
 import SearchIcon from "@material-ui/icons/Search";
 import { makeStyles } from "@material-ui/core/styles";
@@ -66,7 +67,7 @@ function UserList({ users, type }) {
           </Grid>
         </Grid>
       </div>
-      <List className={classes.userContainer}>
+      <List className={classes.userContainer} component={Paper}>
         <ListItem className={classes.listHeader} disabled>
           <Typography className={classes.id}>ID</Typography>
           <Typography className={classes.lastName}>Last Name</Typography>

@@ -11,6 +11,5 @@ export const getBooking = (bookingId) => async (dispatch) => {
         "bookingList": [ bookingId]
        }
   });
-  console.log(response.data[0])
   dispatch({ type: "FETCH_BOOKING", payload: response.data[0] });
 };

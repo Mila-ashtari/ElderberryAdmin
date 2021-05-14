@@ -59,31 +59,19 @@ function Row({ booking }) {
 
   return (
     <>
-      <TableRow className={classes.root} hover="true" component={Link} to={`/booking/${booking.id}`}>
+      <TableRow
+        className={classes.root}
+        hover="true"
+        component={Link}
+        to={`/booking/${booking.id}`}
+        target="_blank"
+        rel="noopener"
+      >
         <TableCell>{startDate.toDateString()}</TableCell>
         <TableCell>{endDate.toDateString()}</TableCell>
         <TableCell>{booking.hours}</TableCell>
         <TableCell>{booking.client.firstName}</TableCell>
-        {/* <TableCell>
-          <IconButton
-            aria-label="expand row"
-            size="small"
-            onClick={() => setOpen(!open)}
-          >
-            {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
-          </IconButton>
-        </TableCell> */}
       </TableRow>
-      {/* <TableRow>
-        <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
-          <Collapse in={open} timeout="auto" unmountOnExit>
-            <div>Tasks</div>
-            <div>Notes</div>
-            <div>CC</div>
-            <div>payment</div>
-          </Collapse>
-        </TableCell>
-      </TableRow> */}
     </>
   );
 }
