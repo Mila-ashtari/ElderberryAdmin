@@ -25,6 +25,7 @@ const useStyles = makeStyles((theme) => ({
     width: "20%",
     margin: "0px 20px",
   },
+  userContainer: { paddingBottom: "0" },
   searchBar: {
     padding: "20px",
   },
@@ -74,7 +75,7 @@ function UserList({ users, type }) {
         </ListItem>
         <Divider />
         {dynamicUserList.map((user) => {
-          const { firstName, lastName } = user ;
+          const { firstName, lastName } = user;
           return (
             <Fragment key={user.id}>
               <ListItem

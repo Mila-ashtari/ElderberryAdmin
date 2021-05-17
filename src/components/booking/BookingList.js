@@ -24,6 +24,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function BookingList({ bookings }) {
+  console.log(bookings[1].startTime)
   const classes = useStyles();
   return (
     <List className={classes.bookingContainer} component={Paper}>
@@ -35,7 +36,7 @@ function BookingList({ bookings }) {
       </ListItem>
       <Divider />
       {bookings.length !==0 && bookings.map((booking) => {
-        const { startDate, endDate, hours, client } = booking;
+        const { startTime, endTime, hours, client } = booking;
         return (
           <Fragment key={booking.id}>
             <ListItem
@@ -48,10 +49,10 @@ function BookingList({ bookings }) {
             >
               <ListItemText className={classes.flexContainer} disableTypography>
                 <Typography className={classes.flexItem}>
-                  {startDate.toDateString()}
+                  {startTime.toDateString()}
                 </Typography>
                 <Typography className={classes.flexItem}>
-                  {endDate.toDateString()}
+                  {endTime.toDateString()}
                 </Typography>
                 <Typography className={classes.flexItem}>{hours}</Typography>
                 <Typography className={classes.flexItem}>

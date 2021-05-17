@@ -5,7 +5,7 @@ import BookingList from "../booking/BookingList"
 
 function Bookings({ bookings }) {
   return (
-    <BookingList bookings={bookings}/>
+    < BookingList bookings={bookings}/>
   );
 }
 
