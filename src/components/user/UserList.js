@@ -7,7 +7,7 @@ import {
   ListItemText,
   Grid,
   TextField,
-  Paper
+  Paper,
 } from "@material-ui/core";
 import SearchIcon from "@material-ui/icons/Search";
 import { makeStyles } from "@material-ui/core/styles";
@@ -15,34 +15,22 @@ import { Link } from "react-router-dom";
 import { Fragment } from "react";
 
 const useStyles = makeStyles((theme) => ({
-  userContainer: {
+  container: {
     padding: "20px",
-  },
-  listHeader: {
-    display: "flex",
-    // justifyContent:'space-between'
   },
   flexContainer: {
     display: "flex",
   },
-  id: {
+  flexItem: {
     width: "20%",
-    margin: "0px 20px",
-  },
-  firstName: {
-    width: "10%",
-    margin: "0px 20px",
-  },
-  lastName: {
-    width: "10%",
     margin: "0px 20px",
   },
   searchBar: {
     padding: "20px",
   },
-  gridContainer:{
-    justifyContent:"flex-end"
-  }
+  gridContainer: {
+    justifyContent: "flex-end",
+  },
 }));
 
 function UserList({ users, type }) {
@@ -56,33 +44,44 @@ function UserList({ users, type }) {
   );
 
   return (
-    <>
-       <div className={classes.searchBar}>
-        <Grid container spacing={1} alignItems="flex-end" className={classes.gridContainer}>
-          <Grid item>
-            <SearchIcon />
-          </Grid>
-          <Grid item>
-            <TextField id="search" label="search" value={searchTerm} onChange={(e)=>{setSearchTerm(e.target.value)}}/>
-          </Grid>
+    <section className={classes.container}>
+      <Grid
+        container
+        spacing={1}
+        alignItems="flex-end"
+        className={classes.gridContainer}
+      >
+        <Grid item>
+          <SearchIcon />
         </Grid>
-      </div>
+        <Grid item>
+          <TextField
+            id="search"
+            label="search"
+            value={searchTerm}
+            onChange={(e) => {
+              setSearchTerm(e.target.value);
+            }}
+          />
+        </Grid>
+      </Grid>
+
       <List className={classes.userContainer} component={Paper}>
-        <ListItem className={classes.listHeader} disabled>
-          <Typography className={classes.id}>ID</Typography>
-          <Typography className={classes.lastName}>Last Name</Typography>
-          <Typography className={classes.firstName}>First Name</Typography>
+        <ListItem className={classes.flexContainer} disabled>
+          <Typography className={classes.flexItem}>ID</Typography>
+          <Typography className={classes.flexItem}>Last Name</Typography>
+          <Typography className={classes.flexItem}>First Name</Typography>
         </ListItem>
         <Divider />
-        {dynamicUserList.map((item) => {
-          const { firstName, lastName } = item.user ? item.user : item;
+        {dynamicUserList.map((user) => {
+          const { firstName, lastName } = user ;
           return (
-            <Fragment key={item.id}>
+            <Fragment key={user.id}>
               <ListItem
                 button
                 className={classes.listItem}
                 component={Link}
-                to={`/${type}/${item.id}`}
+                to={`/${type}/${user.id}`}
                 target="_blank"
                 rel="noopener"
               >
@@ -90,11 +89,11 @@ function UserList({ users, type }) {
                   className={classes.flexContainer}
                   disableTypography
                 >
-                  <Typography className={classes.id}>ID</Typography>
-                  <Typography className={classes.lastName}>
+                  <Typography className={classes.flexItem}>ID</Typography>
+                  <Typography className={classes.flexItem}>
                     {lastName}
                   </Typography>
-                  <Typography className={classes.firstName}>
+                  <Typography className={classes.flexItem}>
                     {firstName}
                   </Typography>
                 </ListItemText>
@@ -104,7 +103,7 @@ function UserList({ users, type }) {
           );
         })}
       </List>
-    </>
+    </section>
   );
 }
 

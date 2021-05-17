@@ -34,7 +34,7 @@ function BookingList({ bookings }) {
         <Typography className={classes.flexItem}>Client</Typography>
       </ListItem>
       <Divider />
-      {bookings.map((booking) => {
+      {bookings.length !==0 && bookings.map((booking) => {
         const { startDate, endDate, hours, client } = booking;
         return (
           <Fragment key={booking.id}>
