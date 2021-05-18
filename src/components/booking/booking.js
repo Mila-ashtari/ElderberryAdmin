@@ -13,11 +13,22 @@ import {
 } from "@material-ui/core";
 import { Link } from "react-router-dom";
 
+const useStyles = makeStyles((theme) => ({
+  container: {
+    padding: "20px",
+  },
+  tableOne:{
+    marginBottom:"20px"
+  }
+}));
+
 function Booking(props) {
+  const classes = useStyles();
   const { getBooking, booking } = props;
-  console.log(booking);
   const { id, createdOn, transactionReference, client, customer, provider } =
     props.booking !== undefined && props.booking;
+
+  console.log(client);
 
   useEffect(() => {
     getBooking(props.match.params.id);
@@ -25,26 +36,24 @@ function Booking(props) {
 
   function RenderTableOne() {
     return (
-      <>
-        <TableContainer component={Paper}>
-          <Table aria-label="bookings table">
-            <TableHead>
-              <TableRow>
-                <TableCell>Booking ID</TableCell>
-                <TableCell>Created On</TableCell>
-                <TableCell>Transaction Ref</TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              <TableRow>
-                <TableCell>{id}</TableCell>
-                <TableCell>{createdOn}</TableCell>
-                <TableCell>{transactionReference}</TableCell>
-              </TableRow>
-            </TableBody>
-          </Table>
-        </TableContainer>
-      </>
+      <TableContainer component={Paper} className={classes.tableOne}>
+        <Table aria-label="bookings table">
+          <TableHead>
+            <TableRow>
+              <TableCell>Booking ID</TableCell>
+              <TableCell>Created On</TableCell>
+              <TableCell>Transaction Ref</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            <TableRow>
+              <TableCell>{id}</TableCell>
+              <TableCell>{createdOn}</TableCell>
+              <TableCell>{transactionReference}</TableCell>
+            </TableRow>
+          </TableBody>
+        </Table>
+      </TableContainer>
     );
   }
 
@@ -70,13 +79,13 @@ function Booking(props) {
                 >{`${client.firstName} ${client.lastName}`}</TableCell>
                 <TableCell
                   component={Link}
-                  to={`/customer/${customer}`}
+                  to={`/customer/${customer.id}`}
                   target="_blank"
                   rel="noopener"
                 >
-                  {customer}
+                  {`${customer.firstName} ${customer.lastName}`}
                 </TableCell>
-                <TableCell>{provider}</TableCell>
+                <TableCell>{`${provider.firstName} ${provider.lastName}`}</TableCell>
               </TableRow>
             </TableBody>
           </Table>
@@ -86,10 +95,10 @@ function Booking(props) {
   }
 
   return (
-    <>
-      <RenderTableOne />
-      <RenderTableTwo />
-    </>
+    <section className={classes.container}>
+      <RenderTableOne/>
+      <RenderTableTwo/>
+    </section>
   );
 }
 const mapStateToProps = (state, ownProps) => {

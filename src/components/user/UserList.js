@@ -26,6 +26,14 @@ const useStyles = makeStyles((theme) => ({
     margin: "0px 20px",
   },
   userContainer: { paddingBottom: "0" },
+  userListItem: {
+    "&:hover": {
+      backgroundColor: "#aca7a786",
+    },
+    "&:active": {
+      backgroundColor: "#aca7a786",
+    },
+  },
   searchBar: {
     padding: "20px",
   },
@@ -81,6 +89,7 @@ function UserList({ users, type }) {
               <ListItem
                 button
                 className={classes.listItem}
+                className={classes.userListItem}
                 component={Link}
                 to={`/${type}/${user.id}`}
                 target="_blank"
