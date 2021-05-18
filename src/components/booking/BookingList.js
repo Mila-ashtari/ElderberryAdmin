@@ -37,6 +37,8 @@ function BookingList({ bookings }) {
       <Divider />
       {bookings.length !==0 && bookings.map((booking) => {
         const { startTime, endTime, hours, client } = booking;
+        const startDate= new Date (startTime)
+        const endDate= new Date (endTime)
         return (
           <Fragment key={booking.id}>
             <ListItem
@@ -49,10 +51,10 @@ function BookingList({ bookings }) {
             >
               <ListItemText className={classes.flexContainer} disableTypography>
                 <Typography className={classes.flexItem}>
-                  {startTime.toDateString()}
+                  {startDate.toDateString()}
                 </Typography>
                 <Typography className={classes.flexItem}>
-                  {endTime.toDateString()}
+                  {endDate.toDateString()}
                 </Typography>
                 <Typography className={classes.flexItem}>{hours}</Typography>
                 <Typography className={classes.flexItem}>
