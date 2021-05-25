@@ -14,32 +14,70 @@ import {
   AppointmentForm,
   MonthView,
 } from "@devexpress/dx-react-scheduler-material-ui";
+import { makeStyles } from "@material-ui/core/styles";
+import { result } from "lodash";
+
+const useStyles = makeStyles((theme) => ({
+  available: {
+    backgroundColor: "#0aae6a3d",
+  },
+}));
 
 const Schedule = ({ schedule, currentBookings }) => {
-  console.log({ schedule, currentBookings });
-  const schedule = [
+  const classes = useStyles();
+  const { saturday, sunday, monday, tuesday, wednesday, thursday, friday } =
+    schedule.availability;
+  console.log(wednesday);
+  const schedulerData = [
     {
-      startDate: "2021-05-04T09:45",
-      endDate: "2021-05-04T11:00",
-      title: "available", 
+      startDate: "2021-03-09T09:45",
+      endDate: "2021-03-09T11:00",
+      title: "Meeting",
     },
     {
-      startDate: "2021-05-11T09:45",
-      endDate: "2021-05-11T11:00",
-      title: "booked",
-      id:"675567576567",
-      clientID:"786868867",
+      startDate: "2021-03-11T09:45",
+      endDate: "2021-03-11T11:00",
+      title: "Going to Gym",
     },
   ];
 
+  // wednesday.map((item) => {
+  //   const dateString= new Date().toDateString()
+  //   console.log(new Date(`${dateString} ${item.startTime[0]}:${item.startTime[1]}`))
+  // });
+
+  const TimeTableCell = (props) => {
+    const { startDate } = props;
+    const date = new Date(startDate);
+    const dateString = date.toDateString();
+    const time= date.getTime()
+    let result = <WeekView.TimeTableCell />;
+    console.log(dateString)
+    if (date.getDay() === 3) {
+      wednesday.forEach((item) => {
+        const endTime = new Date(`${dateString} ${item.endTime[0]}:${item.endTime[1]}`);
+        const startTime = new Date(`${dateString} ${item.startTime[0]}:${item.startTime[1]}`);
+        if (startTime< time < endTime) {
+          result = <WeekView.TimeTableCell className={classes.available}/>
+        }
+      });
+    }
+    return result;
+  };
   const [data, setData] = useState(schedulerData);
   return (
     <Paper>
       <Scheduler data={data} height={660}>
-        <ViewState defaultCurrentViewName="Month" />
+        <ViewState defaultCurrentViewName="Week" />
 
-        <DayView startDayHour={9} endDayHour={18} />
-        <WeekView startDayHour={10} endDayHour={19} />
+        <DayView startDayHour={0} endDayHour={24} />
+        <WeekView
+          startDayHour={0}
+          endDayHour={24}
+          timeTableCellComponent={TimeTableCell}
+          // dayScaleLayoutComponent={dayScaleLayout}
+          cellDuration={60}
+        />
         <MonthView />
         <Toolbar />
         <DateNavigator />

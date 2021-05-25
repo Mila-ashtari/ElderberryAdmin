@@ -20,13 +20,13 @@ const useStyles = makeStyles((theme) => ({
   flexContainer: {
     display: "flex",
   },
-  bookingListItem:{
-    '&:hover': {
-      backgroundColor: '#aca7a786',
-  },
-  "&:active": {
-    backgroundColor: "#aca7a786",
-  },
+  bookingListItem: {
+    "&:hover": {
+      backgroundColor: "#0aae6a81",
+    },
+    "&:active": {
+      backgroundColor: "#0aae6a81",
+    },
   },
   flexItem: {
     width: "20%",
@@ -46,44 +46,41 @@ function BookingList({ bookings }) {
           <Typography className={classes.flexItem}>Client</Typography>
         </ListItem>
         <Divider />
-        {bookings.length !== 0 &&
-          bookings.map((booking) => {
-            const { startTime, endTime, hours, client } = booking;
-            const startDate = new Date(startTime);
-            const endDate = new Date(endTime);
-            return (
-              <Fragment key={booking.id}>
-                <ListItem
-                  button
-                  className={classes.listItem}
-                  className={classes.bookingListItem}
-                  component={Link}
-                  to={`/booking/${booking.id}`}
-                  target="_blank"
-                  rel="noopener"
+        {bookings.map((booking) => {
+          const { startTime, endTime, hours, client } = booking;
+          const startDate = new Date(startTime);
+          const endDate = new Date(endTime);
+          return (
+            <Fragment key={booking.id}>
+              <ListItem
+                button
+                className={classes.listItem}
+                className={classes.bookingListItem}
+                component={Link}
+                to={`/booking/${booking.id}`}
+                target="_blank"
+                rel="noopener"
+              >
+                <ListItemText
+                  className={classes.flexContainer}
+                  disableTypography
                 >
-                  <ListItemText
-                    className={classes.flexContainer}
-                    disableTypography
-                  >
-                    <Typography className={classes.flexItem}>
-                      {startDate.toDateString()}
-                    </Typography>
-                    <Typography className={classes.flexItem}>
-                      {endDate.toDateString()}
-                    </Typography>
-                    <Typography className={classes.flexItem}>
-                      {hours}
-                    </Typography>
-                    <Typography className={classes.flexItem}>
-                      {`${client.firstName} ${client.lastName} `}
-                    </Typography>
-                  </ListItemText>
-                </ListItem>
-                <Divider />
-              </Fragment>
-            );
-          })}
+                  <Typography className={classes.flexItem}>
+                    {startDate.toDateString()}
+                  </Typography>
+                  <Typography className={classes.flexItem}>
+                    {endDate.toDateString()}
+                  </Typography>
+                  <Typography className={classes.flexItem}>{hours}</Typography>
+                  <Typography className={classes.flexItem}>
+                    {`${client.firstName} ${client.lastName} `}
+                  </Typography>
+                </ListItemText>
+              </ListItem>
+              <Divider />
+            </Fragment>
+          );
+        })}
       </List>
     </section>
   );

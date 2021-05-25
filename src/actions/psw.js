@@ -25,7 +25,7 @@ export const updatePsw = (psw, verification, expiration) => async (
   const token = localStorage.getItem("token");
   const { user, id } = psw;
   const verified = verification === "true" ? true : false;
-  const response = await axios({
+  await axios({
     url: "https://elderberry-development-api.herokuapp.com/api/admin/psw",
     method: "POST",
     headers: { Authorization: `Bearer ${token}` },
