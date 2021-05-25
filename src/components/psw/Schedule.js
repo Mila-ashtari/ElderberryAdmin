@@ -27,7 +27,6 @@ const Schedule = ({ schedule, currentBookings }) => {
   const classes = useStyles();
   const { saturday, sunday, monday, tuesday, wednesday, thursday, friday } =
     schedule.availability;
-  console.log(wednesday);
   const schedulerData = [
     {
       startDate: "2021-03-09T09:45",
@@ -40,29 +39,40 @@ const Schedule = ({ schedule, currentBookings }) => {
       title: "Going to Gym",
     },
   ];
-
-  // wednesday.map((item) => {
-  //   const dateString= new Date().toDateString()
-  //   console.log(new Date(`${dateString} ${item.startTime[0]}:${item.startTime[1]}`))
-  // });
-
   const TimeTableCell = (props) => {
     const { startDate } = props;
     const date = new Date(startDate);
     const dateString = date.toDateString();
-    const time= date.getTime()
-    let result = <WeekView.TimeTableCell />;
-    console.log(dateString)
-    if (date.getDay() === 3) {
-      wednesday.forEach((item) => {
-        const endTime = new Date(`${dateString} ${item.endTime[0]}:${item.endTime[1]}`);
-        const startTime = new Date(`${dateString} ${item.startTime[0]}:${item.startTime[1]}`);
-        if (startTime< time < endTime) {
-          result = <WeekView.TimeTableCell className={classes.available}/>
+    const time = date.getTime();
+    const getAvailablity=(day)=>{
+      let result = <WeekView.TimeTableCell />;
+      day.forEach((item) => {
+        const endTime = new Date(`${dateString} ${item.endTime[0]}:${item.endTime[1]}`).getTime();
+        const startTime = new Date(`${dateString} ${item.startTime[0]}:${item.startTime[1]}`).getTime();
+        if (time >= startTime && time < endTime) {
+          result = <WeekView.TimeTableCell className={classes.available} />
         }
-      });
+      })
+      return result;
     }
-    return result;
+    switch (date.getDay()) {
+      case 0:
+        return getAvailablity(sunday)
+      case 1:
+        return getAvailablity(monday)
+      case 2:
+        return getAvailablity(tuesday)
+      case 3:
+        return getAvailablity(wednesday)
+      case 4:
+        return getAvailablity(thursday)
+      case 5:
+        return getAvailablity(friday)
+      case 6:
+        return getAvailablity(saturday)
+      default:
+        return result;
+    }
   };
   const [data, setData] = useState(schedulerData);
   return (
@@ -76,7 +86,7 @@ const Schedule = ({ schedule, currentBookings }) => {
           endDayHour={24}
           timeTableCellComponent={TimeTableCell}
           // dayScaleLayoutComponent={dayScaleLayout}
-          cellDuration={60}
+          cellDuration={30}
         />
         <MonthView />
         <Toolbar />
