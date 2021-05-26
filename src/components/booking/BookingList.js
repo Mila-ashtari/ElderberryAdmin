@@ -22,10 +22,10 @@ const useStyles = makeStyles((theme) => ({
   },
   bookingListItem: {
     "&:hover": {
-      backgroundColor: "#0aae6a81",
+      backgroundColor: theme.palette.secondary.main,
     },
     "&:active": {
-      backgroundColor: "#0aae6a81",
+      backgroundColor: theme.palette.secondary.main,
     },
   },
   flexItem: {

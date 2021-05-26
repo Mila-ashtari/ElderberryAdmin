@@ -19,7 +19,7 @@ import { result } from "lodash";
 
 const useStyles = makeStyles((theme) => ({
   available: {
-    backgroundColor: "#0aae6a3d",
+    backgroundColor: theme.palette.secondary.main,
   },
 }));
 
@@ -27,6 +27,7 @@ const Schedule = ({ schedule, currentBookings }) => {
   const classes = useStyles();
   const { saturday, sunday, monday, tuesday, wednesday, thursday, friday } =
     schedule.availability;
+  console.log(currentBookings)
   const schedulerData = [
     {
       startDate: "2021-03-09T09:45",
@@ -44,8 +45,8 @@ const Schedule = ({ schedule, currentBookings }) => {
     const date = new Date(startDate);
     const dateString = date.toDateString();
     const time = date.getTime();
+    let result = <WeekView.TimeTableCell />;
     const getAvailablity=(day)=>{
-      let result = <WeekView.TimeTableCell />;
       day.forEach((item) => {
         const endTime = new Date(`${dateString} ${item.endTime[0]}:${item.endTime[1]}`).getTime();
         const startTime = new Date(`${dateString} ${item.startTime[0]}:${item.startTime[1]}`).getTime();
@@ -85,7 +86,6 @@ const Schedule = ({ schedule, currentBookings }) => {
           startDayHour={0}
           endDayHour={24}
           timeTableCellComponent={TimeTableCell}
-          // dayScaleLayoutComponent={dayScaleLayout}
           cellDuration={30}
         />
         <MonthView />

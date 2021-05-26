@@ -28,10 +28,10 @@ const useStyles = makeStyles((theme) => ({
   userContainer: { paddingBottom: "0" },
   userListItem: {
     "&:hover": {
-      backgroundColor: "#0aae6a81",
+      backgroundColor: theme.palette.secondary.main,
     },
     "&:active": {
-      backgroundColor: "#0aae6a81",
+      backgroundColor: theme.palette.secondary.main,
     },
   },
   searchBar: {
