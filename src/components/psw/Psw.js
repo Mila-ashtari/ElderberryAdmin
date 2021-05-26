@@ -27,7 +27,6 @@ const Psw = (props) => {
     { label: "Availability", component: <Availability schedule={schedule} /> },
     { label: "Bookings", component: <Bookings bookings={currentBookings}/> }
   ];
-  console.log(psw)
   useEffect(() => {
     getPsw(props.match.params.id);
   }, []);

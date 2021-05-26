@@ -27,50 +27,51 @@ const Schedule = ({ schedule, currentBookings }) => {
   const classes = useStyles();
   const { saturday, sunday, monday, tuesday, wednesday, thursday, friday } =
     schedule.availability;
-  console.log(currentBookings)
-  const schedulerData = [
-    {
-      startDate: "2021-03-09T09:45",
-      endDate: "2021-03-09T11:00",
-      title: "Meeting",
-    },
-    {
-      startDate: "2021-03-11T09:45",
-      endDate: "2021-03-11T11:00",
-      title: "Going to Gym",
-    },
-  ];
+  console.log(currentBookings);
+  const schedulerData = [];
+  currentBookings.forEach((booking) => {
+    const {client, provider}=booking
+    schedulerData.push({
+      startDate: `${booking.startTime}`,
+      endDate: `${booking.endTime}`,
+      title: `${provider.firstName}'s appointment with ${client.firstName}`,
+    });
+  });
   const TimeTableCell = (props) => {
     const { startDate } = props;
     const date = new Date(startDate);
     const dateString = date.toDateString();
     const time = date.getTime();
     let result = <WeekView.TimeTableCell />;
-    const getAvailablity=(day)=>{
+    const getAvailablity = (day) => {
       day.forEach((item) => {
-        const endTime = new Date(`${dateString} ${item.endTime[0]}:${item.endTime[1]}`).getTime();
-        const startTime = new Date(`${dateString} ${item.startTime[0]}:${item.startTime[1]}`).getTime();
+        const endTime = new Date(
+          `${dateString} ${item.endTime[0]}:${item.endTime[1]}`
+        ).getTime();
+        const startTime = new Date(
+          `${dateString} ${item.startTime[0]}:${item.startTime[1]}`
+        ).getTime();
         if (time >= startTime && time < endTime) {
-          result = <WeekView.TimeTableCell className={classes.available} />
+          result = <WeekView.TimeTableCell className={classes.available} />;
         }
-      })
+      });
       return result;
-    }
+    };
     switch (date.getDay()) {
       case 0:
-        return getAvailablity(sunday)
+        return getAvailablity(sunday);
       case 1:
-        return getAvailablity(monday)
+        return getAvailablity(monday);
       case 2:
-        return getAvailablity(tuesday)
+        return getAvailablity(tuesday);
       case 3:
-        return getAvailablity(wednesday)
+        return getAvailablity(wednesday);
       case 4:
-        return getAvailablity(thursday)
+        return getAvailablity(thursday);
       case 5:
-        return getAvailablity(friday)
+        return getAvailablity(friday);
       case 6:
-        return getAvailablity(saturday)
+        return getAvailablity(saturday);
       default:
         return result;
     }
