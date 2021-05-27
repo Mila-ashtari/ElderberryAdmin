@@ -14,8 +14,8 @@ import {
   AppointmentForm,
   MonthView,
 } from "@devexpress/dx-react-scheduler-material-ui";
+import { EditingState } from "@devexpress/dx-react-scheduler";
 import { makeStyles } from "@material-ui/core/styles";
-import { result } from "lodash";
 
 const useStyles = makeStyles((theme) => ({
   available: {
@@ -27,16 +27,20 @@ const Schedule = ({ schedule, currentBookings }) => {
   const classes = useStyles();
   const { saturday, sunday, monday, tuesday, wednesday, thursday, friday } =
     schedule.availability;
-  console.log(currentBookings);
   const schedulerData = [];
   currentBookings.forEach((booking) => {
-    const {client, provider}=booking
+    const { client, provider } = booking;
     schedulerData.push({
       startDate: `${booking.startTime}`,
       endDate: `${booking.endTime}`,
       title: `${provider.firstName}'s appointment with ${client.firstName}`,
     });
   });
+  const [data, setData] = useState(schedulerData);
+  const [addedAppointment, setAddedAppointment] = useState({});
+  const [appointmentChanges, setAppointmentChanges] = useState({});
+  const [editingApointment, setEditingApointment] = useState(undefined);
+
   const TimeTableCell = (props) => {
     const { startDate } = props;
     const date = new Date(startDate);
@@ -76,7 +80,37 @@ const Schedule = ({ schedule, currentBookings }) => {
         return result;
     }
   };
-  const [data, setData] = useState(schedulerData);
+  const changeAddedAppointment = (addedAppointment) => {
+    setAddedAppointment({ addedAppointment });
+  };
+  const changeAppointmentChanges = (appointmentChanges) => {
+    setAppointmentChanges({ appointmentChanges });
+  };
+  const changeEditingApointment = (editingApointment) => {
+    setEditingApointment({ editingApointment });
+  };
+
+  // const commitChanges = ({ added, changed, deleted }) => {
+  //   this.setState((state) => {
+  //     let { data } = state;
+  //     if (added) {
+  //       const startingAddedId =
+  //         data.length > 0 ? data[data.length - 1].id + 1 : 0;
+  //       data = [...data, { id: startingAddedId, ...added }];
+  //     }
+  //     if (changed) {
+  //       data = data.map((appointment) =>
+  //         changed[appointment.id]
+  //           ? { ...appointment, ...changed[appointment.id] }
+  //           : appointment
+  //       );
+  //     }
+  //     if (deleted !== undefined) {
+  //       data = data.filter((appointment) => appointment.id !== deleted);
+  //     }
+  //     return { data };
+  //   });
+  // };
   return (
     <Paper>
       <Scheduler data={data} height={660}>
@@ -94,8 +128,9 @@ const Schedule = ({ schedule, currentBookings }) => {
         <DateNavigator />
         <TodayButton />
         <Appointments />
+        <EditingState />
         <AppointmentTooltip showCloseButton showOpenButton />
-        <AppointmentForm readOnly />
+        <AppointmentForm />
         <ViewSwitcher />
       </Scheduler>
     </Paper>
