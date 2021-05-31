@@ -14,14 +14,58 @@ import {
   AppointmentForm,
   MonthView,
 } from "@devexpress/dx-react-scheduler-material-ui";
-import { EditingState } from "@devexpress/dx-react-scheduler";
-import { makeStyles } from "@material-ui/core/styles";
+// import IconButton from '@material-ui/core/IconButton';
+// import InfoIcon from '@material-ui/icons/Info';
+import { EditingState, IntegratedEditing } from "@devexpress/dx-react-scheduler";
+import { makeStyles, withStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
   available: {
     backgroundColor: theme.palette.secondary.main,
   },
 }));
+
+// const styles = theme => ({
+//   button: {
+//     color: theme.palette.background.default,
+//     padding: 0,
+//   },
+//   text: {
+//     paddingTop: theme.spacing(1),
+//     overflow: 'hidden',
+//     textOverflow: 'ellipsis',
+//     whiteSpace: 'nowrap',
+//   },
+// });
+
+// const AppointmentBase = ({
+//   children,
+//   data,
+//   onClick,
+//   classes,
+//   toggleVisibility,
+//   onAppointmentMetaChange,
+//   ...restProps
+// }) => (
+//   <Appointments.Appointment
+//     {...restProps}
+//   >
+//     <React.Fragment>
+//       <IconButton
+//         className={classes.button}
+//         onClick={({ target }) => {
+//           toggleVisibility();
+//           onAppointmentMetaChange({ target: target.parentElement.parentElement, data });
+//         }}
+//       >
+//         <InfoIcon fontSize="small" />
+//       </IconButton>
+//       {children}
+//     </React.Fragment>
+//   </Appointments.Appointment>
+// );
+
+// const Appointment = withStyles(styles, { name: 'Appointment' })(AppointmentBase);
 
 const Schedule = ({ schedule, currentBookings }) => {
   const classes = useStyles();
@@ -34,12 +78,18 @@ const Schedule = ({ schedule, currentBookings }) => {
       startDate: `${booking.startTime}`,
       endDate: `${booking.endTime}`,
       title: `${provider.firstName}'s appointment with ${client.firstName}`,
+      id:booking.id
     });
   });
   const [schedulerData, setSchedulerData] = useState(data);
   const [addedAppointment, setAddedAppointment] = useState({});
   const [appointmentChanges, setAppointmentChanges] = useState({});
   const [editingAppointment, setEditingApointment] = useState(undefined);
+  // const [visible, setVisible] = useState(false);
+  // const [appointmentMeta, setAppointmentMeta] = useState({
+  //   terget: null,
+  //   data: {},
+  // });
 
   const TimeTableCell = (props) => {
     const { startDate } = props;
@@ -89,7 +139,21 @@ const Schedule = ({ schedule, currentBookings }) => {
   const handleEditingAppointment = (editingAppointment) => {
     setEditingApointment({ editingAppointment });
   };
-
+  // const onAppointmentMetaChange = ({ data, target }) => {
+  //   setAppointmentMeta({ appointmentMeta: { data, target } });
+  // };
+  // const toggleVisibility = () => {
+  //   setVisible(!visible);
+  // };
+  // const myAppointment = (props) => {
+  //   return (
+  //     <Appointment
+  //       {...props}
+  //       toggleVisibility={toggleVisibility}
+  //       onAppointmentMetaChange={onAppointmentMetaChange}
+  //     />
+  //   );
+  // };
   const commitChanges = ({ added, changed, deleted }) => {
     let data = [...schedulerData];
     if (added) {
@@ -109,10 +173,21 @@ const Schedule = ({ schedule, currentBookings }) => {
     }
     setSchedulerData(data);
   };
+
   return (
     <Paper>
       <Scheduler data={schedulerData} height={660}>
         <ViewState defaultCurrentViewName="Week" />
+        <EditingState
+          onCommitChanges={commitChanges}
+          addedAppointment={addedAppointment}
+          onAddedAppointmentChange={handleAddedAppointment}
+          appointmentChanges={appointmentChanges}
+          onAppointmentChangesChange={handleAppointmentChanges}
+          editingAppointment={editingAppointment}
+          onEditingAppointmentChange={handleEditingAppointment}
+        />
+        <IntegratedEditing/>
 
         <DayView startDayHour={0} endDayHour={24} />
         <WeekView
@@ -125,17 +200,17 @@ const Schedule = ({ schedule, currentBookings }) => {
         <Toolbar />
         <DateNavigator />
         <TodayButton />
+        {/* <Appointments appointmentComponent={myAppointment}/> */}
         <Appointments />
-        <EditingState
-          onCommitChanges={commitChanges}
-          addedAppointment={addedAppointment}
-          onAddedAppointmentChange={handleAddedAppointment}
-          appointmentChanges={appointmentChanges}
-          onAppointmentChangesChange={handleAppointmentChanges}
-          editingAppointment={editingAppointment}
-          onEditingAppointmentChange={handleEditingAppointment}
+        <AppointmentTooltip
+          showCloseButton
+          showOpenButton
+          showDeleteButton
+          // visible={visible}
+          // onVisibilityChange={toggleVisibility}
+          // appointmentMeta={appointmentMeta}
+          // onAppointmentMetaChange={(e)=>{console.log(e.target)}}
         />
-        <AppointmentTooltip showCloseButton showOpenButton />
         <AppointmentForm />
         <ViewSwitcher />
       </Scheduler>
