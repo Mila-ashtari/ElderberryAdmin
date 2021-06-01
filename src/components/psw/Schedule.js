@@ -1,6 +1,10 @@
 import React, { useState } from "react";
 import Paper from "@material-ui/core/Paper";
-import { ViewState } from "@devexpress/dx-react-scheduler";
+import {
+  ViewState,
+  EditingState,
+  IntegratedEditing,
+} from "@devexpress/dx-react-scheduler";
 import {
   Scheduler,
   DayView,
@@ -14,10 +18,10 @@ import {
   AppointmentForm,
   MonthView,
 } from "@devexpress/dx-react-scheduler-material-ui";
-// import IconButton from '@material-ui/core/IconButton';
-// import InfoIcon from '@material-ui/icons/Info';
-import { EditingState, IntegratedEditing } from "@devexpress/dx-react-scheduler";
 import { makeStyles, withStyles } from "@material-ui/core/styles";
+import { connect } from "react-redux";
+
+import createBooking from "../../actions/booking";
 
 const useStyles = makeStyles((theme) => ({
   available: {
@@ -67,8 +71,9 @@ const useStyles = makeStyles((theme) => ({
 
 // const Appointment = withStyles(styles, { name: 'Appointment' })(AppointmentBase);
 
-const Schedule = ({ schedule, currentBookings }) => {
+const Schedule = (props) => {
   const classes = useStyles();
+  const { schedule, currentBookings, createBooking } = props;
   const { saturday, sunday, monday, tuesday, wednesday, thursday, friday } =
     schedule.availability;
   const data = [];
@@ -78,11 +83,11 @@ const Schedule = ({ schedule, currentBookings }) => {
       startDate: `${booking.startTime}`,
       endDate: `${booking.endTime}`,
       title: `${provider.firstName}'s appointment with ${client.firstName}`,
-      id:booking.id
+      id: booking.id,
     });
   });
   const [schedulerData, setSchedulerData] = useState(data);
-  const [addedAppointment, setAddedAppointment] = useState({});
+  const [addedAppointment, setAddedAppointment] = useState();
   const [appointmentChanges, setAppointmentChanges] = useState({});
   const [editingAppointment, setEditingApointment] = useState(undefined);
   // const [visible, setVisible] = useState(false);
@@ -130,15 +135,16 @@ const Schedule = ({ schedule, currentBookings }) => {
         return result;
     }
   };
-  const handleAddedAppointment = (addedAppointment) => {
-    setAddedAppointment({ addedAppointment });
-  };
-  const handleAppointmentChanges = (appointmentChanges) => {
-    setAppointmentChanges({ appointmentChanges });
-  };
-  const handleEditingAppointment = (editingAppointment) => {
-    setEditingApointment({ editingAppointment });
-  };
+  // const handleAddedAppointment = (addedAppointment) => {
+  //   setAddedAppointment({ addedAppointment });
+  //   console.log(addedAppointment);
+  // };
+  // const handleAppointmentChanges = (appointmentChanges) => {
+  //   setAppointmentChanges({ appointmentChanges });
+  // };
+  // const handleEditingAppointment = (editingAppointment) => {
+  //   setEditingApointment({ editingAppointment });
+  // };
   // const onAppointmentMetaChange = ({ data, target }) => {
   //   setAppointmentMeta({ appointmentMeta: { data, target } });
   // };
@@ -159,6 +165,7 @@ const Schedule = ({ schedule, currentBookings }) => {
     if (added) {
       const startingAddedId =
         data.length > 0 ? data[data.length - 1].id + 1 : 0;
+        console.log(added)
       data = [...data, { id: startingAddedId, ...added }];
     }
     if (changed) {
@@ -171,6 +178,7 @@ const Schedule = ({ schedule, currentBookings }) => {
     if (deleted !== undefined) {
       data = data.filter((appointment) => appointment.id !== deleted);
     }
+    console.log(data);
     setSchedulerData(data);
   };
 
@@ -180,14 +188,14 @@ const Schedule = ({ schedule, currentBookings }) => {
         <ViewState defaultCurrentViewName="Week" />
         <EditingState
           onCommitChanges={commitChanges}
-          addedAppointment={addedAppointment}
-          onAddedAppointmentChange={handleAddedAppointment}
-          appointmentChanges={appointmentChanges}
-          onAppointmentChangesChange={handleAppointmentChanges}
-          editingAppointment={editingAppointment}
-          onEditingAppointmentChange={handleEditingAppointment}
+          // addedAppointment={addedAppointment}
+          // onAddedAppointmentChange={handleAddedAppointment}
+          // appointmentChanges={appointmentChanges}
+          // onAppointmentChangesChange={handleAppointmentChanges}
+          // editingAppointment={editingAppointment}
+          // onEditingAppointmentChange={handleEditingAppointment}
         />
-        <IntegratedEditing/>
+        <IntegratedEditing />
 
         <DayView startDayHour={0} endDayHour={24} />
         <WeekView
@@ -218,4 +226,4 @@ const Schedule = ({ schedule, currentBookings }) => {
   );
 };
 
-export default Schedule;
+export default connect(null, { createBooking })(Schedule);
