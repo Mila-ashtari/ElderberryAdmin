@@ -21,7 +21,7 @@ import {
 import { makeStyles, withStyles } from "@material-ui/core/styles";
 import { connect } from "react-redux";
 
-import createBooking from "../../actions/booking";
+import { createBooking } from "../../actions/booking";
 
 const useStyles = makeStyles((theme) => ({
   available: {
@@ -73,7 +73,7 @@ const useStyles = makeStyles((theme) => ({
 
 const Schedule = (props) => {
   const classes = useStyles();
-  const { schedule, currentBookings, createBooking } = props;
+  const { schedule, currentBookings, id, createBooking } = props;
   const { saturday, sunday, monday, tuesday, wednesday, thursday, friday } =
     schedule.availability;
   const data = [];
@@ -87,15 +87,15 @@ const Schedule = (props) => {
     });
   });
   const [schedulerData, setSchedulerData] = useState(data);
-  const [addedAppointment, setAddedAppointment] = useState();
-  const [appointmentChanges, setAppointmentChanges] = useState({});
-  const [editingAppointment, setEditingApointment] = useState(undefined);
+  // const [addedAppointment, setAddedAppointment] = useState();
+  // const [appointmentChanges, setAppointmentChanges] = useState({});
+  // const [editingAppointment, setEditingApointment] = useState(undefined);
   // const [visible, setVisible] = useState(false);
   // const [appointmentMeta, setAppointmentMeta] = useState({
   //   terget: null,
   //   data: {},
   // });
-
+  console.log(id)
   const TimeTableCell = (props) => {
     const { startDate } = props;
     const date = new Date(startDate);
@@ -165,7 +165,7 @@ const Schedule = (props) => {
     if (added) {
       const startingAddedId =
         data.length > 0 ? data[data.length - 1].id + 1 : 0;
-        console.log(added)
+      createBooking({...added, pswID:id});
       data = [...data, { id: startingAddedId, ...added }];
     }
     if (changed) {

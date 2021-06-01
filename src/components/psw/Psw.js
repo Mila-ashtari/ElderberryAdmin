@@ -14,6 +14,7 @@ const Psw = (props) => {
   const { psw, getPsw } = props;
   const { user, skills, profile, schedule, currentBookings, id } =
     props.psw !== undefined && props.psw;
+  // console.log(psw)
   const tabs = props.psw !== undefined && [
     {
       label: "Profile",
@@ -22,7 +23,7 @@ const Psw = (props) => {
     { label: "Documentation", component: <Documents psw={psw} /> },
     {
       label: "Schedule",
-      component: <Schedule {...{ schedule, currentBookings }} />,
+      component: <Schedule {...{ schedule, currentBookings, id }} />,
     },
     { label: "Availability", component: <Availability schedule={schedule} /> },
     { label: "Bookings", component: <Bookings bookings={currentBookings}/> }
