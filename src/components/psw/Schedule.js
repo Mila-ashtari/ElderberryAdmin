@@ -95,13 +95,12 @@ const Schedule = (props) => {
   //   terget: null,
   //   data: {},
   // });
-  console.log(id)
   const TimeTableCell = (props) => {
     const { startDate } = props;
     const date = new Date(startDate);
     const dateString = date.toDateString();
     const time = date.getTime();
-    let result = <WeekView.TimeTableCell />;
+    let result = <WeekView.TimeTableCell onDoubleClick={(e)=>console.log(e)}/>;
     const getAvailablity = (day) => {
       day.forEach((item) => {
         const endTime = new Date(
@@ -163,9 +162,14 @@ const Schedule = (props) => {
   const commitChanges = ({ added, changed, deleted }) => {
     let data = [...schedulerData];
     if (added) {
+      createBooking({
+        ...added,
+        pswID: id,
+        startDate: added.startDate.toISOString(),
+        endDate: added.endDate.toISOString(),
+      });
       const startingAddedId =
         data.length > 0 ? data[data.length - 1].id + 1 : 0;
-      createBooking({...added, pswID:id});
       data = [...data, { id: startingAddedId, ...added }];
     }
     if (changed) {
@@ -196,8 +200,6 @@ const Schedule = (props) => {
           // onEditingAppointmentChange={handleEditingAppointment}
         />
         <IntegratedEditing />
-
-        <DayView startDayHour={0} endDayHour={24} />
         <WeekView
           startDayHour={0}
           endDayHour={24}
