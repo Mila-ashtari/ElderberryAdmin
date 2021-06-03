@@ -87,7 +87,7 @@ const Schedule = (props) => {
     });
   });
   const [schedulerData, setSchedulerData] = useState(data);
-  // const [addedAppointment, setAddedAppointment] = useState();
+  const [addedAppointment, setAddedAppointment] = useState();
   // const [appointmentChanges, setAppointmentChanges] = useState({});
   // const [editingAppointment, setEditingApointment] = useState(undefined);
   // const [visible, setVisible] = useState(false);
@@ -100,7 +100,7 @@ const Schedule = (props) => {
     const date = new Date(startDate);
     const dateString = date.toDateString();
     const time = date.getTime();
-    let result = <WeekView.TimeTableCell onDoubleClick={props.onDoubleClick}/>;
+    let result = <WeekView.TimeTableCell onDoubleClick={props.onDoubleClick} />;
     const getAvailablity = (day) => {
       day.forEach((item) => {
         const endTime = new Date(
@@ -110,7 +110,12 @@ const Schedule = (props) => {
           `${dateString} ${item.startTime[0]}:${item.startTime[1]}`
         ).getTime();
         if (time >= startTime && time < endTime) {
-          result = <WeekView.TimeTableCell className={classes.available} />;
+          result = (
+            <WeekView.TimeTableCell
+              className={classes.available}
+              onDoubleClick={props.onDoubleClick}
+            />
+          );
         }
       });
       return result;
@@ -134,10 +139,10 @@ const Schedule = (props) => {
         return result;
     }
   };
-  // const handleAddedAppointment = (addedAppointment) => {
-  //   setAddedAppointment({ addedAppointment });
-  //   console.log(addedAppointment);
-  // };
+  const handleAddedAppointment = (addedAppointment) => {
+    setAddedAppointment({ addedAppointment });
+    console.log(addedAppointment);
+  };
   // const handleAppointmentChanges = (appointmentChanges) => {
   //   setAppointmentChanges({ appointmentChanges });
   // };
@@ -162,12 +167,12 @@ const Schedule = (props) => {
   const commitChanges = ({ added, changed, deleted }) => {
     let data = [...schedulerData];
     if (added) {
-      createBooking({
-        ...added,
-        pswID: id,
-        startDate: added.startDate.toISOString(),
-        endDate: added.endDate.toISOString(),
-      });
+      // createBooking({
+      //   ...added,
+      //   pswID: id,
+      //   startDate: added.startDate.toISOString(),
+      //   endDate: added.endDate.toISOString(),
+      // });
       const startingAddedId =
         data.length > 0 ? data[data.length - 1].id + 1 : 0;
       data = [...data, { id: startingAddedId, ...added }];
@@ -192,6 +197,12 @@ const Schedule = (props) => {
         <ViewState defaultCurrentViewName="Week" />
         <EditingState
           onCommitChanges={commitChanges}
+          // addedAppointment={addedAppointment}
+          onAddedAppointmentChange={handleAddedAppointment}
+          // appointmentChanges={appointmentChanges}
+          // onAppointmentChangesChange={handleAppointmentChanges}
+          // editingAppointment={editingAppointment}
+          // onEditingAppointmentChange={handleEditingAppointment}
         />
         <IntegratedEditing />
         <WeekView
