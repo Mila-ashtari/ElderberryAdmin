@@ -100,7 +100,7 @@ const Schedule = (props) => {
     const date = new Date(startDate);
     const dateString = date.toDateString();
     const time = date.getTime();
-    let result = <WeekView.TimeTableCell onDoubleClick={(e)=>console.log(e)}/>;
+    let result = <WeekView.TimeTableCell onDoubleClick={props.onDoubleClick}/>;
     const getAvailablity = (day) => {
       day.forEach((item) => {
         const endTime = new Date(
@@ -192,12 +192,6 @@ const Schedule = (props) => {
         <ViewState defaultCurrentViewName="Week" />
         <EditingState
           onCommitChanges={commitChanges}
-          // addedAppointment={addedAppointment}
-          // onAddedAppointmentChange={handleAddedAppointment}
-          // appointmentChanges={appointmentChanges}
-          // onAppointmentChangesChange={handleAppointmentChanges}
-          // editingAppointment={editingAppointment}
-          // onEditingAppointmentChange={handleEditingAppointment}
         />
         <IntegratedEditing />
         <WeekView
