@@ -8,7 +8,6 @@ import {
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 
-import requiredAuth from "../requiredAuth";
 import history from "../../history"
 
 const useStyles = makeStyles((theme) => ({
@@ -42,7 +41,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function User({user, tabs}) {
+function User({firstName, lastName, email, tabs}) {
   const classes = useStyles();
   const [value, setValue] = useState(0);
   const handleChange = (event, newValue) => {
@@ -52,10 +51,10 @@ function User({user, tabs}) {
     <>
       <Grid container spacing={4} className={classes.gridContainer}>
         <Grid item>
-          <Typography variant="h2">{`${user.firstName} ${user.lastName}`}</Typography>
+          <Typography variant="h2">{`${firstName} ${lastName}`}</Typography>
         </Grid>
         <Grid item>
-          <Typography variant="body1">Email: {user.email}</Typography>
+          {email !==undefined && <Typography variant="body1">Email: {email}</Typography>}
         </Grid>
       </Grid>
 
@@ -82,4 +81,4 @@ function User({user, tabs}) {
   );
 }
 
-export default requiredAuth(User)
+export default User

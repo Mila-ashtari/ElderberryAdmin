@@ -6,14 +6,20 @@ import Profile from "./Profile";
 import Documents from "./Documents";
 import Availability from "./Availability";
 import User from "../user/User";
-import Bookings from "./Bookings"
+import Bookings from "./Bookings";
 import Schedule from "./Schedule";
-
+import requiredAuth from "../requiredAuth";
 
 const Psw = (props) => {
   const { psw, getPsw } = props;
-  const { user, skills, profile, schedule, currentBookings, id } =
-    props.psw !== undefined && props.psw;
+  const {
+    user: { firstName, lastName, email },
+    skills,
+    profile,
+    schedule,
+    currentBookings,
+    id,
+  } = props.psw !== undefined && props.psw;
   // console.log(psw)
   const tabs = props.psw !== undefined && [
     {
@@ -32,11 +38,17 @@ const Psw = (props) => {
     getPsw(props.match.params.id);
   }, []);
 
-  return props.psw !== undefined && <User {...{ user, tabs }} />;
+  return (
+    props.psw !== undefined && (
+      <User {...{ firstName, lastName, email, tabs }} />
+    )
+  );
 };
 
 const mapStateToProps = (state, ownProps) => {
   return { psw: state.psws[ownProps.match.params.id] };
 };
 
-export default connect(mapStateToProps, { getPsw })(Psw);
+const ConnectedPsw = connect(mapStateToProps, { getPsw })(Psw);
+
+export default requiredAuth(ConnectedPsw);

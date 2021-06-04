@@ -5,12 +5,15 @@ import { getCustomer } from "../../actions/customer";
 import Profile from "./Profile";
 import Clients from "./Clients";
 import User from "../user/User";
-
-// import Schedule from "./Schedule"
+import requiredAuth from "../requiredAuth";
 
 const Customer = (props) => {
   const { getCustomer } = props;
-  const { user, clients } = props.customer !== undefined && props.customer;
+  const {
+    user: { firstName, lastName, email },
+    user,
+    clients,
+  } = props.customer !== undefined && props.customer;
   const tabs = props.customer !== undefined && [
     {
       label: "Profile",
@@ -24,11 +27,17 @@ const Customer = (props) => {
     getCustomer(props.match.params.id);
   }, []);
 
-  return props.customer !== undefined && <User {...{ user, tabs }} />;
+  return (
+    props.customer !== undefined && (
+      <User {...{ firstName, lastName, email, tabs }} />
+    )
+  );
 };
 
 const mapStateToProps = (state, ownProps) => {
   return { customer: state.customers[ownProps.match.params.id] };
 };
 
-export default connect(mapStateToProps, { getCustomer })(Customer);
+const ConnectedCustomer = connect(mapStateToProps, { getCustomer })(Customer);
+
+export default requiredAuth(ConnectedCustomer);
