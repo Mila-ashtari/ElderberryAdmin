@@ -9,11 +9,8 @@ import requiredAuth from "../requiredAuth";
 
 const Customer = (props) => {
   const { getCustomer } = props;
-  const {
-    user: { firstName, lastName, email },
-    user,
-    clients,
-  } = props.customer !== undefined && props.customer;
+  const { firstName, lastName, user, clients } =
+    props.customer !== undefined && props.customer;
   const tabs = props.customer !== undefined && [
     {
       label: "Profile",
@@ -29,7 +26,7 @@ const Customer = (props) => {
 
   return (
     props.customer !== undefined && (
-      <User {...{ firstName, lastName, email, tabs }} />
+      <User {...{ firstName, lastName, tabs }} />
     )
   );
 };

@@ -13,7 +13,8 @@ import requiredAuth from "../requiredAuth";
 const Psw = (props) => {
   const { psw, getPsw } = props;
   const {
-    user: { firstName, lastName, email },
+    firstName,
+    lastName,
     skills,
     profile,
     schedule,
@@ -40,7 +41,7 @@ const Psw = (props) => {
 
   return (
     props.psw !== undefined && (
-      <User {...{ firstName, lastName, email, tabs }} />
+      <User {...{ firstName, lastName, tabs }} />
     )
   );
 };
