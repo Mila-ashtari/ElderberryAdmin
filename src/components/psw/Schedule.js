@@ -95,7 +95,7 @@ const Schedule = (props) => {
   //   terget: null,
   //   data: {},
   // });
-  const TimeTableCell = (props) => {
+  const timeTableCell = (props) => {
     const { startDate } = props;
     const date = new Date(startDate);
     const dateString = date.toDateString();
@@ -139,10 +139,21 @@ const Schedule = (props) => {
         return result;
     }
   };
-  const handleAddedAppointment = (addedAppointment) => {
-    setAddedAppointment({ addedAppointment });
-    console.log(addedAppointment);
+
+  const basicLayout = (props) => {
+    console.log (props)
+    return (
+      <AppointmentForm.BasicLayoutProps
+        // textEditorComponent={() => (
+        //   <AppointmentForm.TextEditorProps type="ordinaryTextEditor"/>
+        // )}
+      />
+    );
   };
+  // const handleAddedAppointment = (addedAppointment) => {
+  //   setAddedAppointment({ addedAppointment });
+  //   console.log(addedAppointment);
+  // };
   // const handleAppointmentChanges = (appointmentChanges) => {
   //   setAppointmentChanges({ appointmentChanges });
   // };
@@ -198,7 +209,7 @@ const Schedule = (props) => {
         <EditingState
           onCommitChanges={commitChanges}
           // addedAppointment={addedAppointment}
-          onAddedAppointmentChange={handleAddedAppointment}
+          // onAddedAppointmentChange={handleAddedAppointment}
           // appointmentChanges={appointmentChanges}
           // onAppointmentChangesChange={handleAppointmentChanges}
           // editingAppointment={editingAppointment}
@@ -208,7 +219,7 @@ const Schedule = (props) => {
         <WeekView
           startDayHour={0}
           endDayHour={24}
-          timeTableCellComponent={TimeTableCell}
+          timeTableCellComponent={timeTableCell}
           cellDuration={30}
         />
         <MonthView />
@@ -226,7 +237,7 @@ const Schedule = (props) => {
           // appointmentMeta={appointmentMeta}
           // onAppointmentMetaChange={(e)=>{console.log(e.target)}}
         />
-        <AppointmentForm />
+        <AppointmentForm basicLayoutComponent={basicLayout} />
         <ViewSwitcher />
       </Scheduler>
     </Paper>

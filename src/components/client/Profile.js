@@ -22,9 +22,6 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import ExpandLessIcon from "@material-ui/icons/ExpandLess";
 
 const useStyles = makeStyles((theme) => ({
-  flexContainer: {
-    display: "flex",
-  },
   profileImage: {
     width: "150px",
     alignSelf: "flex-start",
@@ -49,7 +46,6 @@ const useStyles = makeStyles((theme) => ({
     display: "block",
   },
 }));
-
 
 function RenderTasks({ tasks }) {
   const [expanded, setExpanded] = useState(false);
@@ -145,62 +141,51 @@ function Profile({ client }) {
     contactNumber,
   } = client;
   return (
-    <Grid container spacing={2}>
-      <Grid item xs={12}>
-        <Card className={classes.flexContainer}>
-          <CardMedia
-            className={classes.profileImage}
-            component="img"
-            src={picture}
-            title="profile image"
-          ></CardMedia>
-          <CardContent>
-            <List>
-              <ListItem>
-                <Typography variant="h2" className={classes.h2}>
-                  Address:
-                </Typography>
-                <Typography variant="body1">{`${address.addressLineOne}, ${address.postalCode},`}</Typography>
-                <Typography variant="body1">{` ${address.province}, ${address.city}`}</Typography>
-              </ListItem>
-              <ListItem>
-                <Typography variant="h2" className={classes.h2}>
-                  Contact Phone Number:
-                </Typography>
-                <Typography variant="body1">{`${contactNumber}`}</Typography>
-              </ListItem>
-              <ListItem>
-                <Typography variant="h2" className={classes.h2}>
-                  {"Weight:  "}
-                </Typography>
-                <Typography className={classes.paragragh}>{weight}</Typography>
-              </ListItem>
-              <ListItem>
-                <Typography variant="h2" className={classes.h2}>
-                  {"Height:  "}
-                </Typography>
-                <Typography className={classes.paragragh}>{height}</Typography>
-              </ListItem>
-              <ListItem>
-                <Collapse in={expanded} timeout="auto" collapsedHeight="70px">
-                  <Typography variant="h2" className={classes.h2}>
-                    {"Notes: "}
-                  </Typography>
-                  <Typography className={classes.paragragh}>{notes}</Typography>
-                </Collapse>
-                <Box className={classes.buttonContainer}>
-                  <Button onClick={() => setExpanded(!expanded)}>
-                    {expanded ? <ExpandLessIcon /> : <ExpandMoreIcon />}
-                  </Button>
-                </Box>
-              </ListItem>
-              <RenderLanguages languages={languages} />
-              <RenderTasks tasks={tasks} />
-            </List>
-          </CardContent>
-        </Card>
-      </Grid>
-    </Grid>
+    <Card className={classes.flexContainer}>
+      <CardMedia
+        className={classes.profileImage}
+        component="img"
+        src={picture}
+        title="profile image"
+      ></CardMedia>
+      <CardContent className={classes.cardConetnt}>
+        <List>
+          <ListItem>
+            <Typography variant="h2" className={classes.h2}>
+              Address:
+            </Typography>
+            <Typography variant="body1">{`${address.addressLineOne}, ${address.postalCode},`}</Typography>
+            <Typography variant="body1">{` ${address.province}, ${address.city}`}</Typography>
+          </ListItem>
+          <ListItem>
+            <Typography variant="h2" className={classes.h2}>
+              Contact Phone Number:
+            </Typography>
+            <Typography variant="body1">{`${contactNumber}`}</Typography>
+          </ListItem>
+          <ListItem>
+            <Typography variant="h2" className={classes.h2}>
+              {"Weight:  "}
+            </Typography>
+            <Typography className={classes.paragragh}>{weight}</Typography>
+          </ListItem>
+          <ListItem>
+            <Typography variant="h2" className={classes.h2}>
+              {"Height:  "}
+            </Typography>
+            <Typography className={classes.paragragh}>{height}</Typography>
+          </ListItem>
+          <ListItem>
+            <Typography variant="h2" className={classes.h2}>
+              {"Notes: "}
+            </Typography>
+            <Typography className={classes.paragragh}>{notes}</Typography>
+          </ListItem>
+          <RenderLanguages languages={languages} />
+          <RenderTasks tasks={tasks} />
+        </List>
+      </CardContent>
+    </Card>
   );
 }
 
