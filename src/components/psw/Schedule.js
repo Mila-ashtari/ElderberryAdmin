@@ -18,7 +18,7 @@ import {
   AppointmentForm,
   MonthView,
 } from "@devexpress/dx-react-scheduler-material-ui";
-import { makeStyles, withStyles } from "@material-ui/core/styles";
+import { makeStyles } from "@material-ui/core/styles";
 import { connect } from "react-redux";
 
 import { createBooking } from "../../actions/booking";
@@ -140,16 +140,10 @@ const Schedule = (props) => {
     }
   };
 
-  const basicLayout = (props) => {
-    console.log (props)
-    return (
-      <AppointmentForm.BasicLayoutProps
-        // textEditorComponent={() => (
-        //   <AppointmentForm.TextEditorProps type="ordinaryTextEditor"/>
-        // )}
-      />
-    );
-  };
+  // const BasicLayout = (props) => {
+  //   console.log(props);
+  //   return <AppointmentForm.BasicLayoutProps {...props}/>;
+  // };
   // const handleAddedAppointment = (addedAppointment) => {
   //   setAddedAppointment({ addedAppointment });
   //   console.log(addedAppointment);
@@ -237,7 +231,7 @@ const Schedule = (props) => {
           // appointmentMeta={appointmentMeta}
           // onAppointmentMetaChange={(e)=>{console.log(e.target)}}
         />
-        <AppointmentForm basicLayoutComponent={basicLayout} />
+        <AppointmentForm  />
         <ViewSwitcher />
       </Scheduler>
     </Paper>
