@@ -139,11 +139,85 @@ const Schedule = (props) => {
         return result;
     }
   };
-
-  // const BasicLayout = (props) => {
-  //   console.log(props);
-  //   return <AppointmentForm.BasicLayoutProps {...props}/>;
+  const TextEditor = (props) => {
+    // eslint-disable-next-line react/destructuring-assignment
+    if (props.type === 'multilineTextEditor') {
+      return null;
+    } return <AppointmentForm.TextEditor {...props} />;
+  };
+  
+  // const BasicLayout = ({ onFieldChange, appointmentData, ...restProps }) => {
+  //   console.log(appointmentData)
+  //   const onCostumerIdChange = (nextValue) => {
+  //     onFieldChange({ costomerId: nextValue });
+  //   };
+  //   // const onClientIdChange = (nextValue) => {
+  //   //   onFieldChange({ clientId: nextValue });
+  //   // };
+  
+  //   return (
+  //     <AppointmentForm.BasicLayout
+  //       appointmentData={appointmentData}
+  //       onFieldChange={onFieldChange}
+  //       {...restProps}
+  //     >
+  //       <AppointmentForm.Label
+  //         text="Costumer ID"
+  //         type="title"
+  //       />
+  //       <AppointmentForm.TextEditor
+  //         value={appointmentData.customerId}
+  //         onValueChange={onCostumerIdChange}
+  //         placeholder="Costumer ID"
+  //       />
+  //        {/* <AppointmentForm.Label
+  //         text="Client ID"
+  //         type="title"
+  //       />
+  //       <AppointmentForm.TextEditor
+  //         value={appointmentData.clientId}
+  //         onValueChange={onClientIdChange}
+  //         placeholder="Client ID"
+  //       /> */}
+  //     </AppointmentForm.BasicLayout>
+  //   );
   // };
+  const BasicLayout = ({ onFieldChange, appointmentData, ...restProps }) => {
+    console.log(appointmentData)
+    const onCostumerIdChange = (nextValue) => {
+      onFieldChange({ costumerId: nextValue });
+    };
+    const onClientIdChange = (nextValue) => {
+      onFieldChange({ clientId: nextValue });
+    };
+  
+    return (
+      <AppointmentForm.BasicLayout
+        appointmentData={appointmentData}
+        onFieldChange={onFieldChange}
+        {...restProps}
+      >
+        <AppointmentForm.Label
+          text="Custom Field"
+          type="title"
+        />
+        <AppointmentForm.TextEditor
+          value={appointmentData.costumerId}
+          onValueChange={onCostumerIdChange}
+          placeholder="Custom field"
+        />
+        <AppointmentForm.Label
+          text="Custom Field"
+          type="title"
+        />
+        <AppointmentForm.TextEditor
+          value={appointmentData.clientId}
+          onValueChange={onClientIdChange}
+          placeholder="Custom field"
+        />
+      </AppointmentForm.BasicLayout>
+    );
+  };
   // const handleAddedAppointment = (addedAppointment) => {
   //   setAddedAppointment({ addedAppointment });
   //   console.log(addedAppointment);
@@ -172,6 +246,7 @@ const Schedule = (props) => {
   const commitChanges = ({ added, changed, deleted }) => {
     let data = [...schedulerData];
     if (added) {
+      console.log(added)
       // createBooking({
       //   ...added,
       //   pswID: id,
@@ -231,7 +306,10 @@ const Schedule = (props) => {
           // appointmentMeta={appointmentMeta}
           // onAppointmentMetaChange={(e)=>{console.log(e.target)}}
         />
-        <AppointmentForm  />
+        <AppointmentForm
+          basicLayoutComponent={BasicLayout}
+          textEditorComponent={TextEditor}
+        />
         <ViewSwitcher />
       </Scheduler>
     </Paper>
