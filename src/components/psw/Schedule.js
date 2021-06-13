@@ -20,13 +20,17 @@ import {
 } from "@devexpress/dx-react-scheduler-material-ui";
 import { makeStyles } from "@material-ui/core/styles";
 import { connect } from "react-redux";
-
 import { createBooking } from "../../actions/booking";
+import { Box } from "@material-ui/core";
+
 
 const useStyles = makeStyles((theme) => ({
   available: {
     backgroundColor: theme.palette.secondary.main,
   },
+  flexContainer:{
+    display:"flex",
+  }
 }));
 
 // const styles = theme => ({
@@ -87,7 +91,7 @@ const Schedule = (props) => {
     });
   });
   const [schedulerData, setSchedulerData] = useState(data);
-  const [addedAppointment, setAddedAppointment] = useState();
+  // const [addedAppointment, setAddedAppointment] = useState();
   // const [appointmentChanges, setAppointmentChanges] = useState({});
   // const [editingAppointment, setEditingApointment] = useState(undefined);
   // const [visible, setVisible] = useState(false);
@@ -141,80 +145,39 @@ const Schedule = (props) => {
   };
   const TextEditor = (props) => {
     // eslint-disable-next-line react/destructuring-assignment
-    if (props.type === 'multilineTextEditor') {
+    if (props.type === "multilineTextEditor") {
       return null;
-    } return <AppointmentForm.TextEditor {...props} />;
+    }
+    return <AppointmentForm.TextEditor {...props} />;
   };
-  
-  // const BasicLayout = ({ onFieldChange, appointmentData, ...restProps }) => {
-  //   console.log(appointmentData)
-  //   const onCostumerIdChange = (nextValue) => {
-  //     onFieldChange({ costomerId: nextValue });
-  //   };
-  //   // const onClientIdChange = (nextValue) => {
-  //   //   onFieldChange({ clientId: nextValue });
-  //   // };
-  
-  //   return (
-  //     <AppointmentForm.BasicLayout
-  //       appointmentData={appointmentData}
-  //       onFieldChange={onFieldChange}
-  //       {...restProps}
-  //     >
-  //       <AppointmentForm.Label
-  //         text="Costumer ID"
-  //         type="title"
-  //       />
-  //       <AppointmentForm.TextEditor
-  //         value={appointmentData.customerId}
-  //         onValueChange={onCostumerIdChange}
-  //         placeholder="Costumer ID"
-  //       />
-  //        {/* <AppointmentForm.Label
-  //         text="Client ID"
-  //         type="title"
-  //       />
-  //       <AppointmentForm.TextEditor
-  //         value={appointmentData.clientId}
-  //         onValueChange={onClientIdChange}
-  //         placeholder="Client ID"
-  //       /> */}
-  //     </AppointmentForm.BasicLayout>
-  //   );
-  // };
+
   const BasicLayout = ({ onFieldChange, appointmentData, ...restProps }) => {
-    console.log(appointmentData)
+    console.log(appointmentData);
     const onCostumerIdChange = (nextValue) => {
       onFieldChange({ costumerId: nextValue });
     };
     const onClientIdChange = (nextValue) => {
       onFieldChange({ clientId: nextValue });
     };
-  
+
     return (
       <AppointmentForm.BasicLayout
         appointmentData={appointmentData}
         onFieldChange={onFieldChange}
         {...restProps}
       >
-        <AppointmentForm.Label
-          text="Custom Field"
-          type="title"
-        />
-        <AppointmentForm.TextEditor
-          value={appointmentData.costumerId}
-          onValueChange={onCostumerIdChange}
-          placeholder="Custom field"
-        />
-        <AppointmentForm.Label
-          text="Custom Field"
-          type="title"
-        />
-        <AppointmentForm.TextEditor
-          value={appointmentData.clientId}
-          onValueChange={onClientIdChange}
-          placeholder="Custom field"
-        />
+        <Box className={classes.flexContainer}>
+          <AppointmentForm.TextEditor
+            value={appointmentData.costumerId}
+            onValueChange={onCostumerIdChange}
+            placeholder="Cotumer ID"
+          />
+          <AppointmentForm.TextEditor
+            value={appointmentData.clientId}
+            onValueChange={onClientIdChange}
+            placeholder="Client ID"
+          />
+        </Box>
       </AppointmentForm.BasicLayout>
     );
   };
@@ -246,7 +209,6 @@ const Schedule = (props) => {
   const commitChanges = ({ added, changed, deleted }) => {
     let data = [...schedulerData];
     if (added) {
-      console.log(added)
       // createBooking({
       //   ...added,
       //   pswID: id,
