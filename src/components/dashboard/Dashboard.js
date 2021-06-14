@@ -7,7 +7,8 @@ import requiredAuth from "../requiredAuth";
 import DashboardHeader from "./DashboardHeader";
 import PswList from "./PswList";
 import CustomerList from "./CustomerList";
-import ClientList from "./ClientList"
+import ClientList from "./ClientList";
+import BookingList from "./BookingList";
 
 const useStyles = makeStyles((theme) => ({
   tabs: {
@@ -33,6 +34,7 @@ function Dashboard(props) {
     { label: "psw", component: PswList },
     { label: "client", component: ClientList },
     { label: "customer", component: CustomerList },
+    { label: "Bookings", component: BookingList },
   ];
 
   const handleChange = (event, newValue) => {
@@ -66,18 +68,6 @@ function Dashboard(props) {
           />
         ))}
       </Tabs>
-
-      {/* <Grid item xs={4} className={classes.searchBar}>
-          <TextField
-            InputProps={{
-              startAdornment: (
-                <InputAdornment position="start">
-                  <SearchIcon />
-                </InputAdornment>
-              ),
-            }}
-          ></TextField>
-        </Grid> */}
 
       <Switch>
         {tabs.map((tab, index) => (
