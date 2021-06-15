@@ -104,7 +104,7 @@ const Schedule = (props) => {
     const date = new Date(startDate);
     const dateString = date.toDateString();
     const time = date.getTime();
-    let result = <WeekView.TimeTableCell onDoubleClick={props.onDoubleClick} />;
+    let result = <WeekView.TimeTableCell/>;
     const getAvailablity = (day) => {
       day.forEach((item) => {
         const endTime = new Date(

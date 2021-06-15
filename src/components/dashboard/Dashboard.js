@@ -34,7 +34,7 @@ function Dashboard(props) {
     { label: "psw", component: PswList },
     { label: "client", component: ClientList },
     { label: "customer", component: CustomerList },
-    { label: "Bookings", component: BookingList },
+    //
   ];
 
   const handleChange = (event, newValue) => {
