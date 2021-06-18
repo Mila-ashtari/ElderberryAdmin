@@ -9,7 +9,6 @@ import requiredAuth from "../requiredAuth";
 
 const Customer = (props) => {
   const { getCustomer } = props;
-  console.log(props.customer)
   const { firstName, lastName, user, clients } =
     props.customer !== undefined && props.customer;
   const tabs = props.customer !== undefined && [
@@ -25,10 +24,10 @@ const Customer = (props) => {
     getCustomer(props.match.params.id);
   }, []);
 
-  return (
-    props.customer !== undefined && (
-      <User {...{ firstName, lastName, tabs }} />
-    )
+  return props.customer !== undefined ? (
+    <User {...{ firstName, lastName, tabs }} />
+  ) : (
+    <div>Loading...</div>
   );
 };
 

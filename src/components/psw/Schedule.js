@@ -154,10 +154,10 @@ const Schedule = (props) => {
   const BasicLayout = ({ onFieldChange, appointmentData, ...restProps }) => {
     console.log(appointmentData);
     const onCostumerIdChange = (nextValue) => {
-      onFieldChange({ costumerId: nextValue });
+      onFieldChange({ costumerID: nextValue });
     };
     const onClientIdChange = (nextValue) => {
-      onFieldChange({ clientId: nextValue });
+      onFieldChange({ clientID: nextValue });
     };
 
     return (
@@ -168,12 +168,12 @@ const Schedule = (props) => {
       >
         <Box className={classes.flexContainer}>
           <AppointmentForm.TextEditor
-            value={appointmentData.costumerId}
+            value={appointmentData.costumerID}
             onValueChange={onCostumerIdChange}
             placeholder="Cotumer ID"
           />
           <AppointmentForm.TextEditor
-            value={appointmentData.clientId}
+            value={appointmentData.clientID}
             onValueChange={onClientIdChange}
             placeholder="Client ID"
           />
@@ -209,12 +209,12 @@ const Schedule = (props) => {
   const commitChanges = ({ added, changed, deleted }) => {
     let data = [...schedulerData];
     if (added) {
-      // createBooking({
-      //   ...added,
-      //   pswID: id,
-      //   startDate: added.startDate.toISOString(),
-      //   endDate: added.endDate.toISOString(),
-      // });
+      createBooking({
+        ...added,
+        pswID: id,
+        startDate: added.startDate.toISOString(),
+        endDate: added.endDate.toISOString(),
+      });
       const startingAddedId =
         data.length > 0 ? data[data.length - 1].id + 1 : 0;
       data = [...data, { id: startingAddedId, ...added }];
