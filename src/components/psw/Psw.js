@@ -15,13 +15,11 @@ const Psw = (props) => {
   const {
     firstName,
     lastName,
-    skills,
-    profile,
-    schedule,
+    services:{personalSupportWorker:{profile, skills, schedule}},
     currentBookings,
     id,
   } = props.psw !== undefined && props.psw;
-  // console.log(psw)
+  console.log(psw)
   const tabs = props.psw !== undefined && [
     {
       label: "Profile",
@@ -40,9 +38,10 @@ const Psw = (props) => {
   }, []);
 
   return (
-    props.psw !== undefined && (
-      <User {...{ firstName, lastName, tabs }} />
-    )
+    // props.psw !== undefined && (
+    //   <User {...{ firstName, lastName, tabs }} />
+    // )
+    <></>
   );
 };
 

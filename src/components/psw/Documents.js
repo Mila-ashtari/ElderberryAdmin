@@ -43,14 +43,25 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function Edit(props) {
-  const { updatePsw, psw } = props;
-  const [verification, setVerification] = useState(`${psw.verified}`);
-  const [expiration, setExpiration] = useState(new Date(psw.expiration));
+  const {
+    updatePsw,
+    psw,
+    psw: { verified, expiration },
+  } = props;
+  // const [verification, setVerification] = useState(`${psw.verified}`);
+  // const [expiration, setExpiration] = useState(new Date(psw.expiration));
   const classes = useStyles();
 
-  useEffect(() => {
-    updatePsw(psw, verification, expiration);
-  }, [verification, expiration]);
+  const handleDateChange = (date) => {
+    updatePsw(psw, verified, date.toISOString());
+  };
+  const handleVerificationChange = (event) => {
+    updatePsw(psw, event.target.value, expiration);
+  };
+
+  // useEffect(() => {
+  //   updatePsw(psw, verification, expiration);
+  // }, [verification, expiration]);
   return (
     <Grid container item sm={12}>
       <Grid item container sm={12}>
@@ -60,10 +71,8 @@ function Edit(props) {
         <RadioGroup
           aria-label="document verified?"
           name="document verification"
-          value={verification}
-          onChange={(event) => {
-            setVerification(event.target.value);
-          }}
+          value={verified}
+          onChange={handleVerificationChange}
           className={classes.radioGroup}
         >
           <FormControlLabel value="true" control={<Radio />} label="Yes" />
@@ -82,14 +91,12 @@ function Edit(props) {
             // openTo="date"
             views={["year", "month", "date"]}
             label="Documents expiration date:"
-            value={expiration}
-            onChange={(date) => {
-              setExpiration(date.toISOString());
-            }}
+            value={new Date(expiration)}
+            onChange={handleDateChange}
             KeyboardButtonProps={{
               "aria-label": "change expiration date",
             }}
-            InputLabelProps={{style:{fontSize:"1.4rem"}}}
+            InputLabelProps={{ style: { fontSize: "1.4rem" } }}
           />
         </MuiPickersUtilsProvider>
       </Grid>
