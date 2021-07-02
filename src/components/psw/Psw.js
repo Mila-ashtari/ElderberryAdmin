@@ -15,17 +15,25 @@ const Psw = (props) => {
   const {
     firstName,
     lastName,
-    services:{personalSupportWorker:{profile, skills, schedule}},
+    services: {
+      personalSupportWorker: { profile, skills, schedule, opswaIdentificationCard },
+    },
     currentBookings,
     id,
+    verified,
+    expiration,
+    identityDocument
   } = props.psw !== undefined && props.psw;
-  console.log(psw)
+  console.log(psw);
   const tabs = props.psw !== undefined && [
     {
       label: "Profile",
       component: <Profile profile={profile} skills={skills} />,
     },
-    { label: "Documentation", component: <Documents psw={psw} /> },
+    {
+      label: "Documentation",
+      component: <Documents {...{ id, verified, expiration }} />,
+    },
     {
       label: "Schedule",
       component: <Schedule {...{ schedule, currentBookings, id }} />,
@@ -38,10 +46,8 @@ const Psw = (props) => {
   }, []);
 
   return (
-    // props.psw !== undefined && (
-    //   <User {...{ firstName, lastName, tabs }} />
-    // )
-    <></>
+    props.psw !== undefined && <User {...{ firstName, lastName, tabs }} />
+    // <></>
   );
 };
 

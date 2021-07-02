@@ -18,7 +18,7 @@ import {
 } from "@material-ui/pickers";
 import { makeStyles } from "@material-ui/core/styles";
 
-import { updatePsw } from "../../actions/psw";
+import { setExpiration } from "../../actions/psw";
 
 const useStyles = makeStyles((theme) => ({
   gridContainer: {
@@ -43,11 +43,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function Edit(props) {
-  const {
-    updatePsw,
-    psw,
-    psw: { verified, expiration },
-  } = props;
+  const { updatePsw, id, verified, expiration } = props;
   // const [verification, setVerification] = useState(`${psw.verified}`);
   // const [expiration, setExpiration] = useState(new Date(psw.expiration));
   const classes = useStyles();
@@ -55,8 +51,9 @@ function Edit(props) {
   const handleDateChange = (date) => {
     updatePsw(psw, verified, date.toISOString());
   };
-  const handleVerificationChange = (event) => {
-    updatePsw(psw, event.target.value, expiration);
+  const handleExpiration = (event) => {
+    console.log(event.target.value);
+    setExpiration(id, event.target.value);
   };
 
   // useEffect(() => {
@@ -64,7 +61,7 @@ function Edit(props) {
   // }, [verification, expiration]);
   return (
     <Grid container item sm={12}>
-      <Grid item container sm={12}>
+      {/* <Grid item container sm={12}>
         <FormLabel component="legend" className={classes.formLabel}>
           Documents verified?
         </FormLabel>
@@ -72,13 +69,13 @@ function Edit(props) {
           aria-label="document verified?"
           name="document verification"
           value={verified}
-          onChange={handleVerificationChange}
+          onChange={handleVerification}
           className={classes.radioGroup}
         >
           <FormControlLabel value="true" control={<Radio />} label="Yes" />
           <FormControlLabel value="false" control={<Radio />} label="No" />
         </RadioGroup>
-      </Grid>
+      </Grid> */}
 
       <Grid item sm={12}>
         <MuiPickersUtilsProvider utils={DateFnsUtils}>
@@ -92,7 +89,7 @@ function Edit(props) {
             views={["year", "month", "date"]}
             label="Documents expiration date:"
             value={new Date(expiration)}
-            onChange={handleDateChange}
+            onChange={handleExpiration}
             KeyboardButtonProps={{
               "aria-label": "change expiration date",
             }}
@@ -104,13 +101,18 @@ function Edit(props) {
   );
 }
 
-const ConnectedEdit = connect(null, { updatePsw })(Edit);
+const ConnectedEdit = connect(null, { setExpiration})(Edit);
 
 export { ConnectedEdit };
 
-function Documents({ psw }) {
+function Documents({
+  id,
+  verified,
+  expiration,
+  opswaIdentificationCard,
+  opswaIdentificationCard,
+}) {
   const classes = useStyles();
-  const { documents } = psw;
   return (
     <Grid container className={classes.gridContainer} spacing={3}>
       <ConnectedEdit psw={psw} />
