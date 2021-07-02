@@ -48,13 +48,13 @@ function Edit(props) {
   // const [expiration, setExpiration] = useState(new Date(psw.expiration));
   const classes = useStyles();
 
-  const handleDateChange = (date) => {
-    updatePsw(psw, verified, date.toISOString());
+  const handleExpiration = (date) => {
+    updatePsw(id, date.toISOString());
   };
-  const handleExpiration = (event) => {
-    console.log(event.target.value);
-    setExpiration(id, event.target.value);
-  };
+  // const handleVerification = (event) => {
+  //   console.log(event.target.value);
+  //   setExpiration(id, event.target.value);
+  // };
 
   // useEffect(() => {
   //   updatePsw(psw, verification, expiration);
