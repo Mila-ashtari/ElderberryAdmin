@@ -43,7 +43,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function Edit(props) {
-  const { updatePsw, id, verified, expiration, pswId } = props;
+  const { setExpiration, id, verified, expiration, pswId } = props;
   const classes = useStyles();
 
   const handleExpiration = (date) => {

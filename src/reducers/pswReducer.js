@@ -10,8 +10,7 @@ const pswReducer = (state = {}, action) => {
         ...state,
         [action.payload.id]: {
           ...state[action.payload.id],
-          verified: action.payload.verified,
-          expiration: action.payload.expiration,
+    expiration: action.payload.expiration,
         },
       };
     default:
