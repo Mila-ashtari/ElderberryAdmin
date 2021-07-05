@@ -19,22 +19,25 @@ export const getPsws = () => async (dispatch) => {
   dispatch({ type: "FETCH_PSWS", payload: response.data });
 };
 
-export const setExpiration = (id, expiration) => async (dispatch) => {
+export const setExpiration = (id, pswId, expiration) => async (dispatch) => {
   const token = localStorage.getItem("token");
   await axios({
     url: "https://elderberry-development-api.herokuapp.com/api/admin/service-expiration",
     method: "POST",
     headers: { Authorization: `Bearer ${token}` },
+    params:{
+      pswID:pswId
+    },
     data: {
       providerID: id,
       serviceType: "personalSupportWorker",
       expiration: expiration,
     },
   });
-  // dispatch({
-  //   type: "UPDATE_PSW",
-  //   payload: { id, verified, expiration },
-  // });
+  dispatch({
+    type: "UPDATE_PSW",
+    payload: { id, expiration },
+  });
 };
 
 export const getPsw = (id) => async (dispatch) => {

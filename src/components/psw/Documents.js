@@ -44,24 +44,21 @@ const useStyles = makeStyles((theme) => ({
 
 function Edit(props) {
   const { updatePsw, id, verified, expiration, pswId } = props;
-  // const [verification, setVerification] = useState(`${psw.verified}`);
-  // const [expiration, setExpiration] = useState(new Date(psw.expiration));
   const classes = useStyles();
 
   const handleExpiration = (date) => {
-    updatePsw(id, date.toISOString());
+    setExpiration(id, pswId, date.toISOString());
   };
-  // const handleVerification = (event) => {
-  //   console.log(event.target.value);
-  //   setExpiration(id, event.target.value);
-  // };
+  const handleVerification = (event) => {
+    console.log(event.target.value);
+  };
 
   // useEffect(() => {
   //   updatePsw(psw, verification, expiration);
   // }, [verification, expiration]);
   return (
     <Grid container item sm={12}>
-      {/* <Grid item container sm={12}>
+      <Grid item container sm={12}>
         <FormLabel component="legend" className={classes.formLabel}>
           Documents verified?
         </FormLabel>
@@ -75,7 +72,7 @@ function Edit(props) {
           <FormControlLabel value="true" control={<Radio />} label="Yes" />
           <FormControlLabel value="false" control={<Radio />} label="No" />
         </RadioGroup>
-      </Grid> */}
+      </Grid>
 
       <Grid item sm={12}>
         <MuiPickersUtilsProvider utils={DateFnsUtils}>

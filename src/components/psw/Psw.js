@@ -21,12 +21,12 @@ const Psw = (props) => {
         skills,
         schedule,
         opswaIdentificationCard,
+        verified,
+        expiration,
       },
     },
     currentBookings,
     id,
-    verified,
-    expiration,
   } = props.psw !== undefined && props.psw;
   const pswId= props.psw !== undefined && props.psw.services.personalSupportWorker
   const tabs = props.psw !== undefined && [
