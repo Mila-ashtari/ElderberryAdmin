@@ -27,9 +27,8 @@ const Psw = (props) => {
     id,
     verified,
     expiration,
-    opswaIdentificationCard,
   } = props.psw !== undefined && props.psw;
-  console.log(psw);
+  const pswId= props.psw !== undefined && props.psw.services.personalSupportWorker
   const tabs = props.psw !== undefined && [
     {
       label: "Profile",
@@ -44,7 +43,7 @@ const Psw = (props) => {
             verified,
             expiration,
             opswaIdentificationCard,
-            opswaIdentificationCard,
+            pswId
           }}
         />
       ),

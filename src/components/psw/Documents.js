@@ -43,7 +43,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function Edit(props) {
-  const { updatePsw, id, verified, expiration } = props;
+  const { updatePsw, id, verified, expiration, pswId } = props;
   // const [verification, setVerification] = useState(`${psw.verified}`);
   // const [expiration, setExpiration] = useState(new Date(psw.expiration));
   const classes = useStyles();
@@ -101,7 +101,7 @@ function Edit(props) {
   );
 }
 
-const ConnectedEdit = connect(null, { setExpiration})(Edit);
+const ConnectedEdit = connect(null, { setExpiration })(Edit);
 
 export { ConnectedEdit };
 
@@ -110,13 +110,13 @@ function Documents({
   verified,
   expiration,
   opswaIdentificationCard,
-  opswaIdentificationCard,
+  pswId,
 }) {
   const classes = useStyles();
   return (
     <Grid container className={classes.gridContainer} spacing={3}>
-      <ConnectedEdit psw={psw} />
-      {documents.map((document) => {
+      <ConnectedEdit {...{ id, verified, expiration, pswId }} />
+      {/* {documents.map((document) => {
         return (
           <Grid item sm={6} key={document.id}>
             <Card className={classes.documentContainer}>
@@ -131,7 +131,21 @@ function Documents({
             </Card>
           </Grid>
         );
-      })}
+      })} */}
+      {
+        <Grid item sm={6} key={opswaIdentificationCard.id}>
+          <Card className={classes.documentContainer}>
+            <CardMedia
+              component="img"
+              src={opswaIdentificationCard.url}
+              title={opswaIdentificationCard.name}
+            ></CardMedia>
+            <CardContent>
+              <Typography>{opswaIdentificationCard.name}</Typography>
+            </CardContent>
+          </Card>
+        </Grid>
+      }
     </Grid>
   );
 }
