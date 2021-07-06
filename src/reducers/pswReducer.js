@@ -10,7 +10,13 @@ const pswReducer = (state = {}, action) => {
         ...state,
         [action.payload.id]: {
           ...state[action.payload.id],
-    expiration: action.payload.expiration,
+          services: {
+            ...state[action.payload.id].services,
+            personalSupportWorker: {
+              ...state[action.payload.id].services.personalSupportWorker,
+              expiration: action.payload.expiration,
+            },
+          },
         },
       };
     default:
