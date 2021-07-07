@@ -106,30 +106,15 @@ function Documents({
   verified,
   expiration,
   opswaIdentificationCard,
+  identityDocument,
   pswId,
 }) {
   const classes = useStyles();
   return (
     <Grid container className={classes.gridContainer} spacing={3}>
       <ConnectedEdit {...{ id, verified, expiration, pswId }} />
-      {/* {documents.map((document) => {
-        return (
-          <Grid item sm={6} key={document.id}>
-            <Card className={classes.documentContainer}>
-              <CardMedia
-                component="img"
-                src={document.url}
-                title={document.name}
-              ></CardMedia>
-              <CardContent>
-                <Typography>{document.name}</Typography>
-              </CardContent>
-            </Card>
-          </Grid>
-        );
-      })} */}
-      {
-        <Grid item sm={6} key={opswaIdentificationCard.id}>
+      <Grid container spacing={3} className={classes.gridContainer}>
+        <Grid item sm={6}>
           <Card className={classes.documentContainer}>
             <CardMedia
               component="img"
@@ -141,7 +126,33 @@ function Documents({
             </CardContent>
           </Card>
         </Grid>
-      }
+      </Grid>
+      <Grid container spacing={3} className={classes.gridContainer}>
+        <Grid item sm={6}>
+          <Card className={classes.documentContainer}>
+            <CardMedia
+              component="img"
+              src={identityDocument.front.url}
+              title={identityDocument.front.name}
+            ></CardMedia>
+            <CardContent>
+              <Typography>{identityDocument.front.name}</Typography>
+            </CardContent>
+          </Card>
+        </Grid>
+        <Grid item sm={6}>
+          <Card className={classes.documentContainer}>
+            <CardMedia
+              component="img"
+              src={identityDocument.back.url}
+              title={identityDocument.back.name}
+            ></CardMedia>
+            <CardContent>
+              <Typography>{identityDocument.back.name}</Typography>
+            </CardContent>
+          </Card>
+        </Grid>
+      </Grid>
     </Grid>
   );
 }

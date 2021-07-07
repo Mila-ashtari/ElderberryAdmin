@@ -27,6 +27,7 @@ const Psw = (props) => {
     },
     currentBookings,
     id,
+    identityDocument
   } = props.psw !== undefined && props.psw;
   const pswId= props.psw !== undefined && props.psw.services.personalSupportWorker
   const tabs = props.psw !== undefined && [
@@ -43,6 +44,7 @@ const Psw = (props) => {
             verified,
             expiration,
             opswaIdentificationCard,
+            identityDocument,
             pswId
           }}
         />
