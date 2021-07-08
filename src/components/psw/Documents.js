@@ -19,6 +19,7 @@ import {
 import { makeStyles } from "@material-ui/core/styles";
 
 import { setExpiration } from "../../actions/psw";
+import { setIdentityExpiration } from "../../actions/provider";
 
 const useStyles = makeStyles((theme) => ({
   gridContainer: {
@@ -44,17 +45,22 @@ const useStyles = makeStyles((theme) => ({
 
 function Edit(props) {
   const classes = useStyles();
-  const { setExpiration, id, verified, expiration, pswId, identityDocument } = props;
+  const {
+    setExpiration,
+    setIdentityExpiration,
+    id,
+    expiration,
+    pswId,
+    identityDocument,
+  } = props;
   const handleExpiration = (date) => {
     setExpiration(id, pswId, date.toISOString());
   };
   const handleIdentityExpiration = (date) => {
-    console.log(date.toISOString());
+    console.log(date);
+    setIdentityExpiration(id, date.toISOString());
   };
 
-  // useEffect(() => {
-  //   updatePsw(psw, verification, expiration);
-  // }, [verification, expiration]);
   return (
     <Grid container item sm={12}>
       {/* <Grid item container sm={12}>
@@ -72,6 +78,27 @@ function Edit(props) {
           <FormControlLabel value="false" control={<Radio />} label="No" />
         </RadioGroup>
       </Grid> */}
+
+      <Grid item sm={12}>
+        <MuiPickersUtilsProvider utils={DateFnsUtils}>
+          <KeyboardDatePicker
+            disableToolbar
+            variant="dialog"
+            format="MM/dd/yyyy"
+            margin="normal"
+            id="date-picker"
+            // openTo="date"
+            views={["year", "month", "date"]}
+            label="OPSWA expiration date:"
+            value={new Date(expiration)}
+            onChange={handleExpiration}
+            KeyboardButtonProps={{
+              "aria-label": "change expiration date",
+            }}
+            InputLabelProps={{ style: { fontSize: "1.4rem" } }}
+          />
+        </MuiPickersUtilsProvider>
+      </Grid>
       <Grid item sm={12}>
         <MuiPickersUtilsProvider utils={DateFnsUtils}>
           <KeyboardDatePicker
@@ -92,33 +119,13 @@ function Edit(props) {
           />
         </MuiPickersUtilsProvider>
       </Grid>
-
-      <Grid item sm={12}>
-        <MuiPickersUtilsProvider utils={DateFnsUtils}>
-          <KeyboardDatePicker
-            disableToolbar
-            variant="dialog"
-            format="MM/dd/yyyy"
-            margin="normal"
-            id="date-picker"
-            // openTo="date"
-            views={["year", "month", "date"]}
-            label="Documents expiration date:"
-            value={new Date(expiration)}
-            onChange={handleExpiration}
-            KeyboardButtonProps={{
-              "aria-label": "change expiration date",
-            }}
-            InputLabelProps={{ style: { fontSize: "1.4rem" } }}
-          />
-        </MuiPickersUtilsProvider>
-      </Grid>
     </Grid>
   );
 }
 
-const ConnectedEdit = connect(null, { setExpiration })(Edit);
-
+const ConnectedEdit = connect(null, { setExpiration, setIdentityExpiration })(
+  Edit
+);
 export { ConnectedEdit };
 
 function Documents({

@@ -18,7 +18,7 @@ function App() {
       <HashRouter history={history}>
         <Route path="/" exact component={Login} />
         <Route path="/dashboard" component={Dashboard} />
-        <Route path="/psw/:id" component={Psw}></Route>
+        <Route path="/provider/:id" component={Psw}></Route>
         <Route path="/customer/:id" component={Customer}></Route>
         <Route path="/client/:id" component={Client}></Route>
         <Route path="/booking/:id" component={Booking}></Route>

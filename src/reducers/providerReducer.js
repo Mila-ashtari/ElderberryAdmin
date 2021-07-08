@@ -1,9 +1,9 @@
 import _ from "lodash";
-const pswReducer = (state = {}, action) => {
+const providerReducer = (state = {}, action) => {
   switch (action.type) {
-    case "FETCH_PSWS":
+    case "FETCH_PROVIDERS":
       return { ...state, ..._.mapKeys(action.payload, "id") };
-    case "FETCH_PSW":
+    case "FETCH_PROVIDER":
       return { ...state, [action.payload.id]: action.payload };
     case "UPDATE_PSW":
       return {
@@ -24,4 +24,4 @@ const pswReducer = (state = {}, action) => {
   }
 };
 
-export default pswReducer;
+export default providerReducer;

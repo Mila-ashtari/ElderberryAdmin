@@ -4,16 +4,16 @@ import { connect } from "react-redux";
 import { getPsws } from "../../actions/psw";
 import UserList from "../user/UserList";
 
-function PswList(props) {
-  const { getPsws, pswList } = props;
+function ProviderList(props) {
+  const { getPsws, providerList } = props;
   useEffect(() => {
     getPsws();
   }, [getPsws]);
 
-  return <UserList users={pswList} type="psw" />;
+  return <UserList users={providerList} type="provider" />;
 }
 
 const mapStateToProps = (state) => {
-  return { pswList: Object.values(state.psws) };
+  return { providerList: Object.values(state.providers) };
 };
-export default connect(mapStateToProps, { getPsws })(PswList);
+export default connect(mapStateToProps, { getPsws })(ProviderList);

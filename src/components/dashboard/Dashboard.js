@@ -5,7 +5,7 @@ import { Switch, Route, Link } from "react-router-dom";
 
 import requiredAuth from "../requiredAuth";
 import DashboardHeader from "./DashboardHeader";
-import PswList from "./PswList";
+import ProviderList from "./ProviderList";
 import CustomerList from "./CustomerList";
 import ClientList from "./ClientList";
 import BookingList from "./BookingList";
@@ -31,7 +31,7 @@ function Dashboard(props) {
   const [value, setValue] = useState(0);
 
   const tabs = [
-    { label: "psw", component: PswList },
+    { label: "provider", component: ProviderList },
     { label: "client", component: ClientList },
     { label: "customer", component: CustomerList },
     //

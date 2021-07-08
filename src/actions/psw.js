@@ -16,12 +16,12 @@ export const getPsws = () => async (dispatch) => {
     //   populateProfile: true,
     // },
   });
-  dispatch({ type: "FETCH_PSWS", payload: response.data });
+  dispatch({ type: "FETCH_PROVIDERS", payload: response.data });
 };
 
 export const setExpiration = (id, pswId, expiration) => async (dispatch) => {
   const token = localStorage.getItem("token");
-    const response= await axios({
+    await axios({
     url: "https://elderberry-development-api.herokuapp.com/api/admin/service-expiration",
     method: "POST",
     headers: { Authorization: `Bearer ${token}` },
@@ -50,5 +50,5 @@ export const getPsw = (id) => async (dispatch) => {
       providerID: id,
     },
   });
-  dispatch({ type: "FETCH_PSW", payload: response.data });
+  dispatch({ type: "FETCH_PROVIDER", payload: response.data });
 };
