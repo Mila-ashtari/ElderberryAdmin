@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 
-import { getPsws } from "../../actions/psw";
+import { getProviders } from "../../actions/provider";
 import UserList from "../user/UserList";
 
 function ProviderList(props) {
-  const { getPsws, providerList } = props;
+  const { getProviders, providerList } = props;
   useEffect(() => {
-    getPsws();
-  }, [getPsws]);
+    getProviders();
+  }, [getProviders]);
 
   return <UserList users={providerList} type="provider" />;
 }
@@ -16,4 +16,4 @@ function ProviderList(props) {
 const mapStateToProps = (state) => {
   return { providerList: Object.values(state.providers) };
 };
-export default connect(mapStateToProps, { getPsws })(ProviderList);
+export default connect(mapStateToProps, { getProviders })(ProviderList);

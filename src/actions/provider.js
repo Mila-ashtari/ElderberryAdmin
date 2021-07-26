@@ -15,3 +15,12 @@ export const setIdentityExpiration = (id, expiration) => async (dispatch) => {
   //     payload: { id, expiration },
   //   });
 };
+export const getProviders = () => async (dispatch) => {
+  const token = localStorage.getItem("token");
+  const response = await axios({
+    url: "https://elderberry-development-api.herokuapp.com/api/admin/all-providers",
+    method: "GET",
+    headers: { Authorization: `Bearer ${token}` },
+  });
+  dispatch({ type: "FETCH_PROVIDERS", payload: response.data });
+};
