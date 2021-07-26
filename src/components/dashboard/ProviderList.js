@@ -6,12 +6,11 @@ import UserList from "../user/UserList";
 
 function ProviderList(props) {
   const { getProviders, providerList } = props;
-  console.log(providerList)
   useEffect(() => {
     getProviders();
   }, [getProviders]);
 
-  return <UserList users={providerList} type="provider" />;
+  return <UserList users={providerList} />;
 }
 
 const mapStateToProps = (state) => {
