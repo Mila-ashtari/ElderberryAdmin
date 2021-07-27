@@ -229,7 +229,6 @@ const Schedule = (props) => {
     if (deleted !== undefined) {
       data = data.filter((appointment) => appointment.id !== deleted);
     }
-    console.log(data);
     setSchedulerData(data);
   };
 

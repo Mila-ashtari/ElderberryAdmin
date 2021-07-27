@@ -1,7 +1,7 @@
 import React, {  useEffect,  } from "react";
 import { connect } from "react-redux";
 
-import { getPsw } from "../../actions/psw";
+import { getProvider } from "../../actions/provider";
 import Profile from "./Profile";
 import Documents from "./Documents";
 import Availability from "./Availability";
@@ -11,7 +11,7 @@ import Schedule from "./Schedule";
 import requiredAuth from "../requiredAuth";
 
 const Psw = (props) => {
-  const { psw, getPsw } = props;
+  const { psw, getProvider } = props;
   const {
     firstName,
     lastName,
@@ -58,19 +58,18 @@ const Psw = (props) => {
     // { label: "Bookings", component: <Bookings bookings={currentBookings}/> }
   ];
   useEffect(() => {
-    getPsw(props.match.params.id);
+    getProvider(props.match.params.id);
   }, []);
 
   return (
     props.psw !== undefined && <User {...{ firstName, lastName, tabs }} />
-    // <></>
   );
 };
 
 const mapStateToProps = (state, ownProps) => {
-  return { psw: state.psws[ownProps.match.params.id] };
+  return { psw: state.providers[ownProps.match.params.id] };
 };
 
-const ConnectedPsw = connect(mapStateToProps, { getPsw })(Psw);
+const ConnectedPsw = connect(mapStateToProps, { getProvider })(Psw);
 
 export default requiredAuth(ConnectedPsw);

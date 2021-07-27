@@ -18,7 +18,7 @@ import {
 } from "@material-ui/pickers";
 import { makeStyles } from "@material-ui/core/styles";
 
-import { setExpiration } from "../../actions/psw";
+import { setOpswaExpiration } from "../../actions/psw";
 import { setIdentityExpiration } from "../../actions/provider";
 
 const useStyles = makeStyles((theme) => ({
@@ -46,7 +46,7 @@ const useStyles = makeStyles((theme) => ({
 function Edit(props) {
   const classes = useStyles();
   const {
-    setExpiration,
+    setOpswaExpiration,
     setIdentityExpiration,
     id,
     expiration,
@@ -54,10 +54,9 @@ function Edit(props) {
     identityDocument,
   } = props;
   const handleExpiration = (date) => {
-    setExpiration(id, pswId, date.toISOString());
+    setOpswaExpiration(id, pswId, date.toISOString());
   };
   const handleIdentityExpiration = (date) => {
-    console.log(date);
     setIdentityExpiration(id, date.toISOString());
   };
 
@@ -123,7 +122,7 @@ function Edit(props) {
   );
 }
 
-const ConnectedEdit = connect(null, { setExpiration, setIdentityExpiration })(
+const ConnectedEdit = connect(null, { setOpswaExpiration, setIdentityExpiration })(
   Edit
 );
 export { ConnectedEdit };
