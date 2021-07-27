@@ -5,7 +5,7 @@ const providerReducer = (state = {}, action) => {
       return { ...state, ..._.mapKeys(action.payload, "id") };
     case "FETCH_PROVIDER":
       return { ...state, [action.payload.id]: action.payload };
-    case "UPDATE_PSW":
+    case "UPDATE_OPSWA_EXPIRATION":  
       return {
         ...state,
         [action.payload.id]: {
@@ -16,6 +16,18 @@ const providerReducer = (state = {}, action) => {
               ...state[action.payload.id].services.personalSupportWorker,
               expiration: action.payload.expiration,
             },
+          },
+        },
+      };
+
+    case "UPDATE_IDENTITY_EXPIRATION":
+      return {
+        ...state,
+        [action.payload.id]: {
+          ...state[action.payload.id],
+          identityDocument: {
+            ...state[action.payload.id].identityDocument,
+            expiration: action.payload.expiration,
           },
         },
       };

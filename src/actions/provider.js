@@ -12,7 +12,7 @@ export const setIdentityExpiration = (id, expiration) => async (dispatch) => {
   });
   console.log(response.data)
     dispatch({
-      type: "UPDATE_PSW",
+      type: "UPDATE_IDENTITY_EXPIRATION",
       payload: { id, expiration },
     });
 };

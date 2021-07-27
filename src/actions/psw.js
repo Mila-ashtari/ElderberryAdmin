@@ -29,7 +29,7 @@ export const setOpswaExpiration = (id, pswId, expiration) => async (dispatch) =>
     },
   });
   dispatch({
-    type: "UPDATE_PSW",
+    type: "UPDATE_OPSWA_EXPIRATION",
     payload: { id, expiration },
   });
 };
