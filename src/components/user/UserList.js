@@ -84,7 +84,7 @@ function UserList({ users, type }) {
         <Divider />
         {dynamicUserList.map((user) => {
           const { firstName, lastName } = user;
-          if (Object.keys(user.services)) type = Object.keys(user.services);
+          type = type === undefined ? Object.keys(user.services) : type;
           return (
             <Fragment key={user.id}>
               <ListItem
