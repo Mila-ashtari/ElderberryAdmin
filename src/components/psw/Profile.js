@@ -9,7 +9,7 @@ import {
 import { makeStyles } from "@material-ui/core/styles";
 
 import Info from './Info'
-import Skills from "./Skills";
+import Qualifications from "./Qualifications";
 
 const useStyles = makeStyles((theme) => ({
   flexContainer: {
@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
     alignSelf: "flex-start",
   },
 }));
-function Profile({ profile, skills }) {
+function Profile({ profile, qualifications }) {
   const classes = useStyles();
   return (
     <Grid container spacing={2}>
@@ -41,8 +41,8 @@ function Profile({ profile, skills }) {
       <Grid item xs={12}>
         <Card>
           <CardContent>
-            <Typography variant="h2">Skills</Typography>
-            <Skills skills={skills}/>
+            <Typography variant="h2">Qualifications</Typography>
+            <Qualifications qualifications={qualifications}/>
           </CardContent>
         </Card>
       </Grid>

@@ -18,7 +18,7 @@ const Psw = (props) => {
     services: {
       personalSupportWorker: {
         profile,
-        skills,
+        qualifications,
         schedule,
         opswaIdentificationCard,
         verified,
@@ -33,7 +33,7 @@ const Psw = (props) => {
   const tabs = props.psw !== undefined && [
     {
       label: "Profile",
-      component: <Profile profile={profile} skills={skills} />,
+      component: <Profile profile={profile} qualifications={qualifications} />,
     },
     {
       label: "Documentation",

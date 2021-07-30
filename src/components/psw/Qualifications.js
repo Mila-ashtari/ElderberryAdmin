@@ -164,13 +164,13 @@ export function RenderQuestions({ otherQuestions, yesNoQuestions }) {
     </ListItem>
   );
 }
-function Skills({ skills }) {
+function Qualifications({ qualifications }) {
   const {
     certificationsAndLicenses,
     languageProficiencies,
     otherQuestions,
     yesNoQuestions,
-  } = skills;
+  } = qualifications;
 
   return (
     <List>
@@ -181,4 +181,4 @@ function Skills({ skills }) {
   );
 }
 
-export default Skills;
+export default Qualifications;
