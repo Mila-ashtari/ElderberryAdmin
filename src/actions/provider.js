@@ -29,7 +29,7 @@ export const getProviders = () => async (dispatch) => {
 export const getProvider = (id) => async (dispatch) => {
   const token = localStorage.getItem("token");
   const response = await axios({
-    url: " https://elderberry-development-api.herokuapp.com/api/admin/provider",
+    url: "https://elderberry-development-api.herokuapp.com/api/admin/provider",
     method: "GET",
     headers: { Authorization: `Bearer ${token}` },
     params: {
