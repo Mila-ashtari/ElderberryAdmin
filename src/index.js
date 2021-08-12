@@ -23,10 +23,10 @@ const store = createStore(
 // console.log(store)
 
 ReactDOM.render(
-  // <Elements stripe={stripePromise}>
+  <Elements stripe={stripePromise}>
     <Provider store={store}>
       <App />
     </Provider>,
-  // </Elements>,
+   </Elements>,
   document.getElementById("root")
 );
