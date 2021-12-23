@@ -1,11 +1,11 @@
-import _ from "lodash";
+import _ from 'lodash';
 const providerReducer = (state = {}, action) => {
   switch (action.type) {
-    case "FETCH_PROVIDERS":
-      return { ...state, ..._.mapKeys(action.payload, "id") };
-    case "FETCH_PROVIDER":
+    case 'FETCH_PROVIDERS_SUCCESS':
+      return { ...state, ..._.mapKeys(action.payload, 'id') };
+    case 'FETCH_PROVIDER_SUCCESS':
       return { ...state, [action.payload.id]: action.payload };
-    case "UPDATE_OPSWA_EXPIRATION":  
+    case 'UPDATE_OPSWA_EXPIRATION':
       return {
         ...state,
         [action.payload.id]: {
@@ -20,7 +20,7 @@ const providerReducer = (state = {}, action) => {
         },
       };
 
-    case "UPDATE_IDENTITY_EXPIRATION":
+    case 'UPDATE_IDENTITY_EXPIRATION':
       return {
         ...state,
         [action.payload.id]: {
